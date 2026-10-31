@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shaktigarh Bowling OVR Calculator v1.48</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1117;--panel:#151b23;--panel2:#1b2430;--line:#2d3948;--text:#edf2f7;--muted:#9aa8b8;--accent:#f4c95d;--green:#73d6a0;--red:#ff8e8e}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#0d1117,#111b26 55%,#0c1118);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:25px 18px 18px;max-width:1100px;margin:auto}header .eyebrow{letter-spacing:.15em;font-size:11px;color:var(--accent);font-weight:800}h1{margin:6px 0;font-size:clamp(27px,5vw,40px);line-height:1.1}header p{color:var(--muted);margin:8px 0 0}
+main{max-width:1100px;margin:auto;padding:0 18px 45px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:rgba(21,27,35,.96);border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}
+h2{font-size:17px;margin:0 0 13px}h3{font-size:14px;margin:0 0 8px}.sub{color:var(--muted);font-size:12px}.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.career-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.career-metrics .metric{padding:10px}.career-metrics .metric strong{font-size:21px}.metric{padding:13px;border-radius:12px;background:var(--panel2);min-width:0}.metric.career-ovr{padding:13px;background:linear-gradient(145deg,#292653,#242344);border:1px solid #5145a8;box-shadow:inset 0 1px 0 rgba(167,139,250,.12)}.metric.career-ovr strong{font-size:27px}.metric.career-ovr small{color:#c4b5fd}.metric.career-ovr em{color:#c4b5fd}.metric small{display:block;color:var(--muted);font-size:11px}.metric strong{font-size:27px;display:block;line-height:1.35;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}.metric em{font-style:normal;color:var(--muted);font-size:11px}
+label{display:block;color:#c5d0dd;font-size:12px;margin:0 0 5px}input,select{width:100%;min-width:0;background:#0e141c;border:1px solid #344254;border-radius:9px;color:var(--text);padding:10px;font:inherit;outline:none}input:focus,select:focus{border-color:var(--accent)}input[type=number]{font-variant-numeric:tabular-nums}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field.full{grid-column:1/-1}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.attr{padding:12px 0;border-bottom:1px solid var(--line)}.attr:last-child{border:0}.attrtop{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px}.attrname{font-weight:700}.pill{border:1px solid #3a4757;border-radius:999px;padding:2px 8px;color:var(--muted);font-size:11px;white-space:nowrap}.bar{height:7px;background:#27313d;border-radius:999px;overflow:hidden}.bar>i{height:100%;display:block;background:linear-gradient(90deg,#8292a5,#73d6a0);border-radius:999px;width:0}.weightrow{display:grid;grid-template-columns:1fr 65px;gap:12px;align-items:center;margin:12px 0}.weightrow input{padding:7px}.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}button{border:1px solid #465466;background:#202b38;color:var(--text);padding:9px 12px;border-radius:9px;font-weight:650;cursor:pointer}button.primary{background:var(--accent);color:#1a1b1d;border-color:var(--accent)}button:hover{filter:brightness(1.08)}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--muted);font-weight:600}td input{min-width:70px;padding:7px}.formhint{font-size:12px;color:var(--muted);margin-top:7px}.warning{color:#ffd68b}.ok{color:var(--green)}.status{font-size:12px;color:var(--muted);min-height:18px;margin-top:8px}.hidden{display:none!important}footer{color:var(--muted);font-size:12px;margin-top:14px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.curvegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}.curvecard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;min-width:0;overflow:hidden}.curvecard h3{margin:0 0 4px}.curvecard p{font-size:11px;color:var(--muted);margin:4px 0}.curvecard p.curve-description{font-size:11px;color:var(--muted);line-height:1.4;margin:3px 0 5px}.curveplot{width:100%;height:auto;display:block;max-width:100%}.curveformula{font:11px ui-monospace,monospace;color:var(--accent);overflow-wrap:anywhere;word-break:break-word}.curvecard p.curveformula{color:var(--accent)}.player-curve-position{font-size:11px!important;color:var(--green)!important;border-top:1px solid var(--line);padding-top:6px;margin-top:6px!important;overflow-wrap:anywhere}/* Database OVR ranking graph */
+.ovr-chart{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:13px;background:rgba(10,15,22,.45)}
+.ovr-chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.ovr-chart-title{font-size:14px;font-weight:750;margin:0}.ovr-chart-sub{font-size:11px;color:var(--muted);margin:3px 0 0}
+.ovr-axis{display:grid;grid-template-columns:38px minmax(0,1fr) 45px;gap:9px;align-items:end;margin-bottom:5px;color:var(--muted);font-size:10px}
+.ovr-axis-scale{display:flex;justify-content:space-between;padding:0 1px}
+.ovr-row{display:grid;grid-template-columns:38px minmax(0,1fr) 45px;gap:9px;align-items:center;margin:10px 0}
+.ovr-rank{font-size:11px;color:var(--muted);font-weight:750;text-align:center}
+.ovr-player{min-width:0}.ovr-player-name{font-size:12px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:5px}
+.ovr-track{height:12px;background:#26313e;border-radius:4px;overflow:hidden;position:relative;background-image:linear-gradient(to right,transparent calc(25% - 1px),rgba(154,168,184,.18) 25%,transparent calc(25% + 1px),transparent calc(50% - 1px),rgba(154,168,184,.18) 50%,transparent calc(50% + 1px),transparent calc(75% - 1px),rgba(154,168,184,.18) 75%,transparent calc(75% + 1px))}
+.ovr-fill{height:100%;min-width:2px;border-radius:4px;background:linear-gradient(90deg,#3b6489,#7aa7cc)}.ovr-row.top1 .ovr-fill{background:linear-gradient(90deg,#8f7436,#e1c36e)}.ovr-row.top2 .ovr-fill{background:linear-gradient(90deg,#647181,#b8c3d0)}.ovr-row.top3 .ovr-fill{background:linear-gradient(90deg,#80583c,#c59469)}
+.ovr-value{text-align:right;font-weight:800;font-size:13px;font-variant-numeric:tabular-nums}.ovr-empty{font-size:12px;color:var(--muted);padding:12px 0}
+
+
+@media(max-width:720px){.curvegrid{grid-template-columns:repeat(2,minmax(0,1fr))}.span8,.span4,.span6{grid-column:span 12}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:10px}.metric strong{font-size:23px}.metric.career-ovr strong{font-size:27px}.fields{grid-template-columns:repeat(2,minmax(0,1fr))}header{padding-top:20px}}
+@media(max-width:420px){.fields{grid-template-columns:1fr}.metric strong{font-size:20px}.card{padding:13px}}
+/* FIFA-inspired bowling player card; uses the calculator's existing muted blue → teal → gold rating spectrum */
+.player-card-wrap{display:flex;justify-content:center;padding:8px 0 4px}
+.player-card{width:min(100%,390px);position:relative;overflow:hidden;border-radius:20px;padding:18px 18px 16px;background:radial-gradient(ellipse at 85% 8%,rgba(101,199,178,.18),transparent 38%),linear-gradient(145deg,#172638,#101820 68%,#1c2835);border:1px solid #526579;box-shadow:0 12px 30px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.035)}
+
+.pc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.pc-club{font-size:9px;letter-spacing:.18em;font-weight:850;color:#b7c8d9}.pc-name{font-size:22px;line-height:1.08;font-weight:900;letter-spacing:-.035em;margin-top:7px;overflow-wrap:anywhere}.pc-role{font-size:10px;letter-spacing:.13em;color:#a8b8c8;margin-top:5px;font-weight:750}.pc-ovr{text-align:right;min-width:76px}.pc-ovr-num{font-size:45px;line-height:.95;font-weight:950;letter-spacing:-.06em}.pc-ovr-label{font-size:10px;letter-spacing:.14em;font-weight:850;color:#b7c8d9;margin-top:6px}.pc-divider{height:1px;background:linear-gradient(90deg,rgba(154,174,192,.65),rgba(154,174,192,.06));margin:16px 0 13px}.pc-attrs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 20px;min-height:170px;align-content:start}.pc-attr{display:grid;grid-template-columns:40px 1fr;align-items:center;gap:8px;min-width:0}.pc-rating{font-size:23px;line-height:1;font-weight:900;font-variant-numeric:tabular-nums}.pc-attr-info{min-width:0}.pc-attr-code{font-size:11px;letter-spacing:.1em;font-weight:900}.pc-attr-name{font-size:9px;color:#a6b4c3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pc-foot{display:flex;justify-content:space-between;gap:8px;margin-top:8px;font-size:9px;letter-spacing:.08em;color:#9aa8b8;font-weight:750}.pc-spectrum{height:3px;border-radius:5px;margin-top:12px;background:linear-gradient(90deg,#8c9aaa 0%,#9aaec0 40%,#65c7b2 70%,#f4c95d 100%)}
+@media print{html,body{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}body *{visibility:hidden!important}.player-card,.player-card *{visibility:visible!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}.player-card{position:absolute;left:0;top:0;width:390px;box-shadow:none!important;background-color:#101820!important;background-image:radial-gradient(ellipse at 85% 8%,rgba(101,199,178,.18),transparent 38%),linear-gradient(145deg,#172638,#101820 68%,#1c2835)!important;border:1px solid #526579!important}.player-card-wrap{display:block}.pc-attrs,.pc-attr,.pc-top,.pc-foot,.pc-divider,.pc-spectrum{visibility:visible!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+
+.player-showcase{display:grid;grid-template-columns:minmax(280px,390px) minmax(280px,1fr);gap:16px;align-items:stretch;margin-top:8px}.player-card-wrap{display:flex;justify-content:center;padding:8px 0 4px;min-width:0}.radar-panel{min-width:0;border:1px solid #526579;border-radius:20px;padding:14px 12px 10px;background:radial-gradient(ellipse at 50% 15%,rgba(101,199,178,.10),transparent 48%),linear-gradient(145deg,#172638,#101820 68%,#1c2835);box-shadow:0 12px 30px rgba(0,0,0,.2)}.radar-title{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#b7c8d9;font-size:10px;font-weight:850;letter-spacing:.14em}.radar-svg{width:100%;height:auto;display:block;max-height:370px;margin:3px auto 0}.radar-note{font-size:10px;color:#9aa8b8;text-align:center;margin:0}@media(max-width:720px){.player-showcase{grid-template-columns:minmax(0,1fr)}.player-card{width:min(100%,390px)}.radar-panel{max-width:480px;width:100%;margin:auto}}
+
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">SHAKTIGARH CRICKET • PLAYER ANALYTICS</div>
+<h1>Bowling OVR Calculator</h1>
+<p>Tennis-ball short format · Nine attributes · Editable weights · Local autosave</p>
+</header>
+<main>
+<div class="grid">
+
+
+<section class="card span8">
+<div class="sectionhead"><h2>Player & career statistics</h2><span class="pill" id="saveBadge">Autosave ready</span></div>
+<div class="fields">
+<div class="field full"><label for="player">Player name</label><input id="player" placeholder="Enter bowler name" autocomplete="off"></div>
+<div class="field"><label for="matches">Bowling innings (matches in which bowled)</label><input id="matches" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="wickets">Wickets</label><input id="wickets" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="hauls3">Innings with 3+ wickets</label><input id="hauls3" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="hauls5">Innings with 5+ wickets</label><input id="hauls5" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="runs">Runs conceded</label><input id="runs" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="overs">Overs bowled</label><input id="overs" type="number" min="0" step="0.1" value="0" placeholder="e.g. 12.3"></div>
+<div class="field"><label for="maidens">Maidens</label><input id="maidens" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="extras">Wides + no-balls conceded</label><input id="extras" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="dotBalls">Dot balls bowled</label><input id="dotBalls" type="number" min="0" step="1" value=""></div>
+<div class="field"><label for="foursConceded">Fours conceded (4s)</label><input id="foursConceded" type="number" min="0" step="1" value=""></div>
+<div class="field"><label for="sixesConceded">Sixes conceded (6s)</label><input id="sixesConceded" type="number" min="0" step="1" value=""></div>
+<div class="field"><label for="bestW">Best figures — wickets</label><input id="bestW" type="number" min="0" step="1" value="0"></div>
+<div class="field"><label for="bestR">Best figures — runs</label><input id="bestR" type="number" min="0" step="1" value="0"></div>
+</div>
+<p class="formhint">Overs use cricket notation: 12.3 means 12 overs and 3 balls, not 12.3 decimal overs. Dot-ball rate uses legal balls (overs × 6); boundary damage uses (4 × fours + 6 × sixes) per over. Enter consistent scorecard totals.</p>
+<div id="validation" class="status"></div>
+</section>
+<section class="card span4">
+<div class="sectionhead"><h2>Career OVR</h2><span class="pill">Live rating</span></div>
+<div class="metric career-ovr"><small>BOWLING OVR</small><strong id="ovr">—</strong><em>/ 100</em></div>
+<div class="metrics career-metrics" style="margin-top:9px">
+<div class="metric"><small>Economy</small><strong id="econ">—</strong><em>runs / over</em></div>
+<div class="metric"><small>Wickets</small><strong id="wktRate">—</strong><em>per innings</em></div>
+<div class="metric"><small>Extras rate</small><strong id="extrasRate">—</strong><em>per over</em></div>
+<div class="metric"><small>Wicket haul</small><strong id="bestFig">—</strong><em>best figures</em></div>
+<div class="metric"><small>Experience</small><strong id="expCount">0</strong><em>innings</em></div>
+<div class="metric"><small>Dot-ball rate</small><strong id="dotRate">—</strong><em>% of legal balls</em></div>
+<div class="metric"><small>Boundary runs</small><strong id="boundaryRate">—</strong><em>per over conceded</em></div>
+<div class="metric"><small>Bowling strike rate</small><strong id="strikeRate">—</strong><em>legal balls / wicket</em></div>
+</div>
+<p class="formhint" id="confidence">Enter statistics to calculate a rating.</p>
+</section>
+<section class="card span12" id="playerCardSection">
+<div class="sectionhead"><h2>Player card</h2><span class="pill">FIFA-style · live ratings</span></div>
+<p class="formhint">A shareable-looking card preview. OVR and all nine attribute ratings update live; ratings are rounded to whole numbers and retain the calculator's muted blue → teal → gold spectrum.</p>
+<div class="player-showcase"><div class="player-card-wrap"><div class="player-card" id="playerCard" aria-label="Bowling player card">
+<div class="pc-top"><div><div class="pc-club">SHAKTIGARH CRICKET</div><div class="pc-name" id="pcName">YOUR PLAYER</div><div class="pc-role">BOWLER · CAREER PROFILE</div></div><div class="pc-ovr"><div class="pc-ovr-num" id="pcOvr">—</div><div class="pc-ovr-label">OVR</div></div></div>
+<div class="pc-divider"></div><div class="pc-attrs" id="pcAttrs"></div><div class="pc-spectrum"></div><div class="pc-foot"><span>PLAYER RATING</span><span>OVR / 100</span></div>
+</div></div><div class="radar-panel"><div class="radar-title"><span>ATTRIBUTE RADAR</span><span>0–100</span></div><div id="bowlingRadar" aria-label="Live bowling attribute radar plot"></div><p class="radar-note">Muted blue → teal → gold spectrum · Live attribute scores</p></div></div><div class="btns"><button type="button" id="printPlayerCard">Download Card as PNG</button></div></section>
+<section class="card span6">
+<h2>Attribute ratings</h2>
+<div id="attributes"></div>
+<p class="formhint">Scores are bounded from 0–100. Unavailable attributes are excluded from the weighted average and shown as unavailable.</p>
+</section>
+<section class="card span6">
+<div class="sectionhead"><h2>Editable weights</h2><span class="pill" id="weightTotal">Total 100%</span></div>
+<div id="weights"></div>
+<div class="btns"><button id="resetWeights">Reset default weights</button><button id="resetTargets">Reset targets</button></div>
+<p class="formhint">Weights are automatically normalised to 100%. All-zero weights produce no OVR.</p>
+</section>
+<section class="card span12">
+<div class="sectionhead"><h2>Target benchmarks</h2><span class="pill">Starting assumptions — calibrate with match data</span></div>
+<div class="fields">
+<div class="field"><label for="targetWkt">Wickets per innings target</label><input id="targetWkt" type="number" min="0.1" step="0.1" value="1.1"></div>
+<div class="field"><label for="eliteWkt">Elite wickets / innings</label><input id="eliteWkt" type="number" min="0.1" step="0.1" value="2"></div>
+<div class="field"><label for="targetEcon">Reference target economy (curve calibrated at 6)</label><input id="targetEcon" type="number" min="0.1" step="0.1" value="6"></div>
+<div class="field"><label for="eliteStrike">Elite strike rate (balls/wicket)</label><input id="eliteStrike" type="number" min="0.1" step="0.1" value="10"></div>
+<div class="field"><label for="targetStrike">Target strike rate (reference)</label><input id="targetStrike" type="number" min="0.1" step="0.1" value="12"></div>
+<div class="field"><label for="poorStrike">Poor strike rate (reference)</label><input id="poorStrike" type="number" min="0.1" step="0.1" value="20"></div>
+<div class="field"><label for="targetExtras">Target extras per over</label><input id="targetExtras" type="number" min="0.1" step="0.1" value="0.5"></div>
+<div class="field"><label for="targetBoundary">Target boundary runs conceded / over</label><input id="targetBoundary" type="number" min="0.1" step="0.1" value="3"></div>
+<div class="field"><label for="eliteBoundary">Elite boundary runs / over</label><input id="eliteBoundary" type="number" min="0.1" step="0.1" value="1.5"></div>
+<div class="field"><label for="poorBoundary">Poor boundary runs / over</label><input id="poorBoundary" type="number" min="0.1" step="0.1" value="6"></div>
+<div class="field"><label for="poorMaidens">Poor maiden-over rate (%)</label><input id="poorMaidens" type="number" min="0" max="100" step="0.5" value="2"></div>
+<div class="field"><label for="targetMaidens">Target maiden-over rate (%)</label><input id="targetMaidens" type="number" min="0.1" max="100" step="0.5" value="7"></div>
+<div class="field"><label for="eliteMaidens">Elite maiden-over rate (%)</label><input id="eliteMaidens" type="number" min="0.1" max="100" step="0.5" value="13"></div>
+<div class="field"><label for="targetExp">Experience target (innings)</label><input id="targetExp" type="number" min="1" step="1" value="100"></div>
+<div class="field"><label for="targetImp3">Target 3+ wicket-innings rate (%)</label><input id="targetImp3" type="number" min="0.1" max="100" step="0.1" value="10"></div>
+<div class="field"><label for="eliteImp3">Elite 3+ wicket-innings rate (%)</label><input id="eliteImp3" type="number" min="0.1" max="100" step="0.1" value="20"></div>
+<div class="field"><label for="targetImp5">Target 5+ wicket-innings rate (%)</label><input id="targetImp5" type="number" min="0.1" max="100" step="0.1" value="2"></div>
+<div class="field"><label for="eliteImp5">Elite 5+ wicket-innings rate (%)</label><input id="eliteImp5" type="number" min="0.1" max="100" step="0.1" value="5"></div>
+<div class="field"><label for="poorExtras">Poor extras threshold / over</label><input id="poorExtras" type="number" min="0.1" step="0.1" value="2"></div>
+</div>
+<p class="formhint">Scoring curves: target performance is approximately 70, elite/exceptional performance approaches 100, and poor performance approaches 0. These are calibration controls, not universal standards. WKT uses total wickets per bowling innings. IMP target rates default to 10% for 3+ wickets (1 in 10) and 2% for 5+ wickets (1 in 50); elite comparison rates default to 20% and 5%.</p>
+</section>
+<section class="card span12">
+<div class="sectionhead"><h2>Attribute scoring curves</h2><span class="pill">Live reference · 0–100 scale</span></div>
+<p class="formhint">These plots show how each raw statistic maps to its attribute score. Curves update when you change benchmark inputs. Some attributes use fixed formulae; target-based curves use the editable values above.</p>
+<div id="curveGrid" class="curvegrid"></div>
+</section>
+
+<section class="card span12">
+<div class="sectionhead"><h2>Player database</h2><span class="pill">Saved on this device/browser</span></div>
+<p class="formhint">Save each bowler once. Next time, find their name and tap Load to bring their stats back into the calculator. Saving a name that already exists updates that player's record.</p>
+<div class="fields" style="margin-top:12px">
+<div class="field"><label for="playerSearch">Find a player</label><input id="playerSearch" placeholder="Search by name…" autocomplete="off"></div>
+<div class="field"><label for="databasePlayerCount">Saved players</label><input id="databasePlayerCount" value="0 players" readonly></div>
+</div>
+<div class="btns"><button class="primary" id="saveToDatabaseBtn">Save / Update This Player</button><button id="exportDatabaseBtn">Export Full Database</button><button id="exportAttributeDbBtn">Export Attribute DB</button><button id="importDatabaseBtn">Import Database</button><input id="databaseFile" class="hidden" type="file" accept=".json,application/json"></div>
+<div id="playerDatabaseList" style="margin-top:12px"></div>
+<div class="status" id="databaseStatus" aria-live="polite">No saved players yet. Enter a player name and stats, then choose Save / Update This Player.</div>
+</section>
+<section class="card span12" id="ovrRankingSection">
+<div class="sectionhead"><h2>Bowling OVR Rankings</h2><span class="pill">All saved players · highest first</span></div>
+<p class="formhint">A live ranking of every saved bowler by Bowling OVR, independent of the player search filter.</p>
+<div id="playerOvrChart" aria-live="polite"></div>
+</section>
+<section class="card span12">
+<div class="sectionhead"><h2>Data management</h2><span class="pill">Current player / backup</span></div>
+<div class="btns">
+<button class="primary" id="exportBtn">Export player JSON</button>
+<button id="importBtn">Import JSON</button>
+<button id="resetPlayer">Reset player</button>
+<input id="importFile" class="hidden" type="file" accept=".json,application/json">
+</div>
+<div class="status" id="dataStatus">Your data is saved locally in this browser. Export JSON to move it to another device.</div>
+</section>
+</div>
+<footer>Shaktigarh Bowling OVR · v1.44 · Use the same scorekeeping rules for every player. Back up important records with JSON export.</footer>
+</main>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const ids = ['player','matches','wickets','hauls3','hauls5','runs','overs','maidens','extras','dotBalls','foursConceded','sixesConceded','bestW','bestR','targetWkt','eliteWkt','targetEcon','targetStrike','eliteStrike','poorStrike','targetExtras','targetBoundary','eliteBoundary','poorBoundary','poorMaidens','targetMaidens','eliteMaidens','targetExp','targetImp3','eliteImp3','targetImp5','eliteImp5','poorExtras'];
+const defaultWeights = {WKT:22,ECO:18,IMP:14,CON:11,DOM:8,EXP:5,DOT:7,BND:7,STR:8};
+const DB_KEY='shaktigarhBowlingPlayerDatabaseV1';
+let playerDatabase=[];
+const labels = {WKT:'Wicket-taking',ECO:'Economy',IMP:'Spell impact',CON:'Control',DOM:'Dominance',EXP:'Experience',DOT:'Dot-ball pressure',BND:'Boundary prevention',STR:'Bowling strike rate'};
+let weights = {...defaultWeights};
+const targetDefaults = {targetWkt:1.1,eliteWkt:2,targetEcon:6,targetStrike:12,eliteStrike:10,poorStrike:20,targetExtras:.5,targetBoundary:3,eliteBoundary:1.5,poorBoundary:6,poorMaidens:2,targetMaidens:7,eliteMaidens:13,targetExp:100,targetImp3:10,eliteImp3:20,targetImp5:2,eliteImp5:5,poorExtras:2};
+const num = id => Math.max(0,Number($(id).value)||0);
+const clamp = (x,a=0,b=100)=>Math.max(a,Math.min(b,x));
+function oversBalls(v){let s=String(v??'0').trim();if(!s)return 0;let n=Number(s);if(!Number.isFinite(n)||n<0)return NaN;let whole=Math.floor(n), dec=Math.round((n-whole)*10);if(dec>5||Math.abs((n-whole)*10-dec)>.001)return NaN;return whole*6+dec;}
+function fmt(n,d=1){return Number.isFinite(n)?n.toFixed(d):'—'}
+function boundedScore(x,poor,target,elite){if(!Number.isFinite(x))return null;if(elite<=target)elite=target*1.5+0.1;if(x<=target)return 70+30*(target===0?1:1-x/target);if(x<=elite)return 70-30*(x-target)/(elite-target);return clamp(40-40*(x-elite)/(Math.max(.1,poor-elite)),0,40)}
+function inverseScore(x,elite,target,poor){if(!Number.isFinite(x))return null;if(elite>=target)elite=target*.5;if(x<=elite)return 100;if(x<=target)return 100-30*(x-elite)/(target-elite);if(x<=poor)return 70-70*(x-target)/(poor-target);return 0}
+// ECO curve: single stretched exponential calibrated to ECO 6→90 and 7.5→75; display range is 0–15.
+function ecoScore(x){if(!Number.isFinite(x)||x<0)return null;return 100*Math.exp(-0.0000331035*Math.pow(x,4.50144))}
+// DOT curve: one smoothstep curve from poor (0) to elite (100); target is intentionally not an anchor.
+function dotScore(x){if(!Number.isFinite(x))return null;return clamp(75+20*Math.atan(0.12*(x-57.5))/Math.atan(2.1),0,100)}
+// Boundary-prevention uses a lower-is-better curve like economy.
+function boundaryScore(x,target,elite,poor){if(!Number.isFinite(x))return null;target=Math.max(.1,target);elite=Math.min(target-.1,elite);poor=Math.max(target+.1,poor);if(x<=elite)return 100;if(x<=target)return 100-30*(x-elite)/(target-elite);if(x<=poor)return 70-70*(x-target)/(poor-target);return 0}
+// CON curve: 100 for zero extras, 90 at target, 60 at poor threshold, 0 at twice the poor threshold.
+function controlScore(x,target,poor){if(!Number.isFinite(x))return null;target=Math.max(.1,target);poor=Math.max(target+.1,poor);const zero=poor*2;if(x<=0)return 100;if(x<=target)return 100-10*x/target;if(x<=poor)return 90-30*(x-target)/(poor-target);if(x<=zero)return 60-60*(x-poor)/(zero-poor);return 0}
+function strikeRateScore(x){if(!Number.isFinite(x))return null;if(x<=10)return 100;return clamp(100*Math.pow(2,-Math.pow((x-10)/10,1.5)));}
+function wicketScore(x,target){if(!Number.isFinite(x)||!Number.isFinite(target))return null; x=clamp(x,0,2); target=Math.max(0.001,target); return clamp(100/(1+(1/9)*Math.exp(-2*(x-target))),0,100);}
+function positiveScore(x,target){if(!Number.isFinite(x))return null;target=Math.max(.001,target);return clamp(100*x/target)}
+function expScore(n,target){if(!Number.isFinite(n)||!Number.isFinite(target)||target<=0)return null;return clamp(100*(1-Math.exp(-Math.log(20)*n/target)),0,100)}
+function average(a){let v=a.filter(x=>x!==null&&Number.isFinite(x));return v.length?v.reduce((s,x)=>s+x,0)/v.length:null}
+function getMetrics(){let inn=num('matches'), wickets=num('wickets'), runs=num('runs'), balls=oversBalls($('overs').value), overs=balls/6, maidens=num('maidens'), extras=num('extras'), dots=num('dotBalls'), fours=num('foursConceded'), sixes=num('sixesConceded'), boundaryRuns=4*fours+6*sixes;
+return {inn,wickets,runs,balls,overs,maidens,extras,dots,fours,sixes,boundaryRuns,econ:overs>0?runs/overs:null,wpi:inn>0?wickets/inn:null,ep:overs>0?extras/overs:null,mp:overs>0?maidens/overs*100:null,dotPct:balls>0?dots/balls*100:null,boundaryRate:overs>0?boundaryRuns/overs:null,strikeRate:wickets>0?balls/wickets:null};}
+function scoresFrom(m){const t=id=>num(id);let hasInnings=m.inn>0,hasOvers=m.overs>0;
+let wkt=hasInnings?wicketScore(m.wpi,t('targetWkt')):null;
+// Revised ECO and CON curves, calibrated to avoid overly harsh drops near target performance.
+let eco=hasOvers?ecoScore(m.econ,t('targetEcon')):null;
+let extras=hasOvers?m.ep:null;
+let con=extras===null?null:controlScore(extras,t('targetExtras'),t('poorExtras'));
+// IMP uses frequency of 3+ and 5+ wicket innings, with best figures as a supporting signal.
+let bw=num('bestW'), br=num('bestR'), h3=num('hauls3'), h5=num('hauls5');
+const rateScore=(rate,targetPct,elitePct)=>{if(!Number.isFinite(rate))return null;let target=Math.max(.001,targetPct)/100,elite=Math.max(targetPct+.1,elitePct)/100;if(rate<target)return clamp(70*rate/target);return clamp(70+30*(rate-target)/(elite-target));};
+let impParts=[];
+if(hasInnings){impParts.push([rateScore(h3/m.inn,t('targetImp3'),t('eliteImp3')),0.50]);impParts.push([rateScore(h5/m.inn,t('targetImp5'),t('eliteImp5')),0.35]);}
+let bestScore=bw>0?clamp(45+bw*12-br*1.5,0,100):null;
+if(bestScore!==null)impParts.push([bestScore,0.15]);
+let imp=average(impParts.filter(([v])=>v!==null).map(([v,w])=>v*w))===null?null:impParts.filter(([v])=>v!==null).reduce((sum,[v,w])=>sum+v*w,0)/impParts.filter(([v])=>v!==null).reduce((sum,[v,w])=>sum+w,0);
+let dom=hasOvers?dominanceScore(m.mp,t('poorMaidens'),t('targetMaidens'),t('eliteMaidens')):null;
+let dot=hasOvers&&$('dotBalls').value.trim()!==''?dotScore(m.dotPct):null;
+let bnd=hasOvers&&($('foursConceded').value.trim()!==''||$('sixesConceded').value.trim()!=='')?boundaryScore(m.boundaryRate,t('targetBoundary'),t('eliteBoundary'),t('poorBoundary')):null;
+let exp=expScore(m.inn,t('targetExp'));
+let str=m.strikeRate===null?null:strikeRateScore(m.strikeRate);
+return {WKT:wkt,ECO:eco,IMP:imp,CON:con,DOM:dom,EXP:exp,DOT:dot,BND:bnd,STR:str};}
+function normalizedWeights(){let vals=Object.values(weights),sum=vals.reduce((a,b)=>a+Math.max(0,b),0);return {sum,normalized:Object.fromEntries(Object.entries(weights).map(([k,v])=>[k,sum?Math.max(0,v)*100/sum:0]))};}
+function calcOVR(scores){let {sum,normalized}=normalizedWeights();if(!sum)return null;let total=0,used=0;for(let [k,s] of Object.entries(scores)){if(s!==null&&normalized[k]>0){total+=s*normalized[k];used+=normalized[k]}}return used?total/used:null;}
+function makeWeights(){ $('weights').innerHTML='';Object.keys(weights).forEach(k=>{let div=document.createElement('div');div.className='weightrow';div.innerHTML=`<div><div class="row"><strong>${k} · ${labels[k]}</strong><span class="sub" id="norm-${k}"></span></div><div class="sub">Weight (%)</div></div><input aria-label="${k} weight" type="number" min="0" max="100" step="1" value="${weights[k]}" id="weight-${k}">`; $('weights').appendChild(div);$('weight-'+k).addEventListener('input',e=>{weights[k]=Math.max(0,Math.min(100,Number(e.target.value)||0));render();save();});});}
+function makeAttrs(){ $('attributes').innerHTML='';Object.keys(labels).forEach(k=>{let d=document.createElement('div');d.className='attr';d.innerHTML=`<div class="attrtop"><div><span class="attrname">${k}</span> <span class="sub">${labels[k]}</span></div><strong id="score-${k}">—</strong></div><div class="bar"><i id="bar-${k}"></i></div><div class="sub" id="desc-${k}" style="margin-top:5px"></div>`;$('attributes').appendChild(d);});}
+function dominanceScore(x,poor,target,elite){if(!Number.isFinite(x))return null;poor=Math.max(0,poor);target=Math.max(poor+.1,target);elite=Math.max(target+.1,elite);const k=3.9464,p=1.57025,t=clamp((x-poor)/(elite-poor),0,1);return clamp(100*(1-Math.exp(-k*Math.pow(t,p)))/(1-Math.exp(-k)));}
+function curveScore(k,x){
+ const t=id=>num(id);
+ if(k==='WKT')return wicketScore(x,t('targetWkt'));
+ if(k==='ECO')return ecoScore(x);
+ if(k==='CON')return controlScore(x,t('targetExtras'),t('poorExtras'));
+ if(k==='DOM')return dominanceScore(x,t('poorMaidens'),t('targetMaidens'),t('eliteMaidens'));
+ if(k==='EXP')return expScore(x,t('targetExp'));
+ if(k==='DOT')return dotScore(x);
+ if(k==='BND')return boundaryScore(x,t('targetBoundary'),t('eliteBoundary'),t('poorBoundary'));
+ if(k==='STR')return strikeRateScore(x);
+ if(k==='IMP')return clamp(x,0,100);
+ return 0;
+}
+function curveSpec(k){return ({WKT:{max:2,unit:'wickets / innings',formula:`Score = 100 / (1 + (1/9) × exp(−2 × (W − ${fmt(num('targetWkt'),1)}))); target → 90`},ECO:{max:15,unit:'runs / over',formula:'Score = 100 × exp(−0.0000331035 × E^4.50144); 6 → 90, 7.5 → 75'},IMP:{max:100,unit:'impact score',formula:'Score = 0.50 × score(3+ hauls) + 0.35 × score(5+ hauls) + 0.15 × score(best figures)'},CON:{max:4,unit:'extras / over',formula:`Score = extras / over (target → 90; poor threshold sets the lower tail)`},DOM:{max:13,unit:'maiden-over rate (%)',formula:'Score = 100 × (1 − exp(−3.9464 × t^1.57025)) / (1 − exp(−3.9464)); t = clamp((rate − poor) / (elite − poor), 0, 1)'},EXP:{max:300,unit:'bowling innings',formula:'Score = 100 × (1 − exp(−ln(20) × innings / target)); target innings → 95'},DOT:{max:100,unit:'dot-ball rate (%)',formula:'Score = 75 + 20 × atan(0.12 × (rate − 57.5)) / atan(2.1); 60% ≈ 80'},BND:{max:10,unit:'boundary runs / over',formula:`Score = (4F + 6S) / O; elite ${fmt(num('eliteBoundary'),1)} → 100, target ${fmt(num('targetBoundary'),1)} → 70, poor ${fmt(num('poorBoundary'),1)} → 0`},STR:{max:30,unit:'legal balls / wicket',formula:'Score = 100 × 2^−(((STR − 10) / 10)^1.5), STR ≤ 10 → 100'}})[k];
+}
+function t(id){return num(id)}
+function curveRawValue(k,m,scores){return ({WKT:m.wpi,ECO:m.econ,IMP:scores.IMP,CON:m.ep,DOM:m.mp,EXP:m.inn,DOT:m.dotPct,BND:m.boundaryRate,STR:m.strikeRate})[k];}
+function drawCurves(m,scores){
+ const grid=$('curveGrid');if(!grid)return;grid.innerHTML='';
+ Object.keys(labels).forEach(k=>{
+  const spec=curveSpec(k),w=300,h=130,pad=25;
+  let minX=(spec.min??0),maxX=spec.max,leftLabel=String(minX),rightLabel=String(spec.max);
+  // For curves with explicit elite/poor benchmarks, show only the calibrated interval.
+  if(k==='DOM'){
+   minX=num('poorMaidens');maxX=num('eliteMaidens');leftLabel=fmt(minX,1)+'%';rightLabel=fmt(maxX,1)+'%';
+  } else if(k==='BND'){
+   minX=0;
+   maxX=Math.max(0.1,num('poorBoundary'));
+   leftLabel='0';rightLabel=fmt(maxX,1);
+  } else if(k==='DOT'){
+   minX=0;maxX=100;
+   leftLabel='0%';rightLabel='100%';
+  }
+  if(!Number.isFinite(minX)||!Number.isFinite(maxX)||maxX<=minX){minX=(spec.min??0);maxX=spec.max;leftLabel=String(minX);rightLabel=String(spec.max);}
+  const points=[];
+  for(let i=0;i<=80;i++){
+   const x=minX+(maxX-minX)*i/80;let y=curveScore(k,x);if(!Number.isFinite(y))y=0;
+   points.push([pad+(w-2*pad)*i/80,h-pad-(h-2*pad)*clamp(y,0,100)/100]);
+  }
+  const d=points.map((pt,i)=>(i?'L':'M')+pt[0].toFixed(1)+','+pt[1].toFixed(1)).join(' ');
+  const raw=curveRawValue(k,m,scores),score=scores[k],inside=Number.isFinite(raw)&&raw>=minX&&raw<=maxX&&Number.isFinite(score);
+  const mx=inside?pad+(w-2*pad)*(raw-minX)/(maxX-minX):0,my=inside?h-pad-(h-2*pad)*clamp(score,0,100)/100:0;
+  const marker=inside?`<circle cx="${mx.toFixed(1)}" cy="${my.toFixed(1)}" r="5" fill="#73d6a0" stroke="#0d1117" stroke-width="2"><title>${fmt(raw,2)} ${spec.unit} → ${fmt(score,1)} attribute</title></circle>`:'';
+  const card=document.createElement('div');card.className='curvecard';
+  const descriptions={WKT:'Smooth logistic S-curve; target wickets per innings maps to 90. Display range 0–2.',ECO:'Stretched exponential decay; calibrated to 6 runs/over → 90 and 7.5 → 75.',IMP:'Weighted composite score: 50% 3+ wicket hauls, 35% 5+ wicket hauls, 15% best figures.',CON:'Inverse piecewise curve; 0 extras → 100, target → 90, and 2× the poor threshold approaches 0.',DOM:'Smooth stretched-exponential saturation; poor maiden rate → 0 and elite rate → 100.',EXP:'Smooth exponential saturation; target bowling innings maps to 95. Display range 0–300.',DOT:'Arctan S-curve; 60% dot-ball rate gives approximately 80.',BND:'Inverse piecewise curve; elite boundary rate → 100, target → 70, poor → 0.',STR:'Exponential decay; 10 balls per wicket → 100, 20 → 50. Values below 10 remain at 100.'};
+  card.innerHTML=`<h3>${k} · ${labels[k]}</h3><p class="curve-description">${descriptions[k]}</p><p>${spec.unit}</p><svg class="curveplot" viewBox="0 0 ${w} ${h}" role="img" aria-label="${k} attribute scoring curve with current player position"><path d="M${pad},${pad} V${h-pad} H${w-pad}" fill="none" stroke="#657487" stroke-width="1"/><path d="${d}" fill="none" stroke="#f4c95d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>${marker}<text x="${pad-5}" y="12" fill="#9aa8b8" font-size="10">100</text><text x="${pad-5}" y="${h-4}" fill="#9aa8b8" font-size="10">0</text><text x="${pad}" y="${h-4}" fill="#9aa8b8" font-size="10">${leftLabel}</text><text x="${w-pad}" y="${h-4}" fill="#9aa8b8" font-size="10" text-anchor="end">${rightLabel}</text></svg><p class="curveformula">${spec.formula}</p>`;
+  const detail=document.createElement('p');detail.className='player-curve-position';
+  if(!Number.isFinite(raw)||!Number.isFinite(score)){detail.textContent='Enter enough stats to plot this player.';}
+  else if(inside){detail.textContent=`● ${$('player').value.trim()||'Current player'}: ${fmt(raw,2)} → ${fmt(score,1)} attribute`;detail.style.color='#73d6a0';}
+  else{detail.textContent=`${$('player').value.trim()||'Current player'}: ${fmt(raw,2)} → ${fmt(score,1)} attribute (outside displayed curve range)`;}
+  card.appendChild(detail);grid.appendChild(card);
+ });
+}
+function ratingColor(score){
+ if(!Number.isFinite(score))return 'var(--muted)';
+ if(score<60)return '#8c9aaa';
+ if(score<80)return '#9aaec0';
+ if(score<90)return '#65c7b2';
+ return '#f4c95d';
+}
+
+function renderBowlingRadar(scores){
+ const host=$('bowlingRadar');if(!host)return;
+ const keys=Object.keys(defaultWeights),axisLabels={WKT:'WKT',ECO:'ECO',IMP:'IMP',CON:'CON',DOM:'DOM',EXP:'EXP',DOT:'DOT',BND:'BND',STR:'STR'};
+ const W=420,H=370,cx=210,cy=180,R=112,labelR=145;
+ const angle=i=>-Math.PI/2+i*2*Math.PI/keys.length;
+ const pt=(r,i)=>[cx+Math.cos(angle(i))*r,cy+Math.sin(angle(i))*r];
+ const colorFor=v=>{const c=ratingColor(v);return c==='var(--muted)'?'#9aa8b8':c};
+ const vals=keys.map(k=>scores[k]);
+ const pointList=keys.map((k,i)=>{const v=vals[i],n=v==null?0:Math.max(0,Math.min(100,v));return pt(R*n/100,i)});
+ const pointsStr=arr=>arr.map(p=>p.map(n=>n.toFixed(1)).join(',')).join(' ');
+ let svg=`<svg class="radar-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Bowling attribute radar, scores from zero to one hundred">`;
+ for(let level=20;level<=100;level+=20){const r=R*level/100,pts=keys.map((_,i)=>pt(r,i).join(',')).join(' ');svg+=`<polygon points="${pts}" fill="none" stroke="rgba(154,174,192,${level===100?.45:.20})" stroke-width="1"/>`;svg+=`<text x="${cx+4}" y="${cy-r+11}" fill="#9aa8b8" font-size="9">${level}</text>`;}
+ keys.forEach((k,i)=>{const [x,y]=pt(R,i),[lx,ly]=pt(labelR,i),v=vals[i],col=colorFor(v);svg+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(154,174,192,.25)" stroke-width="1"/><text x="${lx}" y="${ly}" fill="${col}" font-size="10" font-weight="900" text-anchor="middle" dominant-baseline="middle">${axisLabels[k]}</text><text x="${lx}" y="${ly+13}" fill="#e5edf5" font-size="10" font-weight="700" text-anchor="middle">${v==null?'—':Math.round(v)}</text>`;});
+ // Each radar sector and connecting edge uses the calculator's value-mapped rating colour, based on the adjacent attribute scores.
+ keys.forEach((k,i)=>{const j=(i+1)%keys.length,vi=vals[i],vj=vals[j],avg=vi==null?vj:vj==null?vi:(vi+vj)/2,col=colorFor(avg),tri=[pt(0,i),pointList[i],pointList[j]];svg+=`<polygon points="${pointsStr(tri)}" fill="${col}" fill-opacity=".17" stroke="none"/>`;svg+=`<line x1="${pointList[i][0].toFixed(1)}" y1="${pointList[i][1].toFixed(1)}" x2="${pointList[j][0].toFixed(1)}" y2="${pointList[j][1].toFixed(1)}" stroke="${col}" stroke-width="3" stroke-linejoin="round"/>`;});
+ keys.forEach((k,i)=>{const v=vals[i],[x,y]=pointList[i],col=colorFor(v);svg+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="${col}" stroke="#101820" stroke-width="1.5"><title>${k}: ${v==null?'N/A':Number(v).toFixed(1)}</title></circle>`;});
+ svg+='</svg>';host.innerHTML=svg;
+}
+function updatePlayerCard(ovr,scores){
+ const name=$('player').value.trim()||'YOUR PLAYER';
+ $('pcName').textContent=name.toUpperCase();
+ $('pcOvr').textContent=ovr===null?'—':String(Math.round(ovr));
+ $('pcOvr').style.color=ratingColor(ovr);
+ const labels={WKT:'Wickets',ECO:'Economy',IMP:'Impact',CON:'Control',DOM:'Dominance',EXP:'Experience',DOT:'Dot balls',BND:'Boundary control',STR:'Strike rate'};
+ const order=['WKT','ECO','IMP','CON','DOM','EXP','DOT','BND','STR'];
+ $('pcAttrs').innerHTML=order.map(k=>{const v=scores[k];const shown=v===null||!Number.isFinite(v)?'—':String(Math.round(v));const col=ratingColor(v);return `<div class="pc-attr"><div class="pc-rating" style="color:${col}">${shown}</div><div class="pc-attr-info"><div class="pc-attr-code" style="color:${col}">${k}</div><div class="pc-attr-name">${labels[k]}</div></div></div>`;}).join('');
+}
+
+
+function downloadPlayerCardPNG(){
+ const card=$('playerCard'); if(!card)return;
+ const attrs=[...card.querySelectorAll('.pc-attr')].map(el=>({rating:el.querySelector('.pc-rating')?.textContent||'—',code:el.querySelector('.pc-attr-code')?.textContent||'',name:el.querySelector('.pc-attr-name')?.textContent||'',color:el.querySelector('.pc-rating')?.style.color||'#9aaec0'}));
+ const name=$('pcName')?.textContent||'YOUR PLAYER', ovr=$('pcOvr')?.textContent||'—', role=card.querySelector('.pc-role')?.textContent||'';
+ const W=780, pad=36, topH=88, dividerY=topH+12, attrsTop=dividerY+25, rowH=38, rows=5, spectrumY=attrsTop+rows*rowH+5, footY=spectrumY+22, H=footY+24;
+ const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H*2;const c=canvas.getContext('2d');c.scale(2,2);
+ const rr=(x,y,w,h,r)=>{c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath()};
+ c.save();rr(1,1,W/2-2,H-2,20);c.clip();
+ const bg=c.createLinearGradient(0,0,W/2,H);bg.addColorStop(0,'#172638');bg.addColorStop(.68,'#101820');bg.addColorStop(1,'#1c2835');c.fillStyle=bg;c.fillRect(0,0,W/2,H);
+ const glow=c.createRadialGradient(W/2-48,12,2,W/2-48,12,180);glow.addColorStop(0,'rgba(101,199,178,.18)');glow.addColorStop(1,'rgba(101,199,178,0)');c.fillStyle=glow;c.fillRect(0,0,W/2,H);
+ c.strokeStyle='#526579';c.lineWidth=1;c.strokeRect(.5,.5,W/2-1,H-1);
+ c.fillStyle='#b7c8d9';c.font='850 9px system-ui, sans-serif';c.letterSpacing='1.6px';c.fillText('SHAKTIGARH CRICKET',pad,29);
+ c.fillStyle='#f0f4f8';c.font='900 22px system-ui, sans-serif';c.letterSpacing='-.4px';let nm=name.toUpperCase();while(c.measureText(nm).width>225&&nm.length>8)nm=nm.slice(0,-1);if(nm!==name.toUpperCase())nm=nm.slice(0,-1)+'…';c.fillText(nm,pad,61);
+ c.fillStyle='#a8b8c8';c.font='750 10px system-ui, sans-serif';c.letterSpacing='1px';c.fillText(role, pad,82);
+ c.textAlign='right';c.fillStyle=$('pcOvr')?.style.color||'#9aaec0';c.font='950 45px system-ui, sans-serif';c.letterSpacing='-2px';c.fillText(ovr,W/2-pad,55);c.fillStyle='#b7c8d9';c.font='850 10px system-ui, sans-serif';c.letterSpacing='1.4px';c.fillText('OVR',W/2-pad,76);c.textAlign='left';
+ const div=c.createLinearGradient(pad,0,W/2-pad,0);div.addColorStop(0,'rgba(154,174,192,.65)');div.addColorStop(1,'rgba(154,174,192,.06)');c.fillStyle=div;c.fillRect(pad,dividerY,W/2-pad*2,1);
+ attrs.forEach((a,i)=>{const col=i%2,row=Math.floor(i/2),x=pad+col*177,y=attrsTop+row*rowH;c.fillStyle=a.color;c.font='900 23px system-ui, sans-serif';c.letterSpacing='-0.4px';c.fillText(a.rating,x,y+22);c.fillStyle=a.color;c.font='900 11px system-ui, sans-serif';c.letterSpacing='1px';c.fillText(a.code,x+48,y+7);c.fillStyle='#a6b4c3';c.font='9px system-ui, sans-serif';c.letterSpacing='0px';c.fillText(a.name,x+48,y+23);});
+ const spec=c.createLinearGradient(pad,0,W/2-pad,0);spec.addColorStop(0,'#8c9aaa');spec.addColorStop(.4,'#9aaec0');spec.addColorStop(.7,'#65c7b2');spec.addColorStop(1,'#f4c95d');rr(pad,spectrumY,W/2-pad*2,3,2);c.fillStyle=spec;c.fill();
+ c.fillStyle='#9aa8b8';c.font='750 9px system-ui, sans-serif';c.letterSpacing='.7px';c.textAlign='left';c.fillText('PLAYER RATING',pad,footY);c.textAlign='right';c.fillText('OVR / 100',W/2-pad,footY);c.restore();
+ canvas.toBlob(blob=>{if(!blob){alert('Could not create the PNG. Please try again.');return;}const url=URL.createObjectURL(blob),a=document.createElement('a');const safe=(name||'player').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'player';a.href=url;a.download=`${safe}-bowling-ovr.png`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);},'image/png');
+}
+
+function render(){let m=getMetrics(),scores=scoresFrom(m),ovr=calcOVR(scores),nw=normalizedWeights();updatePlayerCard(ovr,scores);renderBowlingRadar(scores);$('ovr').textContent=ovr===null?'—':fmt(ovr,1);$('ovr').style.color=ratingColor(ovr);$('econ').textContent=m.econ===null?'—':fmt(m.econ,2);$('wktRate').textContent=m.wpi===null?'—':fmt(m.wpi,2);$('extrasRate').textContent=m.ep===null?'—':fmt(m.ep,2);$('bestFig').textContent=num('bestW')?`${num('bestW')}/${num('bestR')}`:'—';$('expCount').textContent=fmt(m.inn,0);$('dotRate').textContent=m.dotPct===null?'—':fmt(m.dotPct,1);$('boundaryRate').textContent=m.boundaryRate===null?'—':fmt(m.boundaryRate,2);$('strikeRate').textContent=m.strikeRate===null?'—':fmt(m.strikeRate,2);$('weightTotal').textContent=`Total ${fmt(nw.sum,0)}%`;drawCurves(m,scores);
+Object.keys(weights).forEach(k=>{let norm=nw.normalized[k]||0;$('norm-'+k).textContent=`Normalised ${fmt(norm,1)}%`;let el=$('weight-'+k);if(document.activeElement!==el)el.value=weights[k];});
+Object.entries(scores).forEach(([k,s])=>{$('score-'+k).textContent=s===null?'N/A':fmt(s,1);$('score-'+k).style.color=ratingColor(s);$('bar-'+k).style.width=(s===null?0:s)+'%';$('bar-'+k).style.background=s===null?'var(--muted)':s>=90?'linear-gradient(90deg,#c7a13b,#f4c95d)':s>=80?'linear-gradient(90deg,#368e87,#73d6a0)':s>=60?'linear-gradient(90deg,#64778b,#a6b6c5)':'linear-gradient(90deg,#64778b,#a6b6c5)';$('desc-'+k).textContent=s===null?'Insufficient data for this attribute':k==='IMP'?'3+ haul rate (50%), 5+ haul rate (35%), best figures (15%); missing components are renormalised':k==='EXP'?'Linear innings-to-target score; reaches 100 at the target and stays capped':k==='DOM'?'Logistic maiden-over rate: poor 2%, target 7%, elite 13%':k==='DOT'?'Dot balls / legal balls; fixed arctan curve, approximately 80 attribute at 60%' :k==='BND'?'Boundary runs conceded per over; lower is better':k==='STR'?'Exponential decay: 100 at STR 10, about 84 at 14, 50 at 20':`Weight after normalisation: ${fmt(nw.normalized[k]||0,1)}%`;});
+let valid=Number.isFinite(m.balls)&&m.balls>=0;let errs=[];if(!valid)errs.push('Overs must use valid cricket notation, e.g. 12.3.');if(m.maidens>m.overs)errs.push('Maidens cannot exceed overs bowled.');if(m.balls>=0&&m.dots>m.balls)errs.push('Dot balls cannot exceed legal balls bowled (overs × 6).');if(m.fours+m.sixes>m.overs*6)errs.push('Boundary count exceeds legal balls bowled; check your totals.');if(m.wickets>m.inn*10&&m.inn>0)errs.push('Wickets look unusually high relative to innings; check your data.');if(num('hauls5')>num('hauls3'))errs.push('5+ wicket innings cannot exceed 3+ wicket innings.');if(num('hauls3')>m.inn)errs.push('3+ wicket innings cannot exceed total bowling innings.');if(m.inn===0&&(m.wickets||m.runs||m.balls||m.maidens||m.extras||m.dots||m.fours||m.sixes))errs.push('Enter bowling innings to contextualise the aggregate stats.');$('validation').textContent=errs.join(' ');$('validation').className='status '+(errs.length?'warning':'ok');$('confidence').textContent=m.inn<5?'Limited sample: treat this OVR as provisional.':m.inn<10?'Moderate sample: ratings may shift as more innings are added.':'Established sample, assuming scorecards are complete.';
+}
+function state(){return {version:1,player:Object.fromEntries(ids.map(id=>[id,$(id).value])),weights};}
+function readDatabase(){try{const d=JSON.parse(localStorage.getItem(DB_KEY)||'[]');playerDatabase=Array.isArray(d)?d.filter(x=>x&&x.player&&typeof x.player.player==='string'):[];}catch(e){playerDatabase=[];}}
+function persistDatabase(){try{localStorage.setItem(DB_KEY,JSON.stringify(playerDatabase));return true;}catch(e){$('databaseStatus').textContent='Could not save database in this browser. Storage may be full or disabled.';return false;}}
+function safeName(s){return String(s||'').trim();}
+function renderDatabase(){
+ const q=($('playerSearch').value||'').trim().toLowerCase(),host=$('playerDatabaseList');host.textContent='';
+ const filtered=playerDatabase.filter(r=>safeName(r.player.player).toLowerCase().includes(q)).sort((a,b)=>safeName(a.player.player).localeCompare(safeName(b.player.player)));
+ $('databasePlayerCount').value=`${playerDatabase.length} player${playerDatabase.length===1?'':'s'}`;
+ if(!filtered.length){const p=document.createElement('p');p.className='formhint';p.textContent=playerDatabase.length?'No player names match your search.':'Your saved players will appear here.';host.appendChild(p);renderPlayerOvrChart();return;}
+ const wrap=document.createElement('div');wrap.className='tablewrap';const table=document.createElement('table');const thead=document.createElement('thead'),hr=document.createElement('tr');
+ ['Player','Career OVR','Last saved','Actions'].forEach(t=>{const th=document.createElement('th');th.textContent=t;hr.appendChild(th)});thead.appendChild(hr);table.appendChild(thead);const tbody=document.createElement('tbody');
+ filtered.forEach(rec=>{const tr=document.createElement('tr');const name=document.createElement('td');name.textContent=rec.player.player;name.style.fontWeight='700';const ovr=document.createElement('td');ovr.textContent=rec.ovr==null?'—':Number(rec.ovr).toFixed(1);const saved=document.createElement('td');saved.textContent=rec.updatedAt?new Date(rec.updatedAt).toLocaleDateString():'—';const actions=document.createElement('td');
+ const loadBtn=document.createElement('button');loadBtn.textContent='Load';loadBtn.className='primary';loadBtn.addEventListener('click',()=>loadDatabasePlayer(rec.id));
+ const delBtn=document.createElement('button');delBtn.textContent='Delete';delBtn.style.marginLeft='6px';delBtn.addEventListener('click',()=>{if(!confirm(`Delete ${rec.player.player} from the saved player database?`))return;playerDatabase=playerDatabase.filter(x=>x.id!==rec.id);persistDatabase();renderDatabase();$('databaseStatus').textContent=`Deleted ${rec.player.player} from the database.`;});
+ actions.append(loadBtn,delBtn);tr.append(name,ovr,saved,actions);tbody.appendChild(tr);});table.appendChild(tbody);wrap.appendChild(table);host.appendChild(wrap);
+ renderPlayerOvrChart();
+}
+function renderPlayerOvrChart(){const host=$('playerOvrChart');if(!host)return;host.textContent='';const head=document.createElement('div');head.className='ovr-chart-head';const titleWrap=document.createElement('div');const title=document.createElement('p');title.className='ovr-chart-title';title.textContent='Bowling OVR Rankings';const sub=document.createElement('p');sub.className='ovr-chart-sub';sub.textContent='All saved players · highest OVR first · scale 0–100';titleWrap.append(title,sub);const count=document.createElement('span');count.className='pill';const ranked=playerDatabase.filter(r=>Number.isFinite(Number(r.ovr))&&r.ovr!==null&&r.ovr!==''&&safeName(r.player.player)).sort((a,b)=>Number(b.ovr)-Number(a.ovr)||safeName(a.player.player).localeCompare(safeName(b.player.player)));count.textContent=`${ranked.length} ranked`;head.append(titleWrap,count);host.appendChild(head);if(!ranked.length){const empty=document.createElement('div');empty.className='ovr-empty';empty.textContent=playerDatabase.length?'No saved players have a valid OVR yet.':'Save players to see their OVR rankings graphed here.';host.appendChild(empty);return}const axis=document.createElement('div');axis.className='ovr-axis';axis.append(document.createElement('span'));const scale=document.createElement('div');scale.className='ovr-axis-scale';[0,25,50,75,100].forEach(n=>{const tick=document.createElement('span');tick.textContent=n;scale.appendChild(tick)});axis.append(scale,document.createElement('span'));host.appendChild(axis);ranked.forEach((rec,i)=>{const row=document.createElement('div');row.className='ovr-row'+(i===0?' top1':i===1?' top2':i===2?' top3':'');const rank=document.createElement('div');rank.className='ovr-rank';rank.textContent='#'+(i+1);const player=document.createElement('div');player.className='ovr-player';const name=document.createElement('div');name.className='ovr-player-name';name.textContent=safeName(rec.player.player);name.title=name.textContent;const track=document.createElement('div');track.className='ovr-track';const fill=document.createElement('div');fill.className='ovr-fill';fill.style.width=Math.max(0,Math.min(100,Number(rec.ovr)))+'%';track.appendChild(fill);player.append(name,track);const value=document.createElement('div');value.className='ovr-value';value.textContent=Number(rec.ovr).toFixed(1);row.append(rank,player,value);host.appendChild(row)})}
+function saveCurrentToDatabase(){const snap=state(),name=safeName(snap.player.player);if(!name){$('databaseStatus').textContent='Enter a player name before saving to the database.';$('player').focus();return;}const key=name.toLocaleLowerCase();const existing=playerDatabase.find(r=>safeName(r.player.player).toLocaleLowerCase()===key);const record={id:existing?existing.id:(Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8)),player:snap.player,weights:snap.weights,ovr:Number.isFinite(Number($('ovr').textContent))?Number($('ovr').textContent):null,updatedAt:new Date().toISOString()};if(existing)playerDatabase=playerDatabase.map(r=>r.id===existing.id?record:r);else playerDatabase.push(record);if(persistDatabase()){renderDatabase();$('databaseStatus').textContent=`${existing?'Updated':'Saved'} ${name} in the player database.`;}}
+function loadDatabasePlayer(id){const rec=playerDatabase.find(r=>r.id===id);if(!rec)return;ids.forEach(k=>{if(rec.player[k]!==undefined)$(k).value=rec.player[k];});weights={...defaultWeights,...(rec.weights||{})};makeWeights();render();save();$('databaseStatus').textContent=`Loaded ${rec.player.player}. You can edit the stats and choose Save / Update This Player to keep changes.`;window.scrollTo({top:0,behavior:'smooth'});}
+function exportFullDatabase(){const blob=new Blob([JSON.stringify({type:'shaktigarh-bowling-player-database',version:1,players:playerDatabase},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shaktigarh_bowling_player_database.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$('databaseStatus').textContent='Full database backup exported.';}
+function exportAttributeDatabase(){if(!playerDatabase.length){$('databaseStatus').textContent='No saved players to export. Save players to the database first.';return;}const current=state();const players=playerDatabase.map(rec=>{ids.forEach(id=>{if(rec.player[id]!==undefined)$(id).value=rec.player[id];});weights={...defaultWeights,...(rec.weights||{})};const scores=scoresFrom(getMetrics());return {id:rec.id,player:{...rec.player},weights:{...weights},ovr:rec.ovr??null,attributeScores:{...scores},updatedAt:rec.updatedAt||null};});ids.forEach(id=>{if(current.player[id]!==undefined)$(id).value=current.player[id];});weights={...defaultWeights,...(current.weights||{})};makeWeights();render();save();const payload={type:'shaktigarh-bowling-attribute-database',version:1,sourceCalculator:'Shaktigarh Bowling OVR v1.50',attributes:['WKT','ECO','IMP','CON','DOM','EXP','DOT','BND','STR'],players};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shaktigarh_bowling_attribute_database.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);$('databaseStatus').textContent=`Attribute database exported for ${players.length} saved players.`;}
+$('printPlayerCard').addEventListener('click',downloadPlayerCardPNG);
+$('saveToDatabaseBtn').addEventListener('click',saveCurrentToDatabase);
+$('playerSearch').addEventListener('input',renderDatabase);
+$('exportDatabaseBtn').addEventListener('click',exportFullDatabase);$('exportAttributeDbBtn').addEventListener('click',exportAttributeDatabase);
+$('importDatabaseBtn').addEventListener('click',()=>$('databaseFile').click());
+$('databaseFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());const incoming=Array.isArray(data)?data:data.players;if(!Array.isArray(incoming))throw Error('This file does not contain a player database.');let added=0,updated=0;incoming.forEach(raw=>{if(!raw||!raw.player||!safeName(raw.player.player))return;const existing=playerDatabase.find(r=>safeName(r.player.player).toLowerCase()===safeName(raw.player.player).toLowerCase());const rec={id:existing?existing.id:(raw.id||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8)),player:raw.player,weights:{...defaultWeights,...(raw.weights||{})},ovr:raw.ovr??null,updatedAt:raw.updatedAt||new Date().toISOString()};if(existing){playerDatabase=playerDatabase.map(r=>r.id===existing.id?rec:r);updated++;}else{playerDatabase.push(rec);added++;}});if(persistDatabase()){renderDatabase();$('databaseStatus').textContent=`Database import complete: ${added} added, ${updated} updated.`;}}catch(err){$('databaseStatus').textContent='Database import failed: '+err.message;}e.target.value='';});
+function save(){try{localStorage.setItem('shaktigarhBowlingOVR',JSON.stringify(state()));$('saveBadge').textContent='Saved locally';}catch(e){$('saveBadge').textContent='Autosave unavailable';}}
+function load(){try{let raw=localStorage.getItem('shaktigarhBowlingOVR');if(!raw)return;let s=JSON.parse(raw);if(s.player)ids.forEach(id=>{if(s.player[id]!==undefined)$(id).value=s.player[id];});if(s.weights)weights={...defaultWeights,...s.weights};if(Array.isArray(s.recent)&&s.recent.length===5)recent=s.recent;makeWeights();}catch(e){}}
+ids.forEach(id=>$(id).addEventListener('input',()=>{render();save();}));
+$('resetWeights').addEventListener('click',()=>{weights={...defaultWeights};makeWeights();render();save();});
+$('resetTargets').addEventListener('click',()=>{Object.entries(targetDefaults).forEach(([id,v])=>$(id).value=v);render();save();});
+$('resetPlayer').addEventListener('click',()=>{if(!confirm('Reset this player and clear their saved data?'))return;ids.forEach(id=>{if(id==='player')$(id).value='';else $(id).value=targetDefaults[id]!==undefined?targetDefaults[id]:0;});weights={...defaultWeights};makeWeights();render();save();});
+$('exportBtn').addEventListener('click',()=>{let blob=new Blob([JSON.stringify(state(),null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(($('player').value||'bowler').trim().replace(/[^a-z0-9_-]+/gi,'_'))+'_bowling_ovr.json';a.click();URL.revokeObjectURL(a.href);$('dataStatus').textContent='JSON export created. Import it on another device to restore the player.';});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{let file=e.target.files[0];if(!file)return;try{let s=JSON.parse(await file.text());if(!s.player||!s.weights)throw Error('Invalid calculator JSON');ids.forEach(id=>{if(s.player[id]!==undefined)$(id).value=s.player[id];});weights={...defaultWeights,...s.weights};makeWeights();render();save();if(s.player&&safeName(s.player.player)){const existing=playerDatabase.find(r=>safeName(r.player.player).toLowerCase()===safeName(s.player.player).toLowerCase());const rec={id:existing?existing.id:(Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8)),player:Object.fromEntries(ids.map(id=>[id,$(id).value])),weights,ovr:Number.isFinite(Number($('ovr').textContent))?Number($('ovr').textContent):null,updatedAt:new Date().toISOString()};if(existing)playerDatabase=playerDatabase.map(r=>r.id===existing.id?rec:r);else playerDatabase.push(rec);persistDatabase();renderDatabase();}$('dataStatus').textContent='Imported successfully.';}catch(err){$('dataStatus').textContent='Import failed: '+err.message;}e.target.value='';});
+makeAttrs();makeWeights();load();readDatabase();renderDatabase();render();save();
+})();
+</script>
+</body>
+</html>
