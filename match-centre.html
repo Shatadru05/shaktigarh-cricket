@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shaktigarh Tournament Match Summary Generator v1.22</title>
+<style>
+:root{color-scheme:dark;--bg:#0d1117;--panel:#151b23;--panel2:#1b2430;--line:#2d3948;--text:#edf2f7;--muted:#9aa8b8;--accent:#f4c95d;--green:#73d6a0;--red:#ff8e8e;--blue:#8eafff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#0d1117,#111b26 55%,#0c1118);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{padding:25px 18px 18px;max-width:1120px;margin:auto}header .eyebrow{letter-spacing:.15em;font-size:11px;color:var(--accent);font-weight:800}h1{margin:6px 0;font-size:clamp(27px,5vw,40px);line-height:1.1}header p{color:var(--muted);margin:8px 0 0}
+main{max-width:1120px;margin:auto;padding:0 18px 45px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:rgba(21,27,35,.96);border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0}.span8{grid-column:span 8}.span4{grid-column:span 4}.span6{grid-column:span 6}.span12{grid-column:span 12}
+h2{font-size:17px;margin:0 0 13px}h3{font-size:14px;margin:0 0 8px}.sub{color:var(--muted);font-size:12px}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}
+label{display:block;color:var(--muted);font-size:12px;margin:0 0 5px;font-weight:650}input,textarea,select{width:100%;border:1px solid var(--line);background:#0f151d;color:var(--text);border-radius:9px;padding:10px 11px;font:inherit;min-width:0}textarea{min-height:80px;resize:vertical}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.fields .full{grid-column:1/-1}.btn{border:1px solid var(--line);background:#202b3a;color:var(--text);border-radius:10px;padding:10px 14px;font-weight:750;cursor:pointer}.btn.primary{background:var(--accent);color:#151515;border-color:var(--accent)}.btn:disabled{opacity:.45;cursor:wait}.upload{border:1px dashed #53637a;border-radius:12px;padding:17px;background:#101720}.status{font-size:12px;color:var(--muted);margin-top:8px}.status.good{color:var(--green)}.status.bad{color:var(--red)}
+.pills{display:flex;gap:8px;flex-wrap:wrap}.pill{border:1px solid var(--line);border-radius:999px;padding:5px 9px;color:var(--muted);font-size:11px;font-weight:750;letter-spacing:.04em}
+.preview-wrap{background:#0c1017;border-radius:12px;padding:12px;overflow:auto}.poster{width:100%;max-width:820px;min-width:320px;margin:auto;background:radial-gradient(ellipse at 100% 0%,rgba(86,120,180,.16),transparent 38%),linear-gradient(145deg,#172638 0%,#101820 55%,#17212d 100%);border:1px solid #526579;border-radius:20px;padding:27px;color:#edf2f7;overflow:hidden;position:relative;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}.poster:before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,#8396aa,#9aaec0 35%,#65c7b2 70%,#f4c95d)}.poster:after{display:none!important;content:none!important}.poster-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;position:relative;z-index:1}.brand-mark{font-size:10px;color:#b7c8d9;font-weight:900;letter-spacing:.17em}.poster .eyebrow{color:#f4c95d;letter-spacing:.14em;font-size:10px;font-weight:600;margin-top:7px}.poster h2{font-family:inherit;font-size:clamp(26px,4vw,36px);line-height:1.02;margin:7px 0 7px;letter-spacing:.14em;font-weight:600}.match-tag{border:1px solid #40536b;background:rgba(28,40,55,.75);border-radius:9px;padding:7px 9px;color:#aebfd2;font-size:9px;font-weight:600;letter-spacing:.13em;white-space:nowrap}.poster .meta{color:#9cacc0;font-size:10px;letter-spacing:.035em;margin-top:5px}.poster .scoreline{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 12px;position:relative;z-index:1}.team{background:linear-gradient(145deg,#1b293a,#172230);border:1px solid #34465c;border-radius:14px;padding:16px;min-width:0;position:relative;overflow:hidden}.team.winner{border-color:#b89b4a;background:linear-gradient(145deg,#2a3548,#1c2938);box-shadow:inset 0 0 0 1px rgba(244,201,93,.06)}.team.winner:after{content:"WINNER";position:absolute;right:0;top:0;background:#f4c95d;color:#19202a;font-size:8px;font-weight:950;letter-spacing:.12em;padding:5px 8px;border-radius:0 0 0 8px}.teamname{font-size:11px;color:#b7c8d9;font-weight:600;letter-spacing:.08em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:42px}.score{font-size:clamp(34px,5vw,48px);font-weight:700;letter-spacing:-.04em;line-height:1.08;margin:9px 0 5px;color:#f4f7fb}.team.winner .score{color:#f4d778}.overs{font-size:10px;color:#9cacc0;letter-spacing:.04em}.vs-divider{display:none}.result{background:linear-gradient(90deg,#26364a,#202e40);border:1px solid #40536b;border-radius:11px;padding:12px 14px;text-align:center;font-weight:600;font-size:14px;color:#f3f6ff;position:relative;z-index:1;box-shadow:0 5px 16px rgba(0,0,0,.12)}.result small{display:block;color:#9fb4cd;font-size:8px;letter-spacing:.2em;margin-bottom:4px}.highlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px;position:relative;z-index:1}.highlight{border-radius:13px;background:linear-gradient(145deg,#1a2736,#141e2a);border:1px solid #2f4155;padding:14px;position:relative;overflow:hidden}.highlight:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(#9aaec0,#65c7b2)}.highlight:nth-child(2):before{background:linear-gradient(#65c7b2,#f4c95d)}.hl-label{font-size:9px;letter-spacing:.14em;color:#9fb4cd;font-weight:600}.hl-name{font-size:18px;font-weight:600;margin:7px 0 9px;overflow-wrap:anywhere;letter-spacing:-.01em}.hl-stat{display:flex;flex-wrap:wrap;gap:6px;font-size:13px;color:#e3eaf4;line-height:1.4}.hl-stat span{display:inline-block;padding:5px 7px;border:1px solid #34485d;border-radius:6px;background:rgba(10,17,26,.38);font-weight:500;white-space:nowrap}.hl-stat span:first-child{font-size:15px;font-weight:650;color:#fff;border-color:#536a83;background:rgba(116,145,180,.12)}.poster.light .hl-stat span{background:rgba(255,255,255,.65);border-color:#cbd7e6;color:#536176}.poster.light .hl-stat span:first-child{color:#182230;border-color:#b8c9dc}.poster .report{margin-top:14px;padding:13px 15px;border:1px solid #2d3c4e;border-left:3px solid #f4c95d;background:rgba(21,31,45,.88);border-radius:0 11px 11px 0;color:#c5d1df;font-size:11px;line-height:1.65;position:relative;z-index:1}.report-label{display:block;color:#f4c95d;font-size:8px;letter-spacing:.16em;font-weight:600;margin-bottom:4px}.poster-foot{display:flex;justify-content:space-between;gap:10px;margin-top:18px;padding-top:12px;border-top:1px solid #344457;color:#8497ad;font-size:8px;font-weight:550;letter-spacing:.12em;position:relative;z-index:1}.poster.light{background:radial-gradient(ellipse at 100% 0%,rgba(106,133,171,.12),transparent 38%),linear-gradient(145deg,#f5f7fb,#e8eef6);color:#182230;border-color:#c7d3e2}.poster.light:before{opacity:.9}.poster.light .brand-mark,.poster.light .meta,.poster.light .overs,.poster.light .teamname,.poster.light .hl-stat,.poster.light .report{color:#536176}.poster.light .match-tag{background:#e4ebf5;border-color:#cbd7e6;color:#52657d}.poster.light .team{background:linear-gradient(145deg,#edf2f9,#e1e9f4);border-color:#cbd7e6}.poster.light .team.winner{background:linear-gradient(145deg,#fff6d9,#f6ebc6);border-color:#d8bd65}.poster.light .score{color:#182230}.poster.light .team.winner .score{color:#8c6b13}.poster.light .result{background:linear-gradient(90deg,#e2eaf5,#d9e3f0);border-color:#c5d3e4;color:#182230}.poster.light .result small,.poster.light .hl-label{color:#596b88}.poster.light .highlight{background:linear-gradient(145deg,#f0f4fa,#e4ebf5);border-color:#cbd7e6}.poster.light .report{background:#e8eef6;border-color:#d3deea;border-left-color:#c69e25}.poster.light .report-label{color:#987415}.poster.light .poster-foot{border-color:#ccd7e5;color:#66758a}
+.team-profile-list{display:grid;gap:8px}.team-profile-row{display:grid;grid-template-columns:minmax(0,1fr) 44px 124px 34px;gap:8px;align-items:center}.team-profile-row input[type=color]{width:100%;height:40px;padding:4px;border:1px solid var(--line);background:#0f151d;border-radius:9px}.team-profile-row .team-color-hex{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;text-transform:uppercase;padding:10px 8px}.team-profile-row .team-color-hex.invalid{border-color:var(--red)}.team-profile-row .remove-team{padding:7px 9px}.logo-preview{width:64px;height:64px;object-fit:contain;border:1px solid var(--line);background:#0f151d;border-radius:12px;padding:5px}.profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.profile-status{margin-top:8px;font-size:12px;color:var(--muted)}.poster-brand{display:flex;align-items:center;gap:10px}.poster-logo{width:48px;height:48px;object-fit:contain;border-radius:10px;padding:3px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);display:none}.poster .team{--team-color:#8eafff;border-color:var(--team-color);background:linear-gradient(145deg,#1b293a,#172230)}.poster .team:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--team-color)}.poster .team.winner{border-color:var(--team-color);box-shadow:inset 0 0 0 1px rgba(244,201,93,.06)}.poster .team.winner .score{color:var(--team-color)}.poster.light .team{background:linear-gradient(145deg,#edf2f9,#e1e9f4)}.poster.light .team.winner .score{color:var(--team-color)}.poster .eyebrow{max-width:600px;overflow-wrap:anywhere}
+
+/* v1.18 — preserve the winning-team result border in dark-mode overrides */
+/* v1.19 — match the MATCH SUMMARY heading typography to the competition label above it */
+.poster .result{--winner-color:#8eafff;border:1px solid var(--winner-color)}
+.poster.light .result{border-color:var(--winner-color)}
+
+/* v1.14 — inning-by-inning score and performance panels */
+.poster .innings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;position:relative;z-index:1}
+.poster .innings-card{--team-color:#8eafff;border:1px solid var(--team-color);border-radius:11px;overflow:hidden;background:linear-gradient(145deg,#192738,#141e2a);min-width:0}
+.poster .innings-heading{padding:11px 12px 10px;border-bottom:1px solid #34465c;background:rgba(116,145,180,.06)}
+.poster .innings-label{font-size:8px;letter-spacing:.14em;color:#f4c95d;font-weight:650}
+.poster .innings-team{font-size:10px;line-height:1.3;letter-spacing:.035em;font-weight:600;overflow-wrap:anywhere;margin-top:4px;color:#b7c8d9}
+.poster .innings-score{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:6px}
+.poster .innings-card.winner{box-shadow:inset 0 0 0 1px rgba(244,201,93,.12)}
+.poster .innings-score span{font-size:clamp(24px,3vw,32px);font-weight:650;letter-spacing:-.035em;line-height:1.1;color:var(--team-color);overflow-wrap:anywhere}
+.poster .innings-score small{font-size:8px;color:#9cacc0;white-space:nowrap}
+.poster .innings-performances{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.poster .performance{padding:10px 10px 11px;min-width:0}
+.poster .performance+.performance{border-left:1px solid #34465c}
+.poster .performance .hl-label{font-size:7px;letter-spacing:.1em;color:#9fb4cd;font-weight:600}
+.poster .performance .hl-name{font-size:12px;line-height:1.25;margin:5px 0 4px;font-weight:600;overflow-wrap:anywhere}
+.poster .performance .hl-stat{display:block;font-size:9px;line-height:1.45;color:#c5d1df;overflow-wrap:anywhere}
+.poster.light .innings-card{background:linear-gradient(145deg,#f0f4fa,#e4ebf5);border-color:#cbd7e6}
+.poster.light .innings-heading{background:rgba(255,255,255,.5);border-color:#cbd7e6}
+.poster.light .innings-team{color:#536176}
+.poster.light .innings-score span{color:#182230}
+.poster.light .innings-score small,.poster.light .performance .hl-label{color:#596b88}
+.poster.light .performance+.performance{border-color:#cbd7e6}
+.poster.light .performance .hl-stat{color:#536176}
+@media(max-width:540px){.poster .innings-grid{grid-template-columns:1fr}.poster .innings-score span{font-size:30px}}
+
+.note{font-size:12px;color:var(--muted);line-height:1.6}.section-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:12px}.section-head h2{margin:0}
+@media(max-width:780px){.span8,.span4,.span6{grid-column:span 12}.fields{grid-template-columns:1fr}.fields .full{grid-column:auto}.poster{padding:18px}.team{padding:12px}.highlight{padding:11px}.poster-foot{font-size:7px}.match-tag{font-size:8px}.team-profile-row{grid-template-columns:minmax(0,1fr) 38px 100px 30px}}
+@media print{body{background:#fff}.no-print{display:none!important}.preview-wrap{padding:0;background:white}.poster{max-width:none}}
+
+/* v1.4 — quieter, compact match-card typography and plain performance lines */
+.poster{padding:22px;border-radius:16px;box-shadow:none}
+.poster:after{display:none!important;content:none!important}
+.poster h2{font-size:clamp(21px,3vw,28px);font-weight:550;letter-spacing:-.035em;margin:5px 0;line-height:1.05}
+.brand-mark{font-size:9px;font-weight:650;letter-spacing:.13em}
+.poster .eyebrow{font-size:9px;font-weight:500;letter-spacing:.11em;margin-top:5px}
+.poster .meta{font-size:9px;letter-spacing:.02em}
+.poster .scoreline{gap:10px;margin:15px 0 10px}
+.poster .team{padding:12px;border-radius:10px}
+.poster .teamname{font-size:10px;font-weight:500;letter-spacing:.055em}
+.poster .score{font-size:clamp(27px,4vw,36px);font-weight:600;letter-spacing:-.035em;margin:7px 0 3px}
+.poster .overs{font-size:9px}
+.poster .team.winner:after{font-size:7px;padding:4px 6px;font-weight:700;letter-spacing:.08em}
+.poster .match-tag{font-size:8px;padding:6px 8px;font-weight:500;letter-spacing:.09em}
+.poster .result{padding:9px 11px;font-size:12px;font-weight:500;box-shadow:none;border-radius:8px}
+.poster .result small{font-size:7px;letter-spacing:.16em;margin-bottom:3px;font-weight:500}
+.poster .highlight-grid{gap:10px;margin-top:12px}
+.poster .highlight{padding:11px 12px;border-radius:9px;background:rgba(20,30,42,.72);box-shadow:none}
+.poster .highlight:before{width:2px}
+.poster .hl-label{font-size:8px;letter-spacing:.12em;font-weight:500}
+.poster .hl-name{font-size:14px;font-weight:550;margin:5px 0 5px;letter-spacing:0;line-height:1.25}
+.poster .hl-stat{display:block;font-size:10px;line-height:1.55;color:#c5d1df;font-weight:400}
+.poster .hl-stat span,.poster .hl-stat span:first-child{display:inline;padding:0;border:0;border-radius:0;background:none;color:inherit;font-size:inherit;font-weight:400;white-space:normal}
+.poster .hl-stat span+span:before{content:' · ';color:#71869e}
+.poster .report{margin-top:11px;padding:10px 12px;font-size:10px;line-height:1.55;box-shadow:none}
+.poster .report-label{font-size:7px;letter-spacing:.14em;font-weight:500;margin-bottom:3px}
+.poster .poster-foot{margin-top:13px;padding-top:9px;font-size:7px;font-weight:450;letter-spacing:.09em}
+.poster.light .highlight{background:rgba(240,244,250,.7)}
+@media(max-width:780px){.poster{padding:16px}.poster .team{padding:10px}.poster .hl-name{font-size:13px}.poster .hl-stat{font-size:9px}.poster .score{font-size:clamp(25px,7vw,32px)}.poster .highlight{padding:9px 10px}}
+
+/* v1.5: carry the match-story accent bar into the score and player panels */
+.poster .team:before,.poster .highlight:before{background:#f4c95d!important;width:3px}
+.poster .score{font-size:clamp(26px,3.5vw,35px);letter-spacing:-.035em;line-height:1.08;margin:8px 0 4px}
+.poster .highlight{padding:13px 14px 13px 16px}
+.poster .hl-name{font-size:15px;font-weight:550;margin:6px 0 7px;letter-spacing:-.01em}
+.poster .hl-stat{display:flex;flex-wrap:wrap;gap:0;font-size:10px;line-height:1.5;color:#cbd6e4}
+.poster .hl-stat span,.poster .hl-stat span:first-child{display:inline;padding:0;border:0;border-radius:0;background:none;color:inherit;font-size:inherit;font-weight:450;white-space:normal}
+.poster .hl-stat span:not(:last-child){margin-right:7px}
+.poster .hl-stat span:not(:last-child):after{content:''}
+.poster .hl-stat .figure-main{display:block;font-size:10px;font-weight:450;color:inherit;letter-spacing:0;line-height:1.45;margin-bottom:2px}
+.poster .hl-stat .figure-sub{display:block;font-size:10px;font-weight:450;color:inherit;line-height:1.45}
+.poster.light .hl-stat .figure-main{color:#182230}
+.poster.light .hl-stat .figure-sub{color:#536176}
+.poster.light .hl-stat span,.poster.light .hl-stat span:first-child{background:none;border:0;color:#536176}
+@media(max-width:780px){.poster .score{font-size:clamp(23px,6vw,29px)}.poster .highlight{padding:10px 10px 10px 13px}.poster .hl-name{font-size:13px}.poster .hl-stat{font-size:9px}.poster .hl-stat .figure-main,.poster .hl-stat .figure-sub{font-size:9px;line-height:1.45}}
+
+
+/* v1.6 — remove decorative accent bars, fit full team names, and drop footer catchphrases */
+.poster:before{display:none!important}
+.poster .team:before,.poster .highlight:before{display:none!important;content:none!important}
+.poster .report{border-left:1px solid #2d3c4e;border-radius:9px}
+.poster.light .report{border-left-color:#d3deea}
+.poster .teamname{font-size:9px!important;line-height:1.25;letter-spacing:.035em;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;padding-right:0;max-width:100%;min-height:2.25em}
+.poster .team.winner .teamname{padding-right:38px}
+.poster .team{padding-top:14px}
+@media(max-width:780px){.poster .teamname{font-size:8px!important;letter-spacing:.02em}.poster .team.winner .teamname{padding-right:34px}}
+
+
+/* v1.20 — deep navy match graphic and final result below both innings */
+.poster:not(.light){background:radial-gradient(ellipse at 100% 0%,rgba(86,120,180,.20),transparent 40%),linear-gradient(145deg,#172638 0%,#101c2a 54%,#1b2b3e 100%)!important;border-color:#526579!important;box-shadow:0 10px 30px rgba(0,0,0,.18)!important}
+.poster:not(.light):after{display:none!important;content:none!important}
+.poster:not(.light) .innings-card{background:linear-gradient(145deg,#1b2b3e,#142131)!important;border-color:var(--team-color)!important}
+.poster:not(.light) .innings-heading{background:rgba(116,145,180,.09)!important;border-color:#34485d!important}
+.poster:not(.light) .performance+.performance{border-color:#34465c!important}
+.poster:not(.light) .result{margin-top:12px;background:linear-gradient(90deg,#263b54,#1b2c40)!important;border-color:var(--winner-color)!important;box-shadow:0 5px 16px rgba(0,0,0,.12)!important}
+.poster:not(.light) .report{background:rgba(21,34,50,.88)!important;border-color:#34465c!important;color:#c5d1df}
+
+/* v1.15 — Man of the Match spotlight above the final result */
+.poster .motm{margin-top:12px;padding:11px 13px;border:1px solid #6d5a27;border-radius:9px;background:#090909;text-align:center;position:relative;z-index:1}
+.poster .motm-label{font-size:7px;letter-spacing:.18em;font-weight:650;color:#f4c95d}
+.poster .motm-name{font-family:inherit;font-size:clamp(21px,3vw,28px);line-height:1.05;font-weight:550;letter-spacing:-.035em;color:#f4f7fb;margin-top:5px;overflow-wrap:anywhere}
+.poster .motm-stat{font-size:9px;line-height:1.45;color:#aebfd2;margin-top:3px;overflow-wrap:anywhere}
+.poster.light .motm{background:#fff8e3;border-color:#d9bd65}
+.poster.light .motm-name{color:#182230}
+.poster.light .motm-stat{color:#536176}
+.poster:not(.light) .motm{background:linear-gradient(145deg,#203149,#172538)!important;border-color:#7c6a37!important}
+
+/* v1.22 — separate batter/bowler substat entry fields */
+.poster:after{display:none!important;content:none!important}
+.poster .motm-name{font-family:inherit;font-size:clamp(21px,3vw,28px);line-height:1.05;font-weight:550;letter-spacing:-.035em}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">SHAKTIGARH CRICKET • TOOLKIT</div>
+ <h1>Tournament Match Summary Generator v1.23</h1>
+ <p>Create a reusable tournament profile, import each CricHeroes scorecard, and export consistent match graphics.</p>
+</header>
+<main>
+ <div class="grid">
+  <section class="card span12 no-print" id="tournamentProfileCard">
+   <div class="section-head"><h2>00 / Tournament profile</h2><span class="sub">Create once • reuse for every match</span></div>
+   <div class="fields">
+    <div><label for="tournamentName">Tournament name</label><input id="tournamentName" value="ALLIANCE CUP S2" placeholder="e.g. Alliance Cup S2"></div>
+    <div><label for="profileSelect">Saved tournament profiles</label><select id="profileSelect"><option value="">Select a saved profile…</option></select></div>
+    <div class="full"><label for="logoFile">Tournament logo (PNG, JPG, WebP)</label><div class="row"><input id="logoFile" type="file" accept="image/*"><img id="logoPreview" class="logo-preview" alt="Tournament logo preview"><span class="sub">Logo is embedded in the saved profile and match graphic.</span></div></div>
+    <div class="full"><div class="section-head"><h3 style="margin:0">Teams & colours</h3><button class="btn" type="button" id="addTeamBtn">+ Add team</button></div><div id="teamProfileList" class="team-profile-list"></div><div class="sub" style="margin-top:7px">Use each team’s exact name and its colour hex code. When a scorecard is imported, matching team colours are applied automatically.</div></div>
+   </div>
+   <div class="profile-actions"><button class="btn primary" id="saveProfileBtn">Save tournament profile</button><button class="btn" id="loadProfileBtn">Load selected profile</button><button class="btn" id="deleteProfileBtn">Delete selected profile</button></div>
+   <div class="profile-status" id="profileStatus">Profiles are saved in this browser on this device.</div>
+  </section>
+  <section class="card span12 no-print" id="savedMatchesCard">
+   <div class="section-head"><h2>01 / Saved match data</h2><span class="sub">Save matches and reopen them later on this device</span></div>
+   <div class="fields">
+    <div><label for="matchRecordName">Match name / label</label><input id="matchRecordName" placeholder="e.g. Alliance Cup — Match 4"></div>
+    <div><label for="savedMatchSelect">Saved matches</label><select id="savedMatchSelect"><option value="">Select a saved match…</option></select></div>
+   </div>
+   <div class="profile-actions"><button class="btn primary" id="saveMatchBtn">Save match data</button><button class="btn" id="loadMatchBtn">Load selected match</button><button class="btn" id="deleteMatchBtn">Delete selected match</button></div>
+   <div class="profile-actions"><button class="btn" id="exportBackupBtn">Export backup file</button><button class="btn" id="importBackupBtn">Import backup file</button><input id="backupFile" type="file" accept="application/json,.json" style="display:none"></div>
+   <div class="profile-status" id="matchSaveStatus">Match data is saved in this browser on this device. Saving includes all score, performance, Man of the Match, result, and story fields.</div>
+  </section>
+  <section class="card span4 no-print">
+   <h2>02 / Import scorecard</h2>
+   <div class="upload">
+    <label for="pdfFile">CricHeroes scorecard PDF</label>
+    <input id="pdfFile" type="file" accept="application/pdf,.pdf">
+    <div id="status" class="status">Choose a PDF. Text extraction runs locally in this browser using PDF.js.</div>
+   </div>
+   <div style="height:14px"></div>
+   <div class="pills"><span class="pill">PDF → DATA</span><span class="pill">EDITABLE</span><span class="pill">PNG EXPORT</span></div>
+   <p class="note" style="margin-top:14px">PDF text extraction is automatic where the scorecard text is selectable. Review the extracted details before exporting; scanned/image-only PDFs may need manual entry.</p>
+   <button class="btn" id="sampleBtn" style="width:100%;margin-top:8px">Load sample match data</button>
+  </section>
+  <section class="card span8 no-print">
+   <div class="section-head"><h2>03 / Match details</h2><span class="sub">Edit any field before export</span></div>
+   <div class="fields">
+    <div class="full"><label for="competition">Competition / round</label><input id="competition" value="LEAGUE MATCHES"></div>
+    <div><label for="teamA">Team A</label><input id="teamA" value="Wolf Brigade"></div>
+    <div><label for="teamB">Team B</label><input id="teamB" value="Shadow Panthers"></div>
+    <div><label for="scoreA">Team A score</label><input id="scoreA" value="63/5"></div>
+    <div><label for="oversA">Team A overs</label><input id="oversA" value="10.0 overs"></div>
+    <div><label for="scoreB">Team B score</label><input id="scoreB" value="53/5"></div>
+    <div><label for="oversB">Team B overs</label><input id="oversB" value="10.0 overs"></div>
+    <div class="full"><label for="manOfMatchName">Man of the match</label><input id="manOfMatchName" value=""></div>
+    <div class="full"><label for="manOfMatchStat">Man of the match — performance / figures</label><input id="manOfMatchStat" value="" placeholder="e.g. 23*(18) • 2 wickets"></div>
+    <div class="full"><label for="result">Result</label><input id="result" value="Wolf Brigade won by 10 runs"></div>
+    <div><label for="ground">Ground</label><input id="ground" value="Shaktigarh Ground, Nabanagar, Kolkata"></div>
+    <div><label for="date">Match date</label><input id="date" value="24 Oct 2026"></div>
+    <div class="full"><h3>Innings 1 performance</h3><p class="sub" style="margin:0 0 9px">Best batter from Team A's innings and best bowler from the opposition. Enter the main figures, then fill the substats in their own fields below.</p></div>
+    <div><label for="batterAName">Best batter — Innings 1</label><input id="batterAName" value="Souhardya"></div>
+    <div><label for="batterAStat">Runs (balls)</label><input id="batterAStatMain" value="23*(18)" placeholder="e.g. 23*(18)"><input type="hidden" id="batterAStat" value=""></div>
+    <div><label for="batterAFours">Fours</label><input id="batterAFours" type="number" min="0" value="1" placeholder="0"></div>
+    <div><label for="batterASixes">Sixes</label><input id="batterASixes" type="number" min="0" value="2" placeholder="0"></div>
+    <div><label for="bowlerAName">Best bowler — Innings 1</label><input id="bowlerAName" value="Arijit Koley"></div>
+    <div><label for="bowlerAStat">Bowling figures (O-M-R-W)</label><input id="bowlerAStatMain" value="3-1-4-2" placeholder="e.g. 3-1-18-2"><input type="hidden" id="bowlerAStat" value=""></div>
+    <div><label for="bowlerADots">Dot balls</label><input id="bowlerADots" type="number" min="0" value="14" placeholder="0"></div>
+    <div><label for="bowlerAExtras">Extras conceded</label><input id="bowlerAExtras" type="number" min="0" value="0" placeholder="0"></div>
+    <div class="full"><h3>Innings 2 performance</h3><p class="sub" style="margin:0 0 9px">Best batter from Team B's innings and best bowler from the opposition. Enter the main figures, then fill the substats in their own fields below.</p></div>
+    <div><label for="batterBName">Best batter — Innings 2</label><input id="batterBName" value=""></div>
+    <div><label for="batterBStat">Runs (balls)</label><input id="batterBStatMain" value="" placeholder="e.g. 32(20)"><input type="hidden" id="batterBStat" value=""></div>
+    <div><label for="batterBFours">Fours</label><input id="batterBFours" type="number" min="0" value="" placeholder="0"></div>
+    <div><label for="batterBSixes">Sixes</label><input id="batterBSixes" type="number" min="0" value="" placeholder="0"></div>
+    <div><label for="bowlerBName">Best bowler — Innings 2</label><input id="bowlerBName" value=""></div>
+    <div><label for="bowlerBStat">Bowling figures (O-M-R-W)</label><input id="bowlerBStatMain" value="" placeholder="e.g. 2-0-18-2"><input type="hidden" id="bowlerBStat" value=""></div>
+    <div><label for="bowlerBDots">Dot balls</label><input id="bowlerBDots" type="number" min="0" value="" placeholder="0"></div>
+    <div><label for="bowlerBExtras">Extras conceded</label><input id="bowlerBExtras" type="number" min="0" value="" placeholder="0"></div>
+    <div class="full"><label for="report">Match story (write it yourself)</label><textarea id="report">Write your match story here. Keep it editable and enter only the details you want to share.</textarea></div>
+   </div>
+   <div class="row" style="margin-top:14px">
+    <button class="btn primary" id="updateBtn">Update preview</button>
+    <button class="btn" id="pngBtn">Export PNG</button>
+    <button class="btn" id="resetBtn">Reset sample</button>
+   </div>
+   <div class="status" id="exportStatus">PNG export saves the match graphic at high resolution.</div>
+  </section>
+  <section class="card span12">
+   <div class="section-head no-print"><h2>04 / Graphic preview</h2><div class="row" style="align-items:center;flex-wrap:wrap"><div class="row" style="align-items:center"><label for="theme" style="margin:0">Theme</label><select id="theme" style="width:auto"><option value="dark">Dark</option><option value="light">Light</option></select></div><button class="btn primary" id="downloadPosterPng">Download as PNG</button></div></div>
+   <div class="preview-wrap">
+    <article id="poster" class="poster">
+     <div class="poster-head">
+      <div class="poster-brand"><img id="pLogo" class="poster-logo" alt="Tournament logo"><div><div class="brand-mark" id="pTournamentName">ALLIANCE CUP S2</div><div class="eyebrow" id="pCompetition">LEAGUE MATCHES</div><h2>MATCH<br>SUMMARY</h2></div></div>
+      <div class="match-tag">FULL TIME<br><span style="color:#f4c95d">• MATCH CENTRE</span></div>
+     </div>
+     <div class="meta" id="pMeta">SHAKTIGARH GROUND, NABANAGAR, KOLKATA • 24 OCT 2026</div>
+     <div class="innings-grid">
+      <section class="innings-card" id="inningsCardA">
+       <div class="innings-heading"><div class="innings-label">INNINGS 1</div><div class="innings-team" id="pInningsTeamA">WOLF BRIGADE</div><div class="innings-score"><span id="pInningsScoreA">63/5</span><small id="pInningsOversA">10.0 overs</small></div></div>
+       <div class="innings-performances">
+        <div class="performance"><div class="hl-label">BEST BATTER</div><div class="hl-name" id="pBatterAName">Souhardya</div><div class="hl-stat" id="pBatterAStat">23*(18) • 1 four • 2 sixes</div></div>
+        <div class="performance"><div class="hl-label">BEST BOWLER</div><div class="hl-name" id="pBowlerAName">Arijit Koley</div><div class="hl-stat" id="pBowlerAStat">3-1-4-2 • 14 dot balls • 0 extras</div></div>
+       </div>
+      </section>
+      <section class="innings-card" id="inningsCardB">
+       <div class="innings-heading"><div class="innings-label">INNINGS 2</div><div class="innings-team" id="pInningsTeamB">SHADOW PANTHERS</div><div class="innings-score"><span id="pInningsScoreB">53/5</span><small id="pInningsOversB">10.0 overs</small></div></div>
+       <div class="innings-performances">
+        <div class="performance"><div class="hl-label">BEST BATTER</div><div class="hl-name" id="pBatterBName">—</div><div class="hl-stat" id="pBatterBStat">—</div></div>
+        <div class="performance"><div class="hl-label">BEST BOWLER</div><div class="hl-name" id="pBowlerBName">—</div><div class="hl-stat" id="pBowlerBStat">—</div></div>
+       </div>
+      </section>
+     </div>
+     <section class="motm" id="pMotmSection"><div class="motm-label">MAN OF THE MATCH</div><div class="motm-name" id="pManOfMatchName">—</div><div class="motm-stat" id="pManOfMatchStat"></div></section>
+     <div class="result"><small>FINAL RESULT</small><span id="pResult">WOLF BRIGADE WON BY 10 RUNS</span></div>
+     <div class="report"><span class="report-label">MATCH STORY</span><span id="pReport">Write your match story here. Keep it editable and enter only the details you want to share.</span></div>
+    </article>
+   </div>
+  </section>
+ </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const fields = ['competition','teamA','teamB','scoreA','oversA','scoreB','oversB','manOfMatchName','manOfMatchStat','result','ground','date','batterAName','batterAStat','batterAFours','batterASixes','bowlerAName','bowlerAStat','bowlerADots','bowlerAExtras','batterBName','batterBStat','batterBFours','batterBSixes','bowlerBName','bowlerBStat','bowlerBDots','bowlerBExtras','report'];
+const PROFILE_KEY='shaktigarh_tournament_profiles_v1';
+const MATCH_KEY='shaktigarh_saved_match_data_v1';
+let tournamentLogoData='';
+let importedScorecardText='';
+const defaultTeams=[{name:'Wolf Brigade',color:'#65c7b2'},{name:'Shadow Panthers',color:'#8eafff'}];
+function readTeams(){return [...$('teamProfileList').querySelectorAll('.team-profile-row')].map(row=>{const typed=row.querySelector('.team-color-hex').value.trim();const picker=row.querySelector('.team-color').value;return {name:row.querySelector('.team-name').value.trim(),color:/^#[0-9a-f]{6}$/i.test(typed)?typed:picker||'#8eafff'};}).filter(t=>t.name);}
+function addTeamRow(name='',color='#8eafff'){
+ const row=document.createElement('div');row.className='team-profile-row';
+ const n=document.createElement('input');n.className='team-name';n.placeholder='Team name';n.value=name;n.setAttribute('aria-label','Team name');
+ const initialColor=/^#[0-9a-f]{6}$/i.test(color)?color:'#8eafff';
+ const c=document.createElement('input');c.type='color';c.className='team-color';c.value=initialColor;c.title='Choose team colour';c.setAttribute('aria-label','Choose team colour');
+ const hex=document.createElement('input');hex.type='text';hex.className='team-color-hex';hex.value=initialColor.toUpperCase();hex.placeholder='#RRGGBB';hex.maxLength=7;hex.title='Enter HEX colour, e.g. #65C7B2';hex.setAttribute('aria-label','Team colour HEX code');
+ const b=document.createElement('button');b.type='button';b.className='btn remove-team';b.textContent='×';b.title='Remove team';b.addEventListener('click',()=>{row.remove();render();});
+ c.addEventListener('input',()=>{hex.value=c.value.toUpperCase();hex.classList.remove('invalid');render();});
+ hex.addEventListener('input',()=>{let v=hex.value.trim();if(v&&!v.startsWith('#'))v='#'+v;if(/^#[0-9a-f]{6}$/i.test(v)){hex.value=v.toUpperCase();c.value=v;hex.classList.remove('invalid');}else{hex.classList.toggle('invalid',v.length>0); }render();});
+ hex.addEventListener('blur',()=>{let v=hex.value.trim();if(v&&!v.startsWith('#'))v='#'+v;if(!/^#[0-9a-f]{6}$/i.test(v)){hex.value=c.value.toUpperCase();hex.classList.remove('invalid');}else{hex.value=v.toUpperCase();c.value=v;}});
+ n.addEventListener('input',render);row.append(n,c,hex,b);$('teamProfileList').append(row);
+}
+function setTeamRows(teams){$('teamProfileList').innerHTML='';(teams&&teams.length?teams:defaultTeams).forEach(t=>addTeamRow(t.name,t.color));}
+function getProfiles(){try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||'{}')}catch(e){return {};}}
+function refreshProfileSelect(selected=''){
+ const sel=$('profileSelect'),profiles=getProfiles();sel.innerHTML='<option value="">Select a saved profile…</option>';
+ Object.keys(profiles).sort((a,b)=>a.localeCompare(b)).forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;sel.append(o);});if(selected&&profiles[selected])sel.value=selected;
+}
+function currentProfile(){return {name:$('tournamentName').value.trim(),logo:tournamentLogoData,teams:readTeams()};}
+function applyProfile(profile){if(!profile)return;$('tournamentName').value=profile.name||'';tournamentLogoData=profile.logo||'';$('logoPreview').src=tournamentLogoData||'';$('logoPreview').style.visibility=tournamentLogoData?'visible':'hidden';setTeamRows(profile.teams||[]);if(!$('competition').value.trim()||$('competition').value.toLowerCase().includes((profile.name||'').toLowerCase()))$('competition').value='LEAGUE MATCHES';$('pTournamentName').textContent=(profile.name||'TOURNAMENT').toUpperCase();render();}
+function profileMessage(msg,good=false){$('profileStatus').textContent=msg;$('profileStatus').style.color=good?'var(--green)':'var(--muted)';}
+function getSavedMatches(){try{return JSON.parse(localStorage.getItem(MATCH_KEY)||'{}')}catch(e){return {};}}
+function refreshSavedMatchSelect(selected=''){
+ const sel=$('savedMatchSelect'),matches=getSavedMatches();sel.innerHTML='<option value="">Select a saved match…</option>';
+ Object.keys(matches).sort((a,b)=>a.localeCompare(b)).forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;sel.append(o);});
+ if(selected&&matches[selected])sel.value=selected;
+}
+function matchData(){composeFigures();const d={};fields.forEach(k=>d[k]=$(k).value);return d;}
+function matchMessage(msg,good=false){$('matchSaveStatus').textContent=msg;$('matchSaveStatus').style.color=good?'var(--green)':'var(--muted)';}
+function suggestedMatchName(){return [ $('teamA').value.trim(), 'vs', $('teamB').value.trim(), $('date').value.trim() ].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();}
+
+const sample = {
+ competition:'LEAGUE MATCHES',teamA:'Wolf Brigade',teamB:'Shadow Panthers',scoreA:'63/5',oversA:'10.0 overs',
+ scoreB:'53/5',oversB:'10.0 overs',manOfMatchName:'',manOfMatchStat:'',result:'Wolf Brigade won by 10 runs',ground:'Shaktigarh Ground, Nabanagar, Kolkata',date:'24 Oct 2026',
+ batterAName:'Souhardya',batterAStat:'23*(18) • 1 four • 2 sixes',bowlerAName:'Arijit Koley',bowlerAStat:'3-1-4-2 • 14 dot balls • 0 extras',batterBName:'',batterBStat:'',bowlerBName:'',bowlerBStat:'',
+ report:'Write your match story here. Keep it editable and enter only the details you want to share.'
+};
+function populateSubstats(data){
+ for(const side of ['A','B']){
+  const bs=String(data['batter'+side+'Stat']||'');
+  const bm=bs.match(/^(.*?)(?:\s*[•|]\s*(.*))?$/);
+  if(bm){const extras=bm[2]||'';const f=extras.match(/(\d+)\s+fours?/i);const six=extras.match(/(\d+)\s+sixes?/i);if(f)$('batter'+side+'Fours').value=f[1];else if(data['batter'+side+'Fours']===undefined)$('batter'+side+'Fours').value='';if(six)$('batter'+side+'Sixes').value=six[1];else if(data['batter'+side+'Sixes']===undefined)$('batter'+side+'Sixes').value='';if(bm[1])$('batter'+side+'StatMain').value=bm[1].trim();}
+  const ws=String(data['bowler'+side+'Stat']||'');const wm=ws.match(/^(.*?)(?:\s*[•|]\s*(.*))?$/);if(wm){const extras=wm[2]||'';const dots=extras.match(/(\d+)\s+dot balls?/i);const ex=extras.match(/(\d+)\s+extras?/i);if(dots)$('bowler'+side+'Dots').value=dots[1];else if(data['bowler'+side+'Dots']===undefined)$('bowler'+side+'Dots').value='';if(ex)$('bowler'+side+'Extras').value=ex[1];else if(data['bowler'+side+'Extras']===undefined)$('bowler'+side+'Extras').value='';if(wm[1])$('bowler'+side+'StatMain').value=wm[1].trim();}
+ }
+}
+function composeFigures(){
+ for(const side of ['A','B']){
+  const bat=$('batter'+side+'StatMain').value.trim(),f=$('batter'+side+'Fours').value.trim(),six=$('batter'+side+'Sixes').value.trim();
+  $('batter'+side+'Stat').value=[bat,f!==''?`${f} four${Number(f)===1?'':'s'}`:'',six!==''?`${six} six${Number(six)===1?'':'es'}`:''].filter(Boolean).join(' • ');
+  const bowl=$('bowler'+side+'StatMain').value.trim(),dots=$('bowler'+side+'Dots').value.trim(),ex=$('bowler'+side+'Extras').value.trim();
+  $('bowler'+side+'Stat').value=[bowl,dots!==''?`${dots} dot balls`:'',ex!==''?`${ex} extras`:''].filter(Boolean).join(' • ');
+ }
+}
+function fill(data, clearMissing=false){
+ populateSubstats(data);
+ for(const k of fields){
+  if(clearMissing){ $(k).value=(data[k]!==undefined && data[k]!==null)?data[k]:''; }
+  else if(data[k]!==undefined && data[k]!==null && String(data[k]).trim()) $(k).value=data[k];
+ }
+ render();
+}
+
+function renderFigures(container,value){
+ container.replaceChildren();
+ const parts=String(value||'').split(/\s*[•|]\s*/).map(x=>x.trim()).filter(Boolean);
+ const main=document.createElement('span');main.className='figure-main';main.textContent=parts.shift()||'—';container.append(main);
+ const sub=document.createElement('span');sub.className='figure-sub';sub.textContent=parts.join('  ·  ');container.append(sub);
+}
+function render(){
+ composeFigures();
+ $('pCompetition').textContent=$('competition').value.toUpperCase()||'MATCH DAY';
+ $('pTournamentName').textContent=($('tournamentName').value||'SHAKTIGARH CRICKET').toUpperCase();
+ $('pLogo').src=tournamentLogoData||'';$('pLogo').style.display=tournamentLogoData?'block':'none';
+ $('pResult').textContent=$('result').value.toUpperCase();
+ $('pManOfMatchName').textContent=$('manOfMatchName').value.trim()||'—';
+ $('pManOfMatchStat').textContent=$('manOfMatchStat').value.trim();
+ // v1.16: keep the Man of the Match section visible even before a name is entered.
+ $('pMotmSection').style.display='block';
+ $('pMeta').textContent=[$('ground').value,$('date').value].filter(Boolean).join(' • ').toUpperCase();
+ $('pInningsTeamA').textContent=$('teamA').value.toUpperCase()||'INNINGS 1'; $('pInningsScoreA').textContent=$('scoreA').value||'—'; $('pInningsOversA').textContent=$('oversA').value||'';
+ $('pInningsTeamB').textContent=$('teamB').value.toUpperCase()||'INNINGS 2'; $('pInningsScoreB').textContent=$('scoreB').value||'—'; $('pInningsOversB').textContent=$('oversB').value||'';
+ for(const side of ['A','B']){for(const role of ['Batter','Bowler']){$('p'+role+side+'Name').textContent=$(''+role.toLowerCase()+side+'Name').value||'—';renderFigures($('p'+role+side+'Stat'),$(''+role.toLowerCase()+side+'Stat').value||'—');}}
+ $('pReport').textContent=$('report').value;
+ const r=$('result').value.toLowerCase(), a=$('teamA').value.toLowerCase(), b=$('teamB').value.toLowerCase();
+ $('inningsCardA').classList.toggle('winner',!!a && r.includes(a)); $('inningsCardB').classList.toggle('winner',!!b && r.includes(b));
+ const teams=readTeams();
+ function colorFor(name){const match=teams.find(t=>t.name.trim().toLowerCase()===String(name||'').trim().toLowerCase());return match?match.color:'#8eafff';}
+ $('inningsCardA').style.setProperty('--team-color',colorFor($('teamA').value));$('inningsCardB').style.setProperty('--team-color',colorFor($('teamB').value));
+ const resultColor = (!!a && r.includes(a)) ? colorFor($('teamA').value) : ((!!b && r.includes(b)) ? colorFor($('teamB').value) : '#8eafff');
+ $('pResult').closest('.result').style.setProperty('--winner-color',resultColor);
+ $('poster').classList.toggle('light',$('theme').value==='light');
+}
+fields.forEach(k=>$(k).addEventListener('input',()=>{render();})); ['batterAStatMain','batterBStatMain','bowlerAStatMain','bowlerBStatMain','batterAFours','batterASixes','bowlerADots','bowlerAExtras','batterBFours','batterBSixes','bowlerBDots','bowlerBExtras'].forEach(k=>$(k).addEventListener('input',render)); $('theme').addEventListener('change',render);
+$('addTeamBtn').addEventListener('click',()=>{addTeamRow('','#8eafff');});
+$('logoFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;if(!file.type.startsWith('image/')){profileMessage('Please choose an image file.');return;}if(file.size>5*1024*1024){profileMessage('Logo is larger than 5 MB. Please use a smaller image.');return;}const reader=new FileReader();reader.onload=()=>{tournamentLogoData=String(reader.result||'');$('logoPreview').src=tournamentLogoData;$('logoPreview').style.visibility='visible';render();profileMessage('Tournament logo loaded. Save the profile to keep it.',true);};reader.readAsDataURL(file);});
+$('saveProfileBtn').addEventListener('click',()=>{const p=currentProfile();if(!p.name){profileMessage('Enter a tournament name before saving.');return;}if(!p.teams.length){profileMessage('Add at least one team before saving.');return;}const all=getProfiles();all[p.name]=p;try{localStorage.setItem(PROFILE_KEY,JSON.stringify(all));refreshProfileSelect(p.name);applyProfile(p);profileMessage('Saved “'+p.name+'” with '+p.teams.length+' team(s).',true);}catch(e){profileMessage('Could not save profile. The logo may be too large; try a smaller image.');}});
+$('loadProfileBtn').addEventListener('click',()=>{const name=$('profileSelect').value,p=getProfiles()[name];if(!p){profileMessage('Choose a saved tournament profile first.');return;}applyProfile(p);profileMessage('Loaded “'+name+'”. Import a scorecard to create the next match graphic.',true);});
+$('deleteProfileBtn').addEventListener('click',()=>{const name=$('profileSelect').value;if(!name){profileMessage('Choose a saved profile to delete.');return;}const all=getProfiles();delete all[name];localStorage.setItem(PROFILE_KEY,JSON.stringify(all));refreshProfileSelect();profileMessage('Deleted saved profile “'+name+'”.',true);});
+
+$('saveMatchBtn').addEventListener('click',()=>{
+ const name=$('matchRecordName').value.trim()||suggestedMatchName();
+ if(!name){matchMessage('Enter a match name or fill in the team names and date.');return;}
+ const all=getSavedMatches();all[name]=matchData();
+ try{localStorage.setItem(MATCH_KEY,JSON.stringify(all));$('matchRecordName').value=name;refreshSavedMatchSelect(name);matchMessage('Saved match data: “'+name+'”. You can load it again from this list.',true);}
+ catch(e){matchMessage('Could not save this match. Browser storage may be full. Try a shorter match story or remove older saved matches.');}
+});
+$('loadMatchBtn').addEventListener('click',()=>{const name=$('savedMatchSelect').value,all=getSavedMatches();if(!name||!all[name]){matchMessage('Choose a saved match first.');return;}fill(all[name],true);$('matchRecordName').value=name;matchMessage('Loaded “'+name+'”. You can edit it and save again.',true);});
+$('deleteMatchBtn').addEventListener('click',()=>{const name=$('savedMatchSelect').value;if(!name){matchMessage('Choose a saved match to delete.');return;}const all=getSavedMatches();delete all[name];try{localStorage.setItem(MATCH_KEY,JSON.stringify(all));refreshSavedMatchSelect();matchMessage('Deleted saved match “'+name+'”.',true);}catch(e){matchMessage('Could not update saved matches.');}});
+// Portable backup protects records if browser storage is cleared or the generator is opened on another device.
+$('exportBackupBtn').addEventListener('click',()=>{try{const backup={format:'ShaktigarhMatchSummaryBackup',version:1,exportedAt:new Date().toISOString(),matches:getSavedMatches(),profiles:getProfiles()};const blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='shaktigarh-match-backup-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);matchMessage('Backup exported. Keep the JSON file somewhere safe.',true);}catch(e){matchMessage('Could not export backup.');}});
+$('importBackupBtn').addEventListener('click',()=>$('backupFile').click());
+$('backupFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!data||data.format!=='ShaktigarhMatchSummaryBackup'||typeof data.matches!=='object'||typeof data.profiles!=='object')throw new Error('invalid');const matches={...getSavedMatches(),...data.matches};const profiles={...getProfiles(),...data.profiles};localStorage.setItem(MATCH_KEY,JSON.stringify(matches));localStorage.setItem(PROFILE_KEY,JSON.stringify(profiles));refreshSavedMatchSelect();refreshProfileSelect();matchMessage('Backup imported. Saved matches and tournament profiles have been restored/merged.',true);}catch(err){matchMessage('That backup file is invalid or could not be imported. Nothing was restored.');}finally{e.target.value='';}});
+$('updateBtn').addEventListener('click',render); $('resetBtn').addEventListener('click',()=>fill(sample)); $('sampleBtn').addEventListener('click',()=>fill(sample));
+function clean(s){return s.replace(/\s+/g,' ').trim();}
+function parseScorecard(text){
+ const t=clean(text), lines=text.split(/\n/).map(clean).filter(Boolean), d={};
+ const comp=(text.match(/([A-Z][A-Z0-9 ]{2,}S\d+\s*\([^)]*\))/i)||[])[1];
+ if(comp)d.competition=comp.trim();
+ const ground=(text.match(/Ground\s+(.{4,100}?)(?:\s+Date\s+|\s+Match Result)/i)||[])[1];
+ if(ground)d.ground=clean(ground).replace(/\s{2,}/g,' ');
+ const date=(text.match(/Date\s+(\d{4}-\d{2}-\d{2})/i)||[])[1];
+ if(date){const dt=new Date(date+'T00:00:00');d.date=dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}
+ const res=(text.match(/Result\s+([A-Za-z][\s\S]{0,90}?)(?=\s+Match Officials|\s+Best Performances|\s+Playing Squad)/i)||[])[1];
+ if(res)d.result=clean(res);
+ const scores=[...text.matchAll(/([A-Za-z][A-Za-z0-9 &'().-]{1,50}?)\s+(\d{1,3})\/(\d{1,2})\s*\((\d+(?:\.\d+)?)\s*Ov\)/g)];
+ if(scores.length>=2){d.teamA=clean(scores[0][1]).replace(/^Total\s+/i,'');d.scoreA=scores[0][2]+'/'+scores[0][3];d.oversA=scores[0][4]+' overs';d.teamB=clean(scores[1][1]).replace(/^Total\s+/i,'');d.scoreB=scores[1][2]+'/'+scores[1][3];d.oversB=scores[1][4]+' overs';}
+ const matchup=(text.match(/Match\s+([A-Za-z][A-Za-z0-9 &'().-]{1,45}?)\s+vs\s+([A-Za-z][A-Za-z0-9 &'().-]{1,45}?)(?=\s+Ground|\s+Date|\s+Toss)/i)||[]); if(matchup.length===3){d.teamA=clean(matchup[1]);d.teamB=clean(matchup[2]);}
+ // Parse compact best-performances table where it is present.
+ const batCandidates=[];
+ for(const line of lines){
+  const m=line.match(/^([A-Za-z][A-Za-z .'-]{1,30}?)\s+(\d{1,3})\s+(\d{1,2})\s+(\d{1,2})\s+(\d{1,2})\s+(\d{1,3}\.\d{2})$/);
+  if(m && !/^(Match|Players|Ground|Date|Total|Result|Overs|Extras|Fall|Playing|Best)/i.test(m[1])) batCandidates.push({name:m[1].trim(),runs:+m[2],balls:+m[3],fours:+m[4],sixes:+m[5],sr:m[6]});
+ }
+ if(batCandidates.length){batCandidates.sort((a,b)=>b.runs-a.runs);const x=batCandidates[0];const notOut=lines.some(line=>line.toLowerCase().includes(x.name.toLowerCase())&&/not out/i.test(line));d.batterAName=x.name;d.batterAStat=`${x.runs}${notOut?'*':''}(${x.balls}) • ${x.fours} four${x.fours===1?'':'s'} • ${x.sixes} six${x.sixes===1?'':'es'}`;}
+ const bowlCandidates=[];
+ for(const line of lines){
+  const m=line.match(/^([A-Za-z][A-Za-z .'-]{1,30}?)\s+(\d+(?:\.\d+)?)\s+(\d{1,2})\s+(\d{1,3})\s+(\d{1,2})\s+(\d{1,2}\.\d{2})$/);
+  if(m && !/^(Match|Players|Ground|Date|Total|Result|Overs|Extras|Fall|Playing|Best|No)/i.test(m[1])) bowlCandidates.push({name:m[1].trim(),overs:m[2],maidens:+m[3],runs:+m[4],wickets:+m[5],eco:m[6]});
+ }
+ if(bowlCandidates.length){
+  bowlCandidates.sort((a,b)=>b.wickets-a.wickets||a.runs-b.runs);const x=bowlCandidates[0];
+  let dots='—',extras='—';
+  const rowPattern=/^\d+\s+(.+?)\s+(\d+(?:\.\d+)?)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+)\s+(\d+\.\d+)$/;
+  for(const line of lines){const row=line.match(rowPattern);if(row&&row[1].trim().toLowerCase().replace(/\s+\(c\)$/,'')===x.name.toLowerCase().replace(/\s+\(c\)$/,'')){dots=row[6];extras=String(Number(row[9])+Number(row[10]));break;}}
+  d.bowlerAName=x.name;d.bowlerAStat=`${x.overs.replace(/\.0$/,'')}-${x.maidens}-${x.runs}-${x.wickets} • ${dots} dot balls • ${extras} extras`;
+ }
+ if(d.teamA&&d.teamB&&d.scoreA&&d.scoreB&&!d.result){
+   const runsA=parseInt(d.scoreA),runsB=parseInt(d.scoreB);
+   d.result=runsA>runsB?`${d.teamA} won by ${runsA-runsB} runs`:`${d.teamB} won`;
+ }
+ if(d.teamA&&d.teamB&&d.scoreA&&d.scoreB){
+  const [ra,wa]=d.scoreA.split('/').map(Number),[rb,wb]=d.scoreB.split('/').map(Number);
+  d.report='';
+ }
+ return d;
+}
+$('pdfFile').addEventListener('change',async e=>{
+ const file=e.target.files[0]; if(!file)return;
+ importedScorecardText='';
+ const st=$('status');st.className='status';st.textContent='Reading PDF…';
+ try{
+  if(!window.pdfjsLib)throw new Error('PDF reader library did not load. Check your internet connection and reload the page.');
+  pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const bytes=await file.arrayBuffer(),pdf=await pdfjsLib.getDocument({data:bytes}).promise; let full='';
+  for(let i=1;i<=pdf.numPages;i++){
+   const page=await pdf.getPage(i),content=await page.getTextContent();
+   const rows={};
+   for(const item of content.items){if(!item.str||!item.str.trim())continue;const y=Math.round(item.transform[5]);(rows[y]??=[]).push({x:item.transform[4],s:item.str});}
+   const pageLines=Object.keys(rows).map(Number).sort((a,b)=>b-a).map(y=>rows[y].sort((a,b)=>a.x-b.x).map(o=>o.s).join(' ').replace(/\s+/g,' ').trim());
+   full+=pageLines.join('\n')+'\n';
+  }
+  if(full.trim().length<40)throw new Error('No selectable text found. This may be a scanned PDF; enter the details manually.');
+  importedScorecardText=full.slice(0,16000);
+  const parsed=parseScorecard(full);fill(parsed,true);
+  st.className='status good';st.textContent=`Read ${pdf.numPages} page(s). Applied ${Object.keys(parsed).length} extracted field(s). Please review names, scores and figures before export.`;
+ }catch(err){st.className='status bad';st.textContent=err.message||'Could not read this PDF. You can still enter the details manually.';}
+});
+
+async function downloadPosterAsPng(){
+ const st=$('exportStatus');st.textContent='Preparing high-resolution PNG…';
+ try{
+  if(!window.html2canvas)throw new Error('PNG library did not load. Check your internet connection and reload.');
+  render();const poster=$('poster');
+  const canvas=await html2canvas(poster,{scale:3,backgroundColor:null,useCORS:true,logging:false});
+  const a=document.createElement('a');a.download='shaktigarh-match-summary.png';a.href=canvas.toDataURL('image/png');a.click();
+  st.textContent='PNG exported. Check your downloads.';
+ }catch(err){st.textContent=err.message||'PNG export failed. Please try again.';}
+}
+$('pngBtn').addEventListener('click',downloadPosterAsPng);
+$('downloadPosterPng').addEventListener('click',downloadPosterAsPng);
+setTeamRows(defaultTeams);refreshProfileSelect();refreshSavedMatchSelect();$('logoPreview').style.visibility='hidden';render();
+</script>
+</body>
+</html>
