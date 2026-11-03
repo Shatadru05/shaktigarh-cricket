@@ -47,37 +47,34 @@ label{display:block;color:#c5d0dd;font-size:12px;margin:0 0 5px}input,select{wid
 @media(max-width:720px){.player-showcase{grid-template-columns:minmax(0,1fr);gap:14px}.player-card-wrap{height:500px;min-height:500px;padding:0}.player-card{width:min(100%,390px);height:500px;min-height:500px;max-height:500px}.radar-panel{width:100%;max-width:480px;height:500px;min-height:500px;max-height:500px;margin:0 auto}.radar-svg{height:100%;max-height:365px;flex:1 1 auto}.pc-attrs{flex:1 1 auto;align-content:space-evenly}}
 
 
-/* Prominent official database import panel — shared Shaktigarh blue/teal/gold spectrum */
+/* Official database panel — restrained styling matched to the calculator cards */
 .central-db-card{
-  position:relative;isolation:isolate;overflow:hidden;
-  border:1.5px solid #6689a8 !important;
-  border-radius:18px !important;
-  padding:20px !important;
-  background:
-    radial-gradient(ellipse at 12% 8%,rgba(91,139,190,.25),transparent 42%),
-    radial-gradient(ellipse at 78% 12%,rgba(65,174,151,.22),transparent 44%),
-    linear-gradient(112deg,rgba(17,43,72,.98) 0%,rgba(12,67,72,.96) 57%,rgba(118,91,39,.94) 100%) !important;
-  box-shadow:0 12px 30px rgba(0,0,0,.22),inset 0 1px 0 rgba(190,218,239,.10);
+  position:relative;
+  border:1px solid #557b98 !important;
+  border-radius:16px !important;
+  padding:17px !important;
+  background:linear-gradient(110deg,rgba(85,123,152,.075),rgba(33,139,122,.055) 58%,rgba(155,116,29,.045)),rgba(21,27,35,.96) !important;
+  box-shadow:none !important;
 }
-.central-db-card:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;background:linear-gradient(120deg,transparent 15%,rgba(111,161,205,.10) 42%,rgba(91,194,169,.10) 68%,rgba(232,195,106,.13) 100%)}
+.central-db-card:before{content:none !important}
 .central-db-card .sectionhead{margin-bottom:8px}
-.central-db-card .sectionhead h2{color:#f1f6fb;font-size:18px}
-.central-db-card .pill{border-color:#7899b7;background:rgba(79,112,145,.34);color:#d8e7f3}
-.central-db-card .formhint{color:#d0dfeb;max-width:760px}
-.central-db-card .btns{margin-top:16px}
+.central-db-card .sectionhead h2{color:var(--text);font-size:17px}
+.central-db-card .pill{border-color:#3a4757;background:transparent;color:var(--muted)}
+.central-db-card .formhint{color:var(--muted);max-width:760px}
+.central-db-card .btns{margin-top:12px}
 .central-db-card button#loadLatestBattingDatabase,.central-db-card button#loadLatestBowlingDatabase{
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  width:100%;min-height:58px;padding:15px 20px;
-  border:1.5px solid #83a9ca !important;border-radius:13px !important;
-  background:linear-gradient(180deg,#527fa8 0%,#365f87 100%) !important;
-  color:#fff !important;font-size:15px;font-weight:850;letter-spacing:.045em;
-  box-shadow:0 5px 16px rgba(4,15,29,.28),inset 0 1px 0 rgba(255,255,255,.20);
-  transition:filter .18s ease,transform .18s ease,box-shadow .18s ease;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;min-height:46px;padding:11px 16px;
+  border:1px solid #7892a8 !important;border-radius:9px !important;
+  background:linear-gradient(100deg,#526f89 0%,#587b7d 52%,#887d60 100%) !important;
+  color:#fff !important;font-size:14px;font-weight:700;letter-spacing:.01em;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10) !important;
+  transition:background .16s ease,border-color .16s ease,filter .16s ease;
 }
-.central-db-card button#loadLatestBattingDatabase:hover,.central-db-card button#loadLatestBowlingDatabase:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 20px rgba(4,15,29,.34),inset 0 1px 0 rgba(255,255,255,.24)}
-.central-db-card button#loadLatestBattingDatabase:disabled,.central-db-card button#loadLatestBowlingDatabase:disabled{opacity:.72;cursor:wait;transform:none}
-.central-db-card .status{color:#e0eaf2;margin-top:12px}
-@media(max-width:520px){.central-db-card{padding:15px !important}.central-db-card button#loadLatestBattingDatabase,.central-db-card button#loadLatestBowlingDatabase{font-size:13px;min-height:54px;padding:13px 10px}}
+.central-db-card button#loadLatestBattingDatabase:hover,.central-db-card button#loadLatestBowlingDatabase:hover{background:linear-gradient(100deg,#5d7b95 0%,#638786 52%,#94896b 100%) !important;border-color:#8aa3b8 !important;filter:none;transform:none}
+.central-db-card button#loadLatestBattingDatabase:disabled,.central-db-card button#loadLatestBowlingDatabase:disabled{opacity:.72;cursor:wait}
+.central-db-card .status{color:var(--muted);margin-top:8px}
+@media(max-width:520px){.central-db-card{padding:15px !important}.central-db-card button#loadLatestBattingDatabase,.central-db-card button#loadLatestBowlingDatabase{font-size:13px;min-height:44px;padding:10px}}
 
 </style>
 </head>
