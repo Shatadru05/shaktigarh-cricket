@@ -262,12 +262,11 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
   const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
   let requestInFlight=false;
   function isAuctionLive(state){
-    if(!state?.settings||state.paused)return false;
-    const phase=String(state.phase||'main');
-    if(!['main','reauction','selection'].includes(phase))return false;
-    if(!Array.isArray(state.players)||!state.players.length||!Array.isArray(state.teams)||!state.teams.length)return false;
-    // A drawn/current player marks a running bidding phase; team selection is itself an active phase.
-    return phase==='selection'||(state.current!==null&&state.current!==undefined&&String(state.current)!=='');
+    // The Auction Manager sets this flag when the first player is brought up.
+    // Do not infer activity from current-player/phase fields: those can be
+    // temporarily empty during transitions while the auction is still active.
+    if(!state?.settings||state.paused||state.started!==true)return false;
+    return String(state.phase||'main')!=='complete';
   }
   function setLive(visible){
     floater.classList.toggle('is-live',visible);
@@ -277,7 +276,7 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
     if(requestInFlight||document.visibilityState==='hidden')return;
     requestInFlight=true;
     try{
-      const {data,error}=await client.from('live_auction').select('state').eq('id','main').maybeSingle();
+      const {data,error}=await client.from('live_auction').select('state').eq('id','main').single();
       if(error)throw error;
       setLive(isAuctionLive(data?.state));
     }catch(error){
@@ -290,7 +289,7 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
   client.channel('homepage-live-auction-status')
     .on('postgres_changes',{event:'*',schema:'public',table:'live_auction',filter:'id=eq.main'},refresh)
     .subscribe();
-  setInterval(refresh,15000);
+  setInterval(refresh,3000);
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')refresh()});
   window.addEventListener('focus',refresh);
 })();
