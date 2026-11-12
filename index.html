@@ -262,11 +262,14 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
   const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
   let requestInFlight=false;
   function isAuctionLive(state){
-    // The Auction Manager sets this flag when the first player is brought up.
-    // Do not infer activity from current-player/phase fields: those can be
-    // temporarily empty during transitions while the auction is still active.
-    if(!state?.settings||state.paused||state.started!==true)return false;
-    return String(state.phase||'main')!=='complete';
+    // Match the Live Auction Viewer: a current player in the published state
+    // means bidding is live. Do not depend on the separate `started` flag.
+    if(!state?.settings||state.paused)return false;
+    const phase=String(state.phase||'main');
+    if(phase==='complete')return false;
+    if(phase==='selection')return true;
+    const players=Array.isArray(state.players)?state.players:[];
+    return players.some(player=>player.id===state.current);
   }
   function setLive(visible){
     floater.classList.toggle('is-live',visible);
