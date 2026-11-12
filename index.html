@@ -58,23 +58,24 @@ body{margin:0;background:radial-gradient(ellipse at 78% -10%,#244b4a55,transpare
 @media(max-width:900px){.about-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.navright{gap:10px}.navlinks{display:flex;gap:0}.navlinks a:not([href="#about"]){display:none}.navlinks a[href="#about"]{display:inline-flex;padding:7px 10px;border:1px solid var(--line);border-radius:9px;font-size:12px}.about-hero{padding:52px 0 30px}.about-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-details{display:block}.about-detail:last-child{grid-column:auto}.about-statement{padding:20px}.about-card{min-height:150px}}
 
-/* Live auction navbar pill — explicit dimensions and opaque surface */
-.navright .nav-live-auction{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;min-height:38px;padding:0 13px;border:1px solid rgba(130,145,151,.32);border-radius:999px;background:linear-gradient(135deg,#59666b 0%,#465258 100%);color:#eef1f2;font:800 10px/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:.11em;white-space:nowrap;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06);opacity:1;visibility:visible;transform:none;transition:background .2s ease,border-color .2s ease,box-shadow .2s ease}
-.navright .nav-live-auction:hover{background:linear-gradient(135deg,#657379 0%,#505d63 100%);border-color:rgba(160,174,180,.58);box-shadow:0 5px 14px rgba(0,0,0,.18)}
-.navright .nav-live-auction.is-live{border-color:rgba(255,112,122,.95);background:linear-gradient(135deg,#b92f3d 0%,#861e2b 100%);color:#fff;box-shadow:0 0 0 1px rgba(255,91,105,.28),0 0 12px rgba(255,65,82,.48),0 0 25px rgba(255,65,82,.28),inset 0 1px 0 rgba(255,255,255,.2);animation:auctionLivePillGlow 1.8s ease-in-out infinite}
-.navright .nav-live-auction.is-live:hover{background:linear-gradient(135deg,#cb3b49 0%,#982432 100%);border-color:#ff9ba2;box-shadow:0 0 0 1px rgba(255,91,105,.35),0 0 16px rgba(255,65,82,.58),0 0 30px rgba(255,65,82,.34)}
+/* Live auction navbar pill */
+.navright .nav-live-auction{box-sizing:border-box;position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;min-height:38px;padding:0 13px;border:1px solid rgba(130,145,151,.32);border-radius:999px;background:linear-gradient(135deg,#59666b 0%,#465258 100%);color:#eef1f2;font:800 10px/1 Inter,ui-sans-serif,system-ui,sans-serif;letter-spacing:.11em;white-space:nowrap;text-decoration:none;box-shadow:0 3px 10px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.06);opacity:1;visibility:visible;transform:none;transition:color .35s ease,border-color .35s ease,box-shadow .35s ease}
+.navright .nav-live-auction::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(135deg,#b92f3d 0%,#861e2b 100%);opacity:0;z-index:-1;pointer-events:none;transition:opacity .38s ease}
+.navright .nav-live-auction:hover{border-color:rgba(160,174,180,.58);box-shadow:0 5px 14px rgba(0,0,0,.18)}
+.navright .nav-live-auction.is-live{border-color:rgba(255,112,122,.95);color:#fff;box-shadow:0 0 0 1px rgba(255,91,105,.28),0 0 12px rgba(255,65,82,.48),0 0 25px rgba(255,65,82,.28),inset 0 1px 0 rgba(255,255,255,.2);animation:auctionLivePillGlow 1.8s ease-in-out infinite}
+.navright .nav-live-auction.is-live::before{opacity:1}
+.navright .nav-live-auction.is-live:hover{border-color:#ff9ba2;box-shadow:0 0 0 1px rgba(255,91,105,.35),0 0 16px rgba(255,65,82,.58),0 0 30px rgba(255,65,82,.34)}
 .navright .nav-live-auction:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
-.navright .nav-live-auction .nav-live-dot{display:block;box-sizing:border-box;width:8px;height:8px;min-width:8px;min-height:8px;flex:0 0 8px;aspect-ratio:1;border-radius:50%;background:#aeb8bc;box-shadow:none;animation:none}
+[data-theme="light"] .navright .nav-live-auction{background:linear-gradient(135deg,#e4e8e9 0%,#d4dbdd 100%);color:#465258;border-color:rgba(104,121,128,.28)}
+[data-theme="light"] .navright .nav-live-auction.is-live{color:#fff;border-color:rgba(255,112,122,.95)}
+.navright .nav-live-auction .nav-live-dot{display:block;box-sizing:border-box;width:8px;height:8px;min-width:8px;min-height:8px;flex:0 0 8px;aspect-ratio:1;border-radius:50%;background:#aeb8bc;box-shadow:none;transition:background-color .35s ease,box-shadow .35s ease}
 .navright .nav-live-auction.is-live .nav-live-dot{background:#ff5965;box-shadow:0 0 0 0 rgba(255,89,101,.48);animation:auctionLivePulse 1.55s ease-out infinite}
 @keyframes auctionLivePulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.55),0 0 8px 2px rgba(255,89,101,.9)}72%{box-shadow:0 0 0 7px rgba(255,89,101,0),0 0 13px 4px rgba(255,89,101,.25)}100%{box-shadow:0 0 0 0 rgba(255,89,101,0),0 0 8px 2px rgba(255,89,101,.7)}}
 @keyframes auctionLivePillGlow{0%,100%{box-shadow:0 0 0 1px rgba(255,91,105,.25),0 0 10px rgba(255,65,82,.38),0 0 20px rgba(255,65,82,.2),inset 0 1px 0 rgba(255,255,255,.2)}50%{box-shadow:0 0 0 2px rgba(255,115,125,.38),0 0 17px rgba(255,65,82,.68),0 0 34px rgba(255,65,82,.4),inset 0 1px 0 rgba(255,255,255,.24)}}
-[data-theme="light"] .navright .nav-live-auction{background:linear-gradient(135deg,#e4e8e9 0%,#d4dbdd 100%);color:#465258;border-color:rgba(104,121,128,.28)}
-[data-theme="light"] .navright .nav-live-auction.is-live{background:linear-gradient(135deg,#b92f3d 0%,#861e2b 100%);color:#fff;border-color:rgba(255,112,122,.95)}
-.navright{gap:16px}
 @media(max-width:900px){.navright{gap:12px}.navlinks{gap:14px}}
 @media(max-width:760px){.nav{padding-inline:14px;height:68px}.navright{gap:9px}.navright .nav-live-auction{height:34px;min-height:34px;padding:0 10px;font-size:9px;letter-spacing:.08em;gap:6px}.navlinks{display:flex;gap:0}.navlinks a:not([href="#about"]){display:none}.navlinks a[href="#about"]{display:inline-flex;padding:7px 10px;border:1px solid var(--line);border-radius:9px;font-size:12px}}
 @media(max-width:390px){.brand{gap:8px;font-size:11px}.crest{width:34px;height:34px}.brand small{font-size:8px}.navright{gap:7px}.navright .nav-live-auction{padding:0 8px;font-size:8px}.theme{transform:scale(.92);transform-origin:right center}}
-@media(prefers-reduced-motion:reduce){.navright .nav-live-auction,.navright .nav-live-auction .nav-live-dot{transition:none;animation:none}.navright .nav-live-auction.is-live{box-shadow:0 0 0 1px rgba(255,91,105,.35),0 0 15px rgba(255,65,82,.55),0 0 28px rgba(255,65,82,.3)}.navright .nav-live-auction .nav-live-dot{box-shadow:0 0 0 4px rgba(255,89,101,.25)}}
+@media(prefers-reduced-motion:reduce){.navright .nav-live-auction,.navright .nav-live-auction::before,.navright .nav-live-auction .nav-live-dot{transition:none}.navright .nav-live-auction.is-live,.navright .nav-live-auction.is-live .nav-live-dot{animation:none}}
 
 </style></head>
 <body><div class="wrap">
@@ -264,8 +265,8 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
   const pill=document.getElementById('liveAuctionFloater');
   if(!pill)return;
   const URL='https://apdnnvgxbmomgekfzpja.supabase.co';
-  const KEY='sb_publishable_a2SohVdoEPsViTSCFsgqxg_yF8qzCb8';
-  const report=(message)=>{pill.title=message;console.info('[Shaktigarh live pill]',message)};
+  const KEY='sb_publishable_a2SohVdoEPsViTSCFsgqxg_y8FqzCb8';
+  const report=(message)=>console.info('[Shaktigarh live pill]',message);
   if(!window.supabase?.createClient){report('Live status unavailable: Supabase library did not load.');return;}
   const db=window.supabase.createClient(URL,KEY);
   let busy=false,last=null;
@@ -280,7 +281,7 @@ else if(location.hash==='#statistics'||location.hash==='#tournament-managers'){
     pill.setAttribute('aria-hidden','false');
     pill.removeAttribute('tabindex');
     pill.setAttribute('aria-label',live?'Live auction in progress. Open the live auction viewer':'No auction currently live. Open the auction viewer');
-    report('Status: '+(live?'LIVE':'NOT LIVE')+' | phase: '+phase+' | current: '+String(S?.current??'none')+' | player matched: '+(!!currentPlayer)+' | players: '+players.length+' | paused: '+String(!!S?.paused));
+    report(live?'Live auction detected':'No live auction detected');
   }
   async function refresh(){
     if(busy||document.visibilityState==='hidden')return;
