@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#101923"><title>Shaktigarh Cricket | Tournament Manager · v1.0.45</title>
+<style>
+:root{--bg:#eef2f5;--panel:#fff;--panel2:#f6f8fa;--ink:#182431;--muted:#718092;--line:#dce3e9;--blue:#6d91b5;--teal:#63a99e;--gold:#d4ad62;--red:#c66c6c;--shadow:0 12px 35px #1b2a3a12;--radius:17px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}body.dark{--bg:#101820;--panel:#18232e;--panel2:#202d39;--ink:#e8eef3;--muted:#98a8b7;--line:#30404e;--blue:#82a9cf;--teal:#75b9ad;--gold:#dfbd78;--red:#d78585;--shadow:0 12px 35px #0003}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1500px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;margin:0 0 18px}.top .brand{margin-right:auto;min-width:0}.top-actions{margin-left:auto;justify-content:flex-end;align-items:center;flex:0 0 auto}.brand{display:flex;align-items:center;gap:12px}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--teal) 58%,var(--gold));box-shadow:var(--shadow)}.brand h1{font-size:18px;margin:0;letter-spacing:-.4px}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}.top-actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:9px 13px;font-weight:650;font-size:12px}.btn.primary{border:0;background:linear-gradient(110deg,var(--blue),var(--teal));color:#fff}.btn.gold{border:0;background:var(--gold);color:#26313b}.btn.danger{color:var(--red)}.btn.small{padding:6px 9px;font-size:11px} .tabs{position:relative;display:flex;align-items:center;gap:4px;width:max-content;max-width:100%;overflow-x:auto;overflow-y:hidden;padding:6px;background:color-mix(in srgb,var(--panel) 54%,transparent);border:1px solid color-mix(in srgb,var(--line) 58%,transparent);border-radius:18px;margin:0 auto 20px;isolation:isolate;scrollbar-width:none;backdrop-filter:blur(24px) saturate(155%);-webkit-backdrop-filter:blur(24px) saturate(155%);box-shadow:0 12px 34px #172a3a12,inset 0 1px 0 #ffffff9c,inset 0 -1px 0 #ffffff24}.tabs::-webkit-scrollbar{display:none}.tabs:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(110deg,#ffffff30,transparent 36%,#ffffff08 75%,#ffffff1c);z-index:-1}.tab-pill{position:absolute;z-index:0;left:6px;top:0;height:100%;width:0;pointer-events:none;transform:translateX(0);transition:transform .68s cubic-bezier(.2,.78,.18,1),width .48s cubic-bezier(.2,.78,.18,1);overflow:visible;opacity:.96;background:radial-gradient(ellipse 72% 82% at 50% 48%,color-mix(in srgb,var(--blue) 23%,transparent) 0%,color-mix(in srgb,var(--teal) 16%,transparent) 38%,color-mix(in srgb,var(--gold) 7%,transparent) 58%,transparent 100%);filter:blur(9px);mix-blend-mode:multiply}.tab-pill:before{content:"";position:absolute;inset:-5px -13px;background:radial-gradient(ellipse 65% 70% at 50% 42%,#ffffff70 0%,color-mix(in srgb,var(--blue) 15%,transparent) 42%,transparent 78%);filter:blur(7px);opacity:.58}.tab-pill:after{content:"";position:absolute;left:50%;top:5px;width:58%;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--blue) 36%,transparent),color-mix(in srgb,var(--teal) 35%,transparent),transparent);opacity:.52;filter:blur(.4px)}.tab{position:relative;z-index:1;flex:none;white-space:nowrap;border:0;background:transparent;color:var(--muted);padding:10px 15px;border-radius:12px;font-weight:600;font-size:12px;letter-spacing:.005em;transition:color .25s ease,transform .25s ease}.tab:hover{color:var(--ink)}.tab:active{transform:scale(.975)}.tab.active{background:transparent;color:var(--ink);font-weight:750;text-shadow:0 1px 0 #ffffff55}body.dark .tabs{background:color-mix(in srgb,#182631 68%,transparent);border-color:#b6c9d51f;box-shadow:0 14px 38px #0005,inset 0 1px 0 #ffffff1c,inset 0 -1px 0 #ffffff08}body.dark .tabs:before{background:linear-gradient(110deg,#ffffff12,transparent 38%,#8eafc20a 76%,#ffffff08)}body.dark .tab-pill{background:radial-gradient(ellipse 76% 88% at 50% 48%,#82a9cf42 0%,#75b9ad30 38%,#dfbd7810 61%,transparent 100%);mix-blend-mode:screen;opacity:.82}body.dark .tab-pill:before{background:radial-gradient(ellipse 68% 72% at 50% 42%,#ffffff24 0%,#82a9cf20 44%,transparent 80%);opacity:.72}body.dark .tab-pill:after{opacity:.35}body.dark .tab.active{color:#f1f5f7;text-shadow:0 1px 5px #0005}@media(max-width:760px){.tabs{width:100%;justify-content:flex-start;margin-bottom:17px}}.view{display:none}.view.active{display:block;animation:viewEnter .34s cubic-bezier(.2,.75,.25,1) both}@keyframes viewEnter{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}.grid{display:grid;gap:14px}.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow);min-width:0}.card h2,.card h3{margin:0 0 12px;letter-spacing:-.3px}.card h2{font-size:17px}.card h3{font-size:14px}.muted{color:var(--muted)}.eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);font-weight:800}.hero{background:linear-gradient(115deg,#6688aa,#579b94 65%,#c4a05a);color:white;border:0;padding:23px}.hero h2{font-size:24px;margin:5px 0}.hero p{margin:0;color:#ffffffd9}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:14px;background:var(--panel2);border-radius:12px}.stat strong{display:block;font-size:23px;letter-spacing:-1px}.stat span{font-size:11px;color:var(--muted)}.row{display:flex;align-items:center;gap:9px}.between{justify-content:space-between}.wrap{flex-wrap:wrap}.field{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}.field label{font-size:11px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea,input,select,textarea{width:100%;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--ink);padding:9px 10px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue)}.field textarea{min-height:75px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px}.team-list,.stage-list,.match-list{display:grid;gap:8px}.team-row,.stage-row,.match-row{display:flex;align-items:center;gap:10px;padding:10px;background:var(--panel2);border:1px solid var(--line);border-radius:11px}.swatch{width:12px;height:32px;border-radius:8px;flex:none}.team-main{flex:1;min-width:0}.team-main strong{display:block}.team-main small{color:var(--muted)}.pill{font-size:10px;border-radius:20px;padding:4px 8px;background:var(--panel2);border:1px solid var(--line);color:var(--muted)}.pill.ok{color:var(--teal)}.pill.warn{color:var(--gold)}.pill.err{color:var(--red)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.section-head h2{margin:0}.canvas-wrap{overflow:auto;background:var(--panel2);border:1px dashed var(--line);border-radius:14px;min-height:430px;padding:18px}.canvas{position:relative;min-width:760px;min-height:390px;background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:19px 19px;border-radius:10px}.node{position:absolute;width:190px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:12px;box-shadow:var(--shadow);cursor:grab;z-index:2}.node.selected{outline:2px solid var(--blue)}.node .node-type{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800}.node strong{display:block;margin:4px 0}.node small{color:var(--muted)}.node .node-actions{display:flex;gap:5px;margin-top:9px}.node .node-actions button{font-size:10px;padding:4px 7px}.connector-layer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}.connector-layer path{stroke:var(--teal);stroke-width:2.2;fill:none;opacity:.8}.stage-inspector{border:1px solid var(--line);border-radius:12px;padding:13px;background:var(--panel2)}.bracket-scroll{overflow:auto;padding:14px 10px}.bracket-flow{position:relative;display:grid;grid-auto-flow:column;grid-auto-columns:190px;column-gap:150px;align-items:start;min-width:max-content;padding:8px 24px 30px}.flow-column{display:flex;flex-direction:column;gap:18px;position:relative;z-index:2;width:190px}.flow-stage{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:7px;box-shadow:0 4px 12px #0000000a;width:190px;position:relative}.flow-stage.group{border-top:3px solid var(--blue)}.flow-stage.knockout{border-top:3px solid var(--teal)}.flow-stage.final{border-top:3px solid var(--gold)}.flow-stage.placement,.flow-stage.league,.flow-stage.custom{border-top:3px solid var(--muted)}.flow-stage h3{font-size:10px;margin:2px 0 4px}.flow-stage .flow-meta{font-size:8px;color:var(--muted);margin-bottom:4px}.flow-stage .flow-team{display:flex;justify-content:space-between;gap:4px;padding:3px 5px;margin-top:2px;border-radius:5px;background:var(--panel2);font-size:8px;min-height:20px;align-items:center}.flow-stage .flow-team small{color:var(--muted)}.flow-stage .flow-match{padding:5px;border:1px solid var(--line);border-radius:6px;margin-top:4px}.flow-stage .flow-match-title{font-size:8px;color:var(--muted);margin-bottom:2px}.flow-stage .flow-note{font-size:10px;color:var(--muted);padding:7px 0 0}.flow-group{padding:4px 0;border-top:1px solid var(--line)}.flow-group:first-of-type{border-top:0}.flow-group b{font-size:7px;color:var(--muted)}.flow-participant{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:4px 5px;margin-top:3px;border-radius:5px;background:var(--panel2);font-size:8px;min-height:22px}.flow-participant small{color:var(--muted)}.match-output{font-size:9px;letter-spacing:.5px;color:var(--teal);font-weight:800;text-align:right;padding:5px 2px 1px}.match-output-pair{display:flex;justify-content:space-between;gap:10px}.flow-stage{z-index:2}.match-output{font-size:9px;letter-spacing:.5px;color:var(--teal);font-weight:800;text-align:right;padding:5px 2px 1px}.match-output-pair{display:flex;justify-content:space-between;gap:10px}.flow-stage{z-index:2}.flow-participant.source-slot{outline:1px solid color-mix(in srgb,var(--teal) 45%,transparent)}.match-config{border:1px solid var(--line);border-radius:10px;padding:9px;margin:8px 0;background:var(--panel2)}.match-config .match-config-head{font-size:11px;font-weight:800;margin-bottom:7px}.match-config .field{margin-bottom:6px}.match-config select{font-size:11px;padding:7px}.flow-team.qualifier{outline:1px solid color-mix(in srgb,var(--teal) 60%,transparent)}.flow-team.eliminated{opacity:.55}.flow-rank{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;border-radius:5px;background:var(--panel);border:1px solid var(--line);font-size:8px;font-weight:800;margin-right:4px}.flow-path-label{font-size:9px;color:var(--teal);font-weight:750;margin-left:5px}.route-editor{border-top:1px solid var(--line);margin-top:12px;padding-top:10px}.route-editor .route-row{display:grid;grid-template-columns:1fr 1.25fr;gap:7px;align-items:center;margin:6px 0}.route-editor select{padding:6px;font-size:11px}.flow-column-title{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800;padding:0 3px 2px}.fixture{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow)}.fixture .fixture-head{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-bottom:7px}.side{display:flex;align-items:center;justify-content:space-between;padding:7px 8px;border-radius:7px;background:var(--panel2);margin-top:4px;gap:8px}.side.winner{outline:1px solid var(--teal);background:color-mix(in srgb,var(--teal) 13%,var(--panel2))}.side small{color:var(--muted)}.side input{width:42px;padding:4px;text-align:center}.notice{padding:10px 12px;border-radius:10px;background:var(--panel2);border-left:3px solid var(--blue);font-size:12px;color:var(--muted);margin:8px 0}.notice.error{border-color:var(--red)}.notice.warning{border-color:var(--gold)}.checks{display:grid;gap:7px}.check{display:flex;gap:9px;align-items:flex-start;padding:9px;border-radius:9px;background:var(--panel2);font-size:12px}.check b{display:block}.check .dot{width:7px;height:7px;border-radius:50%;margin-top:5px;background:var(--teal);flex:none}.check.error .dot{background:var(--red)}.check.warning .dot{background:var(--gold)}.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}.schedule-table{width:100%;border-collapse:collapse;font-size:12px}.schedule-table th,.schedule-table td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}.schedule-table th{color:var(--muted);font-size:10px;text-transform:uppercase}.schedule-table select,.schedule-table input{min-width:100px;padding:6px}.bracket-note{font-size:11px;color:var(--muted);margin:8px 0}.modal-backdrop{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:16px;z-index:20}.modal-backdrop.show{display:flex}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;box-shadow:0 25px 80px #0005}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 15px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:30}.toast.show{opacity:1}.hidden{display:none!important}.footer{padding:18px 3px;text-align:center;color:var(--muted);font-size:10px}
+@media(max-width:850px){.cols3{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(2,1fr)}.cols2{grid-template-columns:1fr}.top{align-items:flex-start}.top-actions{justify-content:flex-end}.card{padding:14px}}
+@media(max-width:560px){.app{padding:10px}.brand h1{font-size:15px}.brand p{font-size:10px}.mark{width:35px;height:35px}.top-actions .btn{padding:8px}.tab{padding:9px 11px}.hero h2{font-size:20px}.stats{gap:7px}.stat strong{font-size:20px}.formgrid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-wrap:wrap}}
+
+/* Auction Manager-style animated sun/moon theme switch */
+.theme{position:relative;width:62px;height:34px;min-width:62px;border:1px solid var(--line);background:#192735;border-radius:999px;padding:3px;cursor:pointer;display:inline-flex;align-items:center;justify-content:space-between;flex:0 0 auto;transition:background-color .45s ease,border-color .45s ease,box-shadow .45s ease}
+body:not(.dark) .theme{background:#fff;border-color:#d4dee7}
+.theme .theme-icon{position:absolute;top:3px;width:26px;height:26px;display:grid;place-items:center;font-size:13px;line-height:1;z-index:2;pointer-events:none;transition:color .4s ease}
+.theme .theme-icon:first-child{left:3px}.theme .theme-icon:nth-child(2){right:3px}
+.theme .theme-thumb{position:absolute;left:3px;top:3px;width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#829cb4,#61c4b0,#e8c36a);box-shadow:0 2px 8px #0003;transition:transform .48s cubic-bezier(.2,.85,.25,1),box-shadow .4s ease}
+.theme[aria-checked="true"] .theme-thumb{transform:translateX(28px)}
+body:not(.dark) .theme[aria-checked="false"] .theme-icon:first-child{color:#203b4d}
+body:not(.dark) .theme[aria-checked="false"] .theme-icon:nth-child(2){color:#758596}
+body.dark .theme[aria-checked="true"] .theme-icon:first-child{color:#aebdca}
+body.dark .theme[aria-checked="true"] .theme-icon:nth-child(2){color:#203b4d}
+.theme:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+body,.app,.top,.card,.tabs,.tab,.btn,.flow-stage,.flow-team,.flow-participant,input,select,textarea{transition:background-color .35s ease,color .35s ease,border-color .35s ease,box-shadow .35s ease}
+@media(prefers-reduced-motion:reduce){.tab-pill,.tab,.view.active{animation:none!important;transition:none!important}.theme,.theme .theme-icon,.theme .theme-thumb,body,.app,.top,.card,.tabs,.tab,.btn,.flow-stage,.flow-team,.flow-participant,input,select,textarea{transition:none!important}}
+/* Each configured tournament stage is one horizontal column; narrow screens scroll sideways. */
+.bracket-flow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,240px);gap:18px;align-items:start;width:max-content;min-width:100%;padding:8px 6px 24px}
+.flow-column{width:100%;min-width:210px;max-width:240px;display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.flow-stage{width:100%;min-width:0}
+.flow-stage .flow-match{margin-top:8px}
+.flow-column-title{white-space:normal;min-height:26px}
+.bracket-scroll{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+
+
+/* Shaktigarh matte floating dock + pure moving spotlight */
+.tabs{
+  position:relative; isolation:isolate; display:flex; align-items:center; gap:7px;
+  width:max-content; max-width:100%; margin:0 auto 20px; padding:8px;
+  overflow-x:auto; overflow-y:hidden; scrollbar-width:none;
+  -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain; touch-action:pan-x;
+  background:#172638; border:1px solid #405365; border-radius:19px;
+  box-shadow:0 10px 26px rgba(13,27,40,.16), inset 0 1px 0 rgba(255,255,255,.035);
+  backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tabs:before{content:none!important;display:none!important}
+.tab-pill{
+  position:absolute; z-index:0; left:0; top:50%; height:1px; width:0;
+  padding:0; border:0!important; border-radius:0!important;
+  background:transparent!important; background-color:transparent!important;
+  box-shadow:none!important; outline:0!important; filter:none!important;
+  mix-blend-mode:normal!important; overflow:visible; opacity:1;
+  pointer-events:none;
+  transform:translate3d(0,0,0);
+  transition:transform .62s cubic-bezier(.18,.78,.2,1),width .46s cubic-bezier(.18,.78,.2,1);
+}
+.tab-pill:before{
+  content:""; position:absolute; left:-38px; right:-38px; top:-38px; bottom:-38px;
+  border:0!important; border-radius:0!important; box-shadow:none!important;
+  background:radial-gradient(ellipse 58% 58% at 50% 50%,rgba(103,184,166,.30) 0%,rgba(105,165,177,.16) 39%,rgba(105,165,177,.055) 61%,transparent 80%);
+  filter:blur(13px); opacity:1; pointer-events:none;
+}
+.tab-pill:after{content:none!important;display:none!important}
+.tab{position:relative;z-index:1;flex:0 0 auto;min-height:40px;padding:10px 15px;border:0!important;border-radius:12px;background:transparent!important;box-shadow:none!important;color:#aebfd0;font-size:12px;font-weight:650;letter-spacing:-.018em;white-space:nowrap;transition:color .22s ease,transform .22s ease}
+.tab:hover{background:transparent!important;color:#edf6fa}
+.tab:active{transform:scale(.975)}
+.tab.active{background:transparent!important;color:#f1fffb;font-weight:750;text-shadow:0 0 15px rgba(125,203,186,.16)}
+body.dark .tab-pill:before{background:radial-gradient(ellipse 58% 58% at 50% 50%,rgba(116,190,177,.32) 0%,rgba(112,165,183,.18) 39%,rgba(112,165,183,.06) 62%,transparent 80%)}
+body:not(.dark) .tabs{background:#e7edef;border-color:#c4d0d3;box-shadow:0 9px 23px rgba(38,62,72,.12),inset 0 1px 0 rgba(255,255,255,.72)}
+body:not(.dark) .tab{color:#687985}
+body:not(.dark) .tab:hover{background:transparent!important;color:#344f53}
+body:not(.dark) .tab.active{background:transparent!important;color:#244d49;text-shadow:0 0 13px rgba(81,153,139,.13)}
+body:not(.dark) .tab-pill:before{background:radial-gradient(ellipse 58% 58% at 50% 50%,rgba(80,157,143,.30) 0%,rgba(95,150,158,.17) 40%,rgba(95,150,158,.06) 62%,transparent 81%)}
+.brand .mark{width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#6e9dcc 0%,#65b9a8 58%,#d5b56d 100%);color:#102033;font-size:15px;font-weight:950;letter-spacing:-1px;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+@media(max-width:760px){
+ .tabs{width:100%;max-width:100%;justify-content:flex-start;margin:0 0 17px;padding:7px;gap:5px;scroll-padding-inline:7px}
+ .tab{padding:10px 13px;min-height:42px}
+ .tabs.dock-fixed{position:fixed!important;top:8px!important;left:50%!important;right:auto!important;z-index:999!important;width:calc(100% - 20px)!important;max-width:740px!important;margin:0!important;transform:translateX(-50%)!important}
+}
+@media(prefers-reduced-motion:reduce){.tab-pill,.tab,.tabs{scroll-behavior:auto!important;transition:none!important}}
+
+/* Floating dock with a matte surface and an ambient blur field extending beyond its edges. */
+.tabs{
+  position:sticky!important; top:8px!important; z-index:1000!important;
+  isolation:isolate; overflow-x:auto; overflow-y:hidden;
+  background:#172638!important; border:1px solid #405365!important;
+  box-shadow:0 10px 26px rgba(13,27,40,.16),inset 0 1px 0 rgba(255,255,255,.035)!important;
+  -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+  scroll-behavior:smooth; overscroll-behavior-x:contain;
+}
+/* Ambient backdrop blur: deliberately larger than the dock, with feathered edges. */
+.tabs:after{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  left:-34px; right:-34px; top:-104px; bottom:-104px;
+  background:linear-gradient(180deg,
+    rgba(225,234,238,0) 0%,
+    rgba(225,234,238,.10) 24%,
+    rgba(225,234,238,.20) 43%,
+    rgba(225,234,238,.23) 56%,
+    rgba(225,234,238,.10) 77%,
+    rgba(225,234,238,0) 100%);
+  -webkit-backdrop-filter:blur(15px) saturate(112%);
+  backdrop-filter:blur(15px) saturate(112%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 76%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 24%,#000 76%,transparent 100%);
+  opacity:.92;
+}
+.tabs:before{content:none!important;display:none!important}
+.tabs .tab-pill{z-index:1!important;pointer-events:none!important}
+.tabs .tab{z-index:2!important;position:relative;background:transparent!important}
+.tabs .tab.active{background:transparent!important}
+body.dark .tabs{background:#17232e!important;border-color:#40515e!important;box-shadow:0 12px 32px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.055)!important}
+body.dark .tabs:after{
+  background:linear-gradient(180deg,rgba(16,27,36,0) 0%,rgba(16,27,36,.16) 25%,rgba(16,27,36,.28) 50%,rgba(16,27,36,.16) 75%,rgba(16,27,36,0) 100%);
+  -webkit-backdrop-filter:blur(16px) saturate(108%); backdrop-filter:blur(16px) saturate(108%);
+}
+@media(max-width:760px){
+  .tabs{width:100%!important;max-width:100%!important;margin:0 0 17px!important;top:6px!important}
+  .tabs:after{left:-18px;right:-18px;top:-88px;bottom:-88px}
+}
+@media(prefers-reduced-motion:reduce){.tabs{scroll-behavior:auto!important}}
+
+/* Corrected dock shell: the halo sits outside the horizontally clipped nav. */
+.dock-wrap{
+  position:sticky; top:8px; z-index:1000;
+  isolation:isolate; overflow:visible;
+  width:max-content; max-width:100%;
+  margin:0 auto 20px;
+}
+.dock-wrap::before{
+  content:""; position:absolute; z-index:0; pointer-events:none;
+  left:-72px; right:-72px; top:-118px; bottom:-118px;
+  background:linear-gradient(180deg,
+    rgba(231,237,239,0) 0%,
+    rgba(231,237,239,.06) 16%,
+    rgba(231,237,239,.22) 39%,
+    rgba(231,237,239,.28) 50%,
+    rgba(231,237,239,.22) 61%,
+    rgba(231,237,239,.06) 84%,
+    rgba(231,237,239,0) 100%);
+  -webkit-backdrop-filter:blur(18px) saturate(118%);
+  backdrop-filter:blur(18px) saturate(118%);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 20%,#000 80%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 20%,#000 80%,transparent 100%);
+}
+.tabs{
+  position:relative!important; top:auto!important; z-index:1!important;
+  width:max-content; max-width:100%; margin:0!important;
+  overflow-x:auto; overflow-y:hidden;
+  background:#e7edef!important; border:1px solid #c4d0d3!important;
+  box-shadow:0 9px 23px rgba(38,62,72,.12),inset 0 1px 0 rgba(255,255,255,.76)!important;
+  -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+}
+.tabs::after{content:none!important;display:none!important}
+body:not(.dark) .tabs{background:#e7edef!important;border-color:#c4d0d3!important}
+body:not(.dark) .tab{color:#687985!important}
+body:not(.dark) .tab:hover{color:#344f53!important}
+body:not(.dark) .tab.active{color:#244d49!important;text-shadow:0 0 13px rgba(81,153,139,.13)!important}
+body:not(.dark) .tab-pill:before{background:radial-gradient(ellipse 58% 58% at 50% 50%,rgba(80,157,143,.30) 0%,rgba(95,150,158,.17) 40%,rgba(95,150,158,.06) 62%,transparent 81%)!important}
+body.dark .dock-wrap::before{
+  background:linear-gradient(180deg,rgba(16,27,36,0) 0%,rgba(16,27,36,.08) 16%,rgba(16,27,36,.25) 40%,rgba(16,27,36,.32) 50%,rgba(16,27,36,.25) 60%,rgba(16,27,36,.08) 84%,rgba(16,27,36,0) 100%);
+  -webkit-backdrop-filter:blur(19px) saturate(112%);backdrop-filter:blur(19px) saturate(112%);
+}
+body.dark .tabs{background:#17232e!important;border-color:#40515e!important;box-shadow:0 12px 32px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.055)!important}
+@media(max-width:760px){
+  .dock-wrap{width:100%;max-width:100%;margin:0 0 17px;top:6px}
+  .dock-wrap::before{left:-22px;right:-22px;top:-102px;bottom:-102px}
+  .tabs{width:100%!important;max-width:100%!important;margin:0!important;padding:7px;gap:5px}
+}
+
+
+/* Final layering correction: keep the masthead above every navigation effect. */
+.top{
+  position:sticky!important; top:0!important; z-index:1200!important;
+  isolation:isolate; background:var(--bg)!important;
+  padding:8px 0!important; margin-top:-8px!important;
+}
+.dock-wrap{
+  position:sticky!important; top:72px!important; z-index:1000!important;
+  isolation:isolate!important; overflow:visible!important;
+}
+.dock-wrap::before{
+  top:-58px!important; bottom:-58px!important;
+  left:-44px!important; right:-44px!important;
+  -webkit-backdrop-filter:blur(12px) saturate(112%)!important;
+  backdrop-filter:blur(12px) saturate(112%)!important;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 23%,#000 77%,transparent 100%)!important;
+  mask-image:linear-gradient(180deg,transparent 0%,#000 23%,#000 77%,transparent 100%)!important;
+}
+body.dark .dock-wrap::before{
+  -webkit-backdrop-filter:blur(12px) saturate(108%)!important;
+  backdrop-filter:blur(12px) saturate(108%)!important;
+}
+@media(max-width:760px){
+  .top{padding:7px 0!important; margin-bottom:10px!important}
+  .dock-wrap{top:66px!important}
+  .dock-wrap::before{top:-48px!important;bottom:-48px!important;left:-16px!important;right:-16px!important}
+}
+
+
+
+/* Final refinement: full-width mobile masthead and softly feathered ambient blur. */
+.top{
+  position:sticky!important; top:0!important; z-index:1200!important;
+  isolation:isolate!important; background:var(--bg)!important;
+  padding:8px 0!important; margin-top:-8px!important;
+}
+.dock-wrap{
+  position:sticky!important; top:72px!important; z-index:1000!important;
+  isolation:isolate!important; overflow:visible!important;
+}
+/* A compact, radial blur field: no straight horizontal or vertical film edge. */
+.dock-wrap::before{
+  content:""!important; display:block!important; position:absolute!important;
+  z-index:0!important; pointer-events:none!important;
+  left:-26px!important; right:-26px!important;
+  top:-34px!important; bottom:-34px!important;
+  background:rgba(120,150,160,.018)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(108%)!important;
+  backdrop-filter:blur(9px) saturate(108%)!important;
+  -webkit-mask-image:radial-gradient(ellipse 82% 70% at 50% 50%,#000 0%,rgba(0,0,0,.78) 43%,rgba(0,0,0,.28) 68%,transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 82% 70% at 50% 50%,#000 0%,rgba(0,0,0,.78) 43%,rgba(0,0,0,.28) 68%,transparent 100%)!important;
+  opacity:.78!important;
+}
+.dock-wrap>.tabs{position:relative!important;z-index:1!important}
+@media(max-width:760px){
+  .top{
+    width:calc(100% + 36px)!important; max-width:none!important;
+    margin-left:-18px!important; margin-right:0!important;
+    padding:9px 18px!important; margin-top:-8px!important;
+    min-height:58px;
+  }
+  .top .brand{min-width:0;gap:9px}
+  .top .brand h1{font-size:16px}
+  .top .brand p{font-size:10px}
+  .top .mark{width:34px;height:34px;flex-basis:34px}
+  .top .top-actions{gap:5px}
+  .top .top-actions .btn{padding:6px 8px;font-size:10px}
+  .dock-wrap{width:100%;max-width:100%;top:66px!important;margin:0 0 17px!important}
+  .dock-wrap::before{
+    left:-12px!important;right:-12px!important;
+    top:-28px!important;bottom:-28px!important;
+    -webkit-backdrop-filter:blur(8px) saturate(106%)!important;
+    backdrop-filter:blur(8px) saturate(106%)!important;
+  }
+  .tabs{width:100%!important;max-width:100%!important}
+}
+
+
+
+/* Ambient blur v2: a transparent backdrop blur with a continuous radial alpha falloff.
+   The mask controls blur strength; there is deliberately no tinted film/background. */
+.dock-wrap{
+  position:sticky!important;
+  top:72px!important;
+  z-index:1000!important;
+  isolation:isolate!important;
+  overflow:visible!important;
+}
+.dock-wrap::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:0!important;
+  pointer-events:none!important;
+  left:-22%!important;
+  right:-22%!important;
+  top:-104px!important;
+  bottom:-104px!important;
+  background:transparent!important;
+  opacity:1!important;
+  -webkit-backdrop-filter:blur(17px) saturate(112%)!important;
+  backdrop-filter:blur(17px) saturate(112%)!important;
+  -webkit-mask-image:radial-gradient(ellipse 72% 52% at 50% 50%,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.96) 24%,
+    rgba(0,0,0,.78) 43%,
+    rgba(0,0,0,.48) 61%,
+    rgba(0,0,0,.20) 78%,
+    rgba(0,0,0,.06) 91%,
+    transparent 100%)!important;
+  mask-image:radial-gradient(ellipse 72% 52% at 50% 50%,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.96) 24%,
+    rgba(0,0,0,.78) 43%,
+    rgba(0,0,0,.48) 61%,
+    rgba(0,0,0,.20) 78%,
+    rgba(0,0,0,.06) 91%,
+    transparent 100%)!important;
+}
+.dock-wrap>.tabs{position:relative!important;z-index:1!important}
+.top{
+  position:sticky!important;top:0!important;z-index:1200!important;
+  isolation:isolate!important;background:var(--bg)!important;
+}
+@media(max-width:760px){
+  .top{
+    width:calc(100% + 36px)!important;max-width:none!important;
+    margin-left:-18px!important;margin-right:0!important;
+    padding:9px 18px!important;margin-top:-8px!important;min-height:58px;
+  }
+  .dock-wrap{width:100%;max-width:100%;top:66px!important;margin:0 0 17px!important}
+  .dock-wrap::before{
+    left:-18%!important;right:-18%!important;
+    top:-86px!important;bottom:-86px!important;
+    -webkit-backdrop-filter:blur(15px) saturate(108%)!important;
+    backdrop-filter:blur(15px) saturate(108%)!important;
+    -webkit-mask-image:radial-gradient(ellipse 76% 58% at 50% 50%,
+      rgba(0,0,0,1) 0%,rgba(0,0,0,.94) 25%,rgba(0,0,0,.72) 45%,
+      rgba(0,0,0,.40) 64%,rgba(0,0,0,.15) 82%,transparent 100%)!important;
+    mask-image:radial-gradient(ellipse 76% 58% at 50% 50%,
+      rgba(0,0,0,1) 0%,rgba(0,0,0,.94) 25%,rgba(0,0,0,.72) 45%,
+      rgba(0,0,0,.40) 64%,rgba(0,0,0,.15) 82%,transparent 100%)!important;
+  }
+  .tabs{width:100%!important;max-width:100%!important}
+}
+
+/* Final positioning repair: both masthead and navigation dock stay fixed to viewport. */
+.app{padding-top:132px!important}
+.top{
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  width:100%!important;max-width:none!important;z-index:1200!important;
+  margin:0!important;transform:none!important;
+  padding:9px max(18px,calc((100vw - 1464px)/2 + 18px))!important;
+  min-height:58px!important;background:var(--bg)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--line) 72%,transparent);
+}
+.dock-wrap{
+  position:fixed!important;top:70px!important;left:50%!important;right:auto!important;
+  transform:translateX(-50%)!important;width:min(740px,calc(100% - 36px))!important;
+  max-width:740px!important;margin:0!important;z-index:1100!important;
+}
+.dock-wrap>.tabs{width:100%!important;max-width:100%!important;margin:0!important}
+.dock-wrap::before{z-index:-1!important}
+@media(max-width:760px){
+  .app{padding-top:126px!important}
+  .top{
+    width:100%!important;left:0!important;right:0!important;
+    margin:0!important;padding:8px 12px!important;min-height:58px!important;
+  }
+  .top .brand{flex:1 1 auto;min-width:0}
+  .top .top-actions{flex:0 0 auto}
+  .dock-wrap{top:66px!important;width:calc(100% - 20px)!important;max-width:none!important}
+  .dock-wrap>.tabs{width:100%!important}
+}
+
+
+/* Clean fixed navigation: no ambient blur and no enclosing dock box. */
+.top{
+  position:fixed!important; top:0!important; left:0!important; right:0!important;
+  z-index:1200!important; width:100%!important; max-width:none!important;
+  margin:0!important; transform:none!important;
+  background:var(--bg)!important;
+}
+.dock-wrap{
+  position:fixed!important; top:70px!important; left:0!important; right:0!important;
+  transform:none!important; width:100%!important; max-width:none!important;
+  margin:0!important; padding:0 12px!important; z-index:1100!important;
+  isolation:isolate!important; overflow:visible!important;
+  background:transparent!important; border:0!important; box-shadow:none!important;
+  -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+}
+.dock-wrap::before,.dock-wrap::after{
+  content:none!important; display:none!important;
+  -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+}
+.dock-wrap>.tabs{
+  position:relative!important; top:auto!important; left:auto!important; right:auto!important;
+  transform:none!important; width:max-content!important; max-width:100%!important;
+  min-height:52px!important; margin:0 auto!important; padding:5px 2px!important;
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  gap:5px!important; overflow-x:auto!important; overflow-y:hidden!important;
+  border:0!important; border-radius:0!important;
+  background:transparent!important; background-color:transparent!important;
+  box-shadow:none!important; outline:0!important;
+  -webkit-backdrop-filter:none!important; backdrop-filter:none!important;
+  scrollbar-width:none!important; -webkit-overflow-scrolling:touch;
+}
+.dock-wrap>.tabs::-webkit-scrollbar{display:none!important}
+.dock-wrap>.tabs::before,.dock-wrap>.tabs::after{content:none!important;display:none!important}
+.dock-wrap>.tabs .tab{flex:0 0 auto!important}
+.dock-wrap>.tabs .tab-pill{z-index:0!important}
+.dock-wrap>.tabs .tab{z-index:1!important}
+body.dark .dock-wrap>.tabs,
+body:not(.dark) .dock-wrap>.tabs{
+  background:transparent!important; border:0!important; box-shadow:none!important;
+}
+.app{padding-top:132px!important}
+@media(max-width:760px){
+  .top{
+    position:fixed!important;top:0!important;left:0!important;right:0!important;
+    width:100%!important;max-width:none!important;margin:0!important;
+    padding:8px 12px!important;min-height:58px!important;
+  }
+  .dock-wrap{top:66px!important;left:0!important;right:0!important;width:100%!important;padding:0 10px!important}
+  .dock-wrap>.tabs{
+    width:100%!important;max-width:100%!important;min-height:48px!important;
+    justify-content:flex-start!important;margin:0!important;padding:4px 2px!important;
+    gap:5px!important;scroll-padding-inline:8px!important;
+  }
+  .dock-wrap>.tabs .tab{padding:9px 13px!important;min-height:40px!important}
+  .app{padding-top:124px!important}
+}
+
+
+/* Final navigation correction: opaque full-width rail, edge-to-edge soft active glow. */
+.top{
+  position:fixed!important;top:0!important;left:0!important;right:0!important;
+  width:100%!important;max-width:none!important;z-index:1200!important;
+  background:var(--bg)!important;isolation:isolate!important;
+}
+.dock-wrap{
+  position:fixed!important;top:70px!important;left:0!important;right:0!important;
+  width:100%!important;max-width:none!important;transform:none!important;
+  margin:0!important;padding:0!important;z-index:1100!important;
+  background:var(--bg)!important; /* opaque: content cannot show through while scrolling */
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  overflow:visible!important;isolation:isolate!important;
+}
+.dock-wrap::before,.dock-wrap::after{content:none!important;display:none!important}
+.dock-wrap>.tabs{
+  position:relative!important;top:auto!important;left:auto!important;right:auto!important;
+  width:100%!important;max-width:none!important;min-height:52px!important;
+  margin:0!important;padding:4px max(12px, calc((100vw - 740px)/2))!important;
+  display:flex!important;align-items:center!important;justify-content:flex-start!important;
+  gap:5px!important;overflow-x:auto!important;overflow-y:hidden!important;
+  background:var(--bg)!important;background-color:var(--bg)!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  outline:0!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  scrollbar-width:none!important;-webkit-overflow-scrolling:touch!important;
+  isolation:isolate!important;
+}
+.dock-wrap>.tabs::-webkit-scrollbar{display:none!important}
+.dock-wrap>.tabs::before,.dock-wrap>.tabs::after{content:none!important;display:none!important}
+/* Restore the original travelling radial spotlight: one soft, shared glow
+   moves underneath the active tab. No per-tab halo, pill fill or tab background. */
+.dock-wrap>.tabs>.tab-pill{
+  display:block!important;position:absolute!important;z-index:0!important;
+  pointer-events:none!important;opacity:1!important;
+}
+.dock-wrap>.tabs>.tab{
+  position:relative!important;z-index:1!important;flex:0 0 auto!important;
+  overflow:visible!important;background:transparent!important;border:0!important;
+  box-shadow:none!important;border-radius:0!important;
+}
+.dock-wrap>.tabs>.tab::before{content:none!important;display:none!important}
+.dock-wrap>.tabs>.tab.active{
+  background:transparent!important;color:var(--ink)!important;text-shadow:none!important;
+}
+.dock-wrap>.tabs>.tab:not(.active){color:var(--muted)!important}
+@media(max-width:760px){
+  .top{top:0!important;left:0!important;right:0!important;width:100%!important;padding:8px 12px!important;min-height:58px!important}
+  .dock-wrap{top:66px!important;left:0!important;right:0!important;width:100%!important;padding:0!important}
+  .dock-wrap>.tabs{width:100%!important;min-height:48px!important;padding:3px 8px!important;justify-content:flex-start!important;gap:4px!important}
+  .dock-wrap>.tabs>.tab{padding:9px 13px!important;min-height:40px!important}
+  .app{padding-top:124px!important}
+}
+
+
+/* Seamless fixed stack: dock touches the masthead with no exposed page strip. */
+.top{height:60px!important;min-height:60px!important;padding-top:8px!important;padding-bottom:8px!important}
+.dock-wrap{top:60px!important}
+.dock-wrap>.tabs{margin-top:0!important;border-top:0!important}
+@media(max-width:760px){
+  .top{height:58px!important;min-height:58px!important;padding-top:8px!important;padding-bottom:8px!important}
+  .dock-wrap{top:58px!important}
+}
+
+/* Navigation rail lower divider: paired with the masthead's existing bottom edge. */
+.dock-wrap{
+  border-bottom:1px solid color-mix(in srgb,var(--line) 72%,transparent)!important;
+}
+
+/* Desktop-only floating dock. Mobile keeps the existing full-width fixed rail. */
+@media (min-width:761px){
+  .dock-wrap{
+    position:fixed!important;top:72px!important;left:50%!important;right:auto!important;
+    transform:translateX(-50%)!important;width:max-content!important;
+    max-width:calc(100% - 40px)!important;padding:0!important;margin:0!important;
+    z-index:1100!important;background:transparent!important;border:0!important;
+    border-radius:0!important;box-shadow:none!important;overflow:visible!important;
+  }
+  .dock-wrap>.tabs{
+    width:max-content!important;max-width:100%!important;min-height:52px!important;
+    margin:0!important;padding:6px 8px!important;gap:5px!important;
+    justify-content:center!important;overflow:visible!important;overflow-y:visible!important;
+    background:var(--panel)!important;background-color:var(--panel)!important;
+    border:1px solid var(--line)!important;border-radius:18px!important;
+    box-shadow:0 10px 28px rgba(18,35,48,.14),inset 0 1px 0 rgba(255,255,255,.58)!important;
+    -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  }
+  body.dark .dock-wrap>.tabs{
+    background:#17232e!important;border-color:#40515e!important;
+    box-shadow:0 12px 32px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.055)!important;
+  }
+  body:not(.dark) .dock-wrap>.tabs{
+    background:#e7edef!important;border-color:#c4d0d3!important;
+    box-shadow:0 9px 23px rgba(38,62,72,.12),inset 0 1px 0 rgba(255,255,255,.72)!important;
+  }
+  .dock-wrap>.tabs>.tab{padding:10px 15px!important;min-height:40px!important}
+}
+
+
+/* Minimal, flat desktop dock refresh. Preserve the shared moving spotlight. */
+@media (min-width:761px){
+  .dock-wrap{
+    top:72px!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    padding:0!important;
+  }
+  .dock-wrap>.tabs{
+    min-height:46px!important;
+    padding:3px 5px!important;
+    gap:2px!important;
+    background:var(--panel)!important;
+    background-color:var(--panel)!important;
+    border:1px solid color-mix(in srgb,var(--line) 88%,transparent)!important;
+    border-radius:12px!important;
+    box-shadow:0 4px 14px rgba(20,38,52,.075)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+  body.dark .dock-wrap>.tabs{
+    background:#18232e!important;
+    border-color:#344552!important;
+    box-shadow:0 5px 16px rgba(0,0,0,.22)!important;
+  }
+  body:not(.dark) .dock-wrap>.tabs{
+    background:#f8fafb!important;
+    border-color:#d8e0e5!important;
+    box-shadow:0 4px 14px rgba(28,48,62,.07)!important;
+  }
+  .dock-wrap>.tabs>.tab{
+    min-height:38px!important;
+    padding:8px 13px!important;
+    border-radius:7px!important;
+    font-size:11.5px!important;
+    font-weight:600!important;
+    letter-spacing:0!important;
+  }
+  .dock-wrap>.tabs>.tab.active{
+    font-weight:700!important;
+  }
+}
+
+
+/* Desktop navigation inspired by the supplied horizontal capsule reference.
+   Keep the existing Shaktigarh theme colours and the original moving spotlight. */
+.desktop-dock-mark,.desktop-dock-end{display:none}
+@media(min-width:761px){
+  .dock-wrap{
+    position:fixed!important;top:72px!important;left:50%!important;right:auto!important;
+    transform:translateX(-50%)!important;width:max-content!important;
+    max-width:calc(100vw - 48px)!important;margin:0!important;padding:0!important;
+    z-index:1100!important;background:transparent!important;border:0!important;
+    box-shadow:none!important;overflow:visible!important;
+  }
+  .dock-wrap>.tabs{
+    display:flex!important;align-items:center!important;justify-content:flex-start!important;
+    gap:8px!important;width:max-content!important;max-width:calc(100vw - 48px)!important;
+    min-height:58px!important;margin:0!important;padding:6px 8px!important;
+    overflow:visible!important;white-space:nowrap!important;
+    border:1px solid var(--line)!important;border-radius:999px!important;
+    background:#e7edef!important;background-color:#e7edef!important;
+    box-shadow:0 9px 24px rgba(27,48,60,.15),inset 0 1px 0 rgba(255,255,255,.78)!important;
+    -webkit-backdrop-filter:none!important;backdrop-filter:none!important;
+  }
+  body.dark .dock-wrap>.tabs{
+    background:#17232e!important;background-color:#17232e!important;
+    border-color:#40515e!important;
+    box-shadow:0 11px 28px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  }
+  .desktop-dock-mark{
+    display:grid!important;place-items:center!important;flex:0 0 42px!important;
+    width:42px!important;height:42px!important;border-radius:50%!important;
+    margin-right:3px!important;background:linear-gradient(135deg,#6e9dcc 0%,#65b9a8 58%,#d5b56d 100%)!important;
+    color:#102033!important;font-size:13px!important;font-weight:950!important;
+    letter-spacing:-.8px!important;box-shadow:0 2px 7px rgba(0,0,0,.12)!important;
+  }
+  .desktop-dock-end{
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    flex:0 0 auto!important;min-height:42px!important;margin-left:5px!important;
+    padding:0 19px!important;border-radius:999px!important;
+    background:#ffffff!important;color:#263d48!important;
+    font-size:10px!important;font-weight:800!important;letter-spacing:.055em!important;
+  }
+  body.dark .desktop-dock-end{background:#e5ecee!important;color:#203440!important}
+  .dock-wrap>.tabs>.tab{
+    flex:0 0 auto!important;min-height:42px!important;padding:0 12px!important;
+    border-radius:0!important;background:transparent!important;box-shadow:none!important;
+    font-size:12px!important;font-weight:620!important;letter-spacing:-.012em!important;
+  }
+  .dock-wrap>.tabs>.tab.active{font-weight:760!important}
+  .dock-wrap>.tabs>.tab-pill{z-index:0!important;pointer-events:none!important}
+  .dock-wrap>.tabs>.tab-pill:before{
+    left:-24px!important;right:-24px!important;top:-29px!important;bottom:-29px!important;
+    filter:blur(13px)!important;
+  }
+  .dock-wrap>.tabs>.tab{z-index:1!important}
+  .desktop-dock-mark,.desktop-dock-end{position:relative;z-index:2}
+}
+
+/* Desktop capsule refinement: tabs only, balanced and evenly spaced. */
+@media(min-width:761px){
+  .desktop-dock-mark,.desktop-dock-end{display:none!important}
+  .dock-wrap{top:72px!important}
+  .dock-wrap>.tabs{
+    justify-content:center!important;
+    gap:12px!important;
+    padding:6px 18px!important;
+    min-height:58px!important;
+    width:max-content!important;
+  }
+  .dock-wrap>.tabs>.tab{
+    padding:0 15px!important;
+    min-height:42px!important;
+  }
+  /* Keep the content breathing room equal to the 12px gap above the dock. */
+  .app{padding-top:142px!important}
+}
+
+
+/* Stable desktop capsule: fixed footprint and full-width workspace on every tab. */
+@media (min-width:761px){
+  .app{
+    width:100%!important;max-width:none!important;
+    margin:0!important;padding-left:clamp(22px,2.2vw,36px)!important;
+    padding-right:clamp(22px,2.2vw,36px)!important;
+    padding-top:18px!important;
+  }
+  .dock-wrap{
+    position:fixed!important;top:72px!important;left:50%!important;right:auto!important;
+    transform:translateX(-50%)!important;
+    width:min(900px,calc(100vw - 64px))!important;
+    max-width:calc(100vw - 64px)!important;
+    margin:0!important;padding:0!important;
+    z-index:1100!important;overflow:visible!important;
+  }
+  .dock-wrap>.tabs{
+    display:flex!important;align-items:center!important;justify-content:stretch!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    min-height:58px!important;margin:0!important;padding:6px 12px!important;
+    gap:0!important;overflow:visible!important;white-space:nowrap!important;
+    border-radius:999px!important;
+  }
+  /* Equal tab slots prevent bold active labels from changing the capsule's geometry. */
+  .dock-wrap>.tabs>.tab{
+    flex:1 1 0!important;width:0!important;min-width:0!important;
+    min-height:42px!important;padding:0 8px!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    text-align:center!important;white-space:nowrap!important;
+    font-size:12px!important;font-weight:650!important;
+    letter-spacing:-.012em!important;transform:none!important;
+  }
+  .dock-wrap>.tabs>.tab.active{font-weight:650!important}
+  .dock-wrap>.tabs>.tab-pill{pointer-events:none!important}
+  main,.footer{width:100%!important;max-width:none!important}
+}
+
+
+/* Keep the desktop layout width constant when switching between short and long tabs.
+   The document scrollbar is visually hidden because the custom spectrum rail replaces it,
+   but its gutter must remain reserved on every page. */
+@media (min-width:761px) and (hover:hover) and (pointer:fine){
+  html{overflow-y:scroll!important;scrollbar-gutter:stable!important}
+  body{min-height:100vh!important}
+}
+
+/* Shaktigarh signature spectrum scrollbar — desktop only. */
+@media (min-width:761px) and (hover:hover) and (pointer:fine){
+  html{scrollbar-width:none!important;-ms-overflow-style:none!important;scroll-behavior:smooth}
+  html::-webkit-scrollbar{display:none!important;width:0!important;height:0!important}
+  /* Scrollable panels retain native scrolling but use the shared spectrum treatment. */
+  *:not(html){scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--teal) 78%,var(--blue)) color-mix(in srgb,var(--panel) 72%,transparent)}
+  *:not(html)::-webkit-scrollbar{width:9px;height:9px}
+  *:not(html)::-webkit-scrollbar-track{background:color-mix(in srgb,var(--panel) 72%,transparent);border-radius:999px}
+  *:not(html)::-webkit-scrollbar-thumb{border:2px solid transparent;border-radius:999px;background:linear-gradient(180deg,var(--blue) 0%,var(--teal) 52%,var(--gold) 100%);background-clip:padding-box;min-height:34px}
+  *:not(html)::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,color-mix(in srgb,var(--blue) 78%,white) 0%,color-mix(in srgb,var(--teal) 78%,white) 52%,color-mix(in srgb,var(--gold) 78%,white) 100%);background-clip:padding-box}
+  *:not(html)::-webkit-scrollbar-corner{background:transparent}
+  .spectrum-scrollbar{position:fixed;z-index:2147483000;top:5px;right:3px;bottom:5px;width:11px;pointer-events:auto;opacity:.86;display:block;contain:none;transition:opacity .2s ease}
+  .spectrum-scrollbar:hover{opacity:1}
+  .spectrum-scrollbar-track{position:absolute;inset:0;border-radius:999px;background:color-mix(in srgb,var(--panel) 72%,transparent);border:1px solid color-mix(in srgb,var(--line) 65%,transparent);pointer-events:auto}
+  .spectrum-scrollbar-thumb{position:absolute;left:1px;right:1px;top:0;height:48px;min-height:48px;border-radius:999px;background:linear-gradient(180deg,#829cb4 0%,#61c4b0 50%,#e8c36a 100%);box-shadow:0 1px 9px #0005;cursor:grab;pointer-events:auto;touch-action:none;transition:filter .18s ease}
+  .spectrum-scrollbar-thumb:hover{filter:brightness(1.16) saturate(1.08)}
+  .spectrum-scrollbar-thumb:active{cursor:grabbing;filter:brightness(1.2)}
+}
+/* Phones/tablets: no visible custom or native scrollbar; touch scrolling remains native. */
+@media (max-width:760px), (hover:none) and (pointer:coarse){
+  html,body,*{scrollbar-width:none!important;-ms-overflow-style:none!important}
+  html::-webkit-scrollbar,body::-webkit-scrollbar,*::-webkit-scrollbar,
+  html::-webkit-scrollbar-track,body::-webkit-scrollbar-track,*::-webkit-scrollbar-track,
+  html::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb,*::-webkit-scrollbar-thumb{display:none!important;width:0!important;height:0!important}
+  .spectrum-scrollbar{display:none!important}
+}
+
+/* Desktop masthead: align brand and action controls to the page content edges. */
+@media (min-width:761px){
+  .top{
+    display:flex!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:24px!important;
+    padding-left:max(18px,calc((100vw - 1500px)/2 + 18px))!important;
+    padding-right:max(18px,calc((100vw - 1500px)/2 + 18px))!important;
+  }
+  .top .brand{margin-left:0!important;flex:0 1 auto!important}
+  .top .top-actions{margin-right:0!important;flex:0 0 auto!important;justify-content:flex-end!important}
+}
+
+/* Premium mobile expandable navigation pane — desktop capsule remains untouched. */
+.mobile-nav-scrim{display:none}
+.mobile-nav-pane{display:none}
+.mobile-menu-button{display:none}
+@media(max-width:760px){
+  .dock-wrap{display:none!important}
+  .top{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;z-index:1300!important;margin:0!important;height:58px!important;min-height:58px!important;padding:7px 12px!important;gap:9px!important;background:color-mix(in srgb,var(--bg) 91%,transparent)!important;border-bottom:1px solid color-mix(in srgb,var(--line) 72%,transparent)!important;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+  .mobile-menu-button{display:flex!important;flex:0 0 36px;width:36px;height:36px;padding:9px 8px;flex-direction:column;justify-content:center;gap:4px;border:1px solid color-mix(in srgb,var(--line) 78%,transparent);border-radius:11px;background:var(--panel);color:var(--ink);box-shadow:0 3px 12px #10203012;cursor:pointer}
+  .mobile-menu-button span{display:block;width:18px;height:1.7px;border-radius:2px;background:currentColor;transition:transform .24s ease,opacity .2s ease}
+  .mobile-menu-button.open span:first-child{transform:translateY(5.7px) rotate(45deg)}
+  .mobile-menu-button.open span:nth-child(2){opacity:0}
+  .mobile-menu-button.open span:last-child{transform:translateY(-5.7px) rotate(-45deg)}
+  .top .brand{gap:8px;min-width:0;flex:1 1 auto!important}
+  .top .brand .mark{width:31px!important;height:31px!important;flex:0 0 31px!important;border-radius:9px!important;font-size:12px!important}
+  .top .brand h1{font-size:13px!important;white-space:nowrap}
+  .top .brand p{display:none!important}
+  .top .top-actions{gap:5px!important;flex:0 0 auto!important;flex-wrap:nowrap!important}
+  .top .top-actions .btn{padding:6px 7px!important;font-size:10px!important}
+  .app{padding-top:78px!important}
+  .mobile-nav-scrim{display:block;position:fixed;inset:60px 0 0;background:rgba(9,17,27,.42);z-index:1180;opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+  .mobile-nav-scrim.open{opacity:1;visibility:visible}
+  .mobile-nav-pane{display:flex;position:fixed;z-index:1200;left:0;top:60px;bottom:0;width:min(286px,calc(100vw - 52px));flex-direction:column;overflow:hidden;background:var(--panel);border-right:1px solid var(--line);box-shadow:18px 0 55px rgba(5,15,27,.24);transform:translateX(-105%);visibility:hidden;transition:transform .34s cubic-bezier(.2,.78,.2,1),visibility .34s,box-shadow .34s;will-change:transform}
+  .mobile-nav-pane.open{transform:translateX(0);visibility:visible;border-right-color:color-mix(in srgb,var(--line) 55%,transparent)}
+  .mobile-nav-head{height:76px;min-height:76px;display:flex;align-items:center;gap:13px;padding:0 9px;border-bottom:1px solid var(--line)}
+  .mobile-nav-trigger{width:39px;min-width:39px;height:42px;border:0;border-radius:11px;background:transparent;color:var(--muted);display:grid;place-items:center;font-size:20px}
+  .mobile-nav-trigger:active{background:var(--panel2)}
+  .mobile-nav-brand{min-width:0;white-space:nowrap;opacity:0;transform:translateX(-7px);transition:opacity .18s,transform .25s;pointer-events:none}
+  .mobile-nav-pane.open .mobile-nav-brand{opacity:1;transform:none;transition-delay:.08s}
+  .mobile-nav-brand strong{display:block;font-size:11px;letter-spacing:.13em}
+  .mobile-nav-brand small{display:block;margin-top:3px;color:var(--muted);font-size:9px;letter-spacing:.08em}
+  .mobile-nav-label{height:35px;min-height:35px;padding:14px 15px 4px;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity .16s}
+  .mobile-nav-pane.open .mobile-nav-label{opacity:1;transition-delay:.08s}
+  .mobile-nav-list{position:relative;padding:12px 7px;display:flex;flex-direction:column;gap:4px;overflow-y:auto;overflow-x:hidden;flex:1}
+  .mobile-nav-link{position:relative;display:flex;align-items:center;gap:15px;width:44px;min-width:44px;height:48px;min-height:48px;margin:0 auto;padding:0 12px;border:0;border-radius:10px;background:transparent;color:var(--muted);text-align:left;white-space:nowrap;overflow:hidden;transition:width .28s,background .22s,color .22s}
+  .mobile-nav-pane.open .mobile-nav-link{width:100%;margin:0;padding:0 14px}
+  .mobile-nav-glyph{width:19px;min-width:19px;display:grid;place-items:center;font-size:18px;position:relative;z-index:2}
+  .mobile-nav-name{font-size:13px;font-weight:620;opacity:0;transform:translateX(-5px);transition:opacity .18s,transform .22s;position:relative;z-index:2}
+  .mobile-nav-pane.open .mobile-nav-name{opacity:1;transform:none;transition-delay:.08s}
+  .mobile-nav-link.active{color:var(--ink);background:color-mix(in srgb,var(--blue) 10%,var(--panel2))}
+  .mobile-nav-link.active:before{content:"";position:absolute;left:0;top:9px;bottom:9px;width:2px;border-radius:3px;background:linear-gradient(180deg,var(--blue),var(--teal),var(--gold))}
+  .mobile-nav-link.active:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 78% 110% at 18% 50%,color-mix(in srgb,var(--blue) 17%,transparent),color-mix(in srgb,var(--teal) 10%,transparent) 46%,transparent 78%);pointer-events:none}
+  .mobile-nav-link.active .mobile-nav-glyph{color:var(--teal)}
+  .mobile-nav-foot{border-top:1px solid var(--line);padding:13px 9px 16px;display:flex;align-items:center;gap:12px;height:64px;min-height:64px;white-space:nowrap}
+  .mobile-nav-seal{width:30px;min-width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:9px;font-weight:900;color:#172534;background:linear-gradient(135deg,var(--blue),var(--teal) 58%,var(--gold))}
+  .mobile-nav-footcopy{opacity:0;transition:opacity .16s}.mobile-nav-pane.open .mobile-nav-footcopy{opacity:1;transition-delay:.08s}
+  .mobile-nav-footcopy strong{display:block;font-size:10px}.mobile-nav-footcopy small{display:block;color:var(--muted);font-size:9px;margin-top:2px}
+  body.mobile-nav-open{overflow:hidden}
+}
+
+
+
+/* Refined mobile masthead + signature charcoal navigation finish */
+@media(max-width:760px){
+  .top{
+    display:grid!important;
+    grid-template-columns:38px minmax(0,1fr) auto!important;
+    align-items:center!important;
+    justify-content:initial!important;
+    column-gap:10px!important;
+    padding:7px 13px!important;
+    height:60px!important;min-height:60px!important;
+  }
+  .top .brand{grid-column:2;grid-row:1;min-width:0!important;width:100%;gap:8px!important;flex:none!important;margin:0!important}
+  .top .brand>div:last-child{min-width:0}
+  .top .brand h1{overflow:hidden;text-overflow:ellipsis;letter-spacing:-.25px}
+  .top .top-actions{grid-column:3;grid-row:1;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;min-width:max-content;flex:none!important;margin:0!important}
+  .top .top-actions .btn{min-height:31px;padding:5px 7px!important;border-radius:9px!important}
+  .mobile-menu-button{
+    grid-column:1;grid-row:1;position:relative!important;display:flex!important;
+    width:36px!important;height:36px!important;min-width:36px!important;flex:none!important;
+    align-items:center;justify-content:center;gap:4px;padding:0!important;
+    border:1px solid #ffffff20!important;border-radius:12px!important;
+    color:#edf2f5!important;
+    background:linear-gradient(145deg,#303b45 0%,#202a33 52%,#151d25 100%)!important;
+    box-shadow:0 5px 14px #07111c35,inset 0 1px 0 #ffffff22,inset 0 -1px 0 #0005!important;
+    transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease!important;
+  }
+  .mobile-menu-button:before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,#8daac044,#75b9ad25,#dfbd7830);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .mobile-menu-button span{height:1.7px!important;width:16px!important;border-radius:4px!important;background:linear-gradient(90deg,#dce6ed,#a9c4c7)!important;box-shadow:0 0 7px #8dbac733;transition:transform .25s ease,opacity .2s ease,width .2s ease!important}
+  .mobile-menu-button span:nth-child(2){width:11px!important;align-self:center;margin-left:5px}
+  .mobile-menu-button.open span:nth-child(2){opacity:0;width:0!important}
+  .mobile-menu-button.open span:first-child{transform:translateY(5.7px) rotate(45deg)}
+  .mobile-menu-button.open span:last-child{transform:translateY(-5.7px) rotate(-45deg)}
+  .mobile-menu-button:active{transform:scale(.96);box-shadow:0 2px 7px #07111c45,inset 0 1px 0 #ffffff18!important}
+
+  .mobile-nav-scrim{inset:60px 0 0!important;background:rgba(5,10,16,.58)!important;backdrop-filter:blur(5px) saturate(115%)!important;-webkit-backdrop-filter:blur(5px) saturate(115%)!important}
+  .mobile-nav-pane{
+    top:60px!important;width:min(304px,calc(100vw - 46px))!important;
+    color:#e9eef2!important;
+    background:linear-gradient(155deg,#202a33 0%,#171f27 48%,#111820 100%)!important;
+    border-right:1px solid #ffffff18!important;
+    box-shadow:22px 0 65px #0008,inset -1px 0 0 #ffffff08!important;
+  }
+  .mobile-nav-head{height:82px!important;min-height:82px!important;padding:0 16px!important;gap:13px!important;border-bottom:1px solid #ffffff14!important;position:relative}
+  .mobile-nav-head:after{content:"";position:absolute;left:16px;right:16px;bottom:-1px;height:1px;background:linear-gradient(90deg,#82a9cf55,#75b9ad42,#dfbd7830,transparent)}
+  .mobile-nav-trigger{width:34px!important;min-width:34px!important;height:34px!important;border:1px solid #ffffff17!important;border-radius:10px!important;background:linear-gradient(145deg,#303b45,#1b242d)!important;color:#e8eef2!important;font-size:19px!important;box-shadow:inset 0 1px 0 #ffffff18,0 3px 10px #0003}
+  .mobile-nav-trigger:active{background:#34414c!important}
+  .mobile-nav-brand strong{font-size:11px!important;letter-spacing:.17em!important;color:#f1f4f6!important}
+  .mobile-nav-brand small{font-size:9px!important;letter-spacing:.105em!important;color:#91a1ad!important}
+  .mobile-nav-label{padding-left:16px!important;color:#81919d!important;font-size:9px!important;letter-spacing:.18em!important}
+  .mobile-nav-list{padding:13px 11px 16px!important;gap:5px!important}
+  .mobile-nav-link,.mobile-nav-pane.open .mobile-nav-link{
+    width:100%!important;height:49px!important;min-height:49px!important;margin:0!important;
+    padding:0 14px!important;gap:14px!important;border:1px solid transparent!important;
+    border-radius:12px!important;color:#a9b5be!important;background:transparent!important;
+    transition:background .22s ease,border-color .22s ease,color .22s ease,transform .22s ease,box-shadow .22s ease!important;
+  }
+  .mobile-nav-link:hover{background:#ffffff08!important;color:#e5ebef!important}
+  .mobile-nav-glyph{width:20px!important;min-width:20px!important;font-size:17px!important;color:#91a3af!important;transition:color .22s ease,transform .22s ease}
+  .mobile-nav-name{font-size:13px!important;font-weight:640!important;letter-spacing:.005em;color:inherit!important}
+  .mobile-nav-link.active,.mobile-nav-pane.open .mobile-nav-link.active{
+    color:#f3f6f8!important;
+    background:linear-gradient(105deg,#82a9cf20 0%,#75b9ad16 54%,#dfbd780c 100%)!important;
+    border-color:#a7c3d21c!important;
+    box-shadow:inset 0 1px 0 #ffffff0d,0 5px 16px #050b112b,0 0 22px #75b9ad0a!important;
+  }
+  .mobile-nav-link.active:before{left:0!important;top:9px!important;bottom:9px!important;width:3px!important;border-radius:0 4px 4px 0!important;background:linear-gradient(180deg,#82a9cf,#75b9ad 55%,#dfbd78)!important;box-shadow:0 0 10px #75b9ad55}
+  .mobile-nav-link.active:after{inset:0!important;border-radius:inherit!important;background:radial-gradient(ellipse 85% 125% at 5% 50%,#82a9cf20 0%,#75b9ad12 43%,transparent 78%)!important}
+  .mobile-nav-link.active .mobile-nav-glyph{color:#9bc9c1!important;transform:scale(1.06)}
+  .mobile-nav-foot{height:70px!important;min-height:70px!important;padding:14px 16px!important;border-top:1px solid #ffffff14!important;background:linear-gradient(90deg,#ffffff05,transparent)!important}
+  .mobile-nav-seal{width:32px!important;min-width:32px!important;height:32px!important;border-radius:10px!important;color:#14212a!important;box-shadow:0 3px 12px #0004,inset 0 1px 0 #ffffff66}
+  .mobile-nav-footcopy strong{font-size:10px!important;letter-spacing:.06em;color:#dce4e9!important}
+  .mobile-nav-footcopy small{font-size:9px!important;color:#81919d!important}
+}
+
+
+
+/* Mobile drawer — matte charcoal in dark mode, clean light surface in light mode */
+@media(max-width:760px){
+  .mobile-nav-pane{background:#f4f6f7!important;color:#202b34!important;border-right:1px solid #d8e0e4!important;box-shadow:20px 0 54px rgba(26,43,54,.18)!important}
+  body.dark .mobile-nav-pane{background:#111213!important;color:#edf0f2!important;border-right:1px solid #303436!important;box-shadow:22px 0 62px rgba(0,0,0,.58)!important}
+  .mobile-nav-head{border-bottom:0!important;position:relative!important}
+  .mobile-nav-head:after{content:none!important;display:none!important}
+  .mobile-nav-brand strong{color:#202b34!important} .mobile-nav-brand small{color:#73818b!important}
+  body.dark .mobile-nav-brand strong{color:#f0f2f3!important} body.dark .mobile-nav-brand small{color:#92999d!important}
+  .mobile-nav-label{margin-top:8px!important;padding:12px 16px 7px!important;color:#7a8992!important;font-size:9px!important;font-weight:750!important;letter-spacing:.17em!important}
+  body.dark .mobile-nav-label{color:#858d91!important}
+  .mobile-nav-list{position:relative!important;isolation:isolate!important}
+  .mobile-nav-link,.mobile-nav-pane.open .mobile-nav-link{position:relative!important;z-index:2!important;color:#667681!important;background:transparent!important;border:0!important;border-radius:9px!important;box-shadow:none!important;overflow:visible!important;transition:color .24s ease!important}
+  .mobile-nav-link:before,.mobile-nav-link:after{content:none!important;display:none!important}
+  .mobile-nav-link.active,.mobile-nav-pane.open .mobile-nav-link.active{color:#244f50!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  body.dark .mobile-nav-link,body.dark .mobile-nav-pane.open .mobile-nav-link{color:#a2aaae!important}
+  body.dark .mobile-nav-link.active,body.dark .mobile-nav-pane.open .mobile-nav-link.active{color:#f1f4f4!important}
+  .mobile-nav-glyph{color:#82919a!important} body.dark .mobile-nav-glyph{color:#8c989e!important}
+  .mobile-nav-link.active .mobile-nav-glyph{color:#478f85!important} body.dark .mobile-nav-link.active .mobile-nav-glyph{color:#83c4b5!important}
+  .mobile-nav-name{color:inherit!important;font-weight:640!important}
+  .mobile-nav-link:hover{color:#263b43!important;background:transparent!important}
+  body.dark .mobile-nav-link:hover{color:#f0f3f4!important;background:transparent!important}
+  /* Flat selected-row track: one restrained surface slides between navigation rows. */
+  .mobile-nav-pill{position:absolute!important;z-index:1!important;left:0;top:0;width:0;height:48px;opacity:0;pointer-events:none;border-radius:3px;
+    transform:translate3d(0,0,0);transition:transform .30s cubic-bezier(.2,.75,.25,1),width .22s ease,height .22s ease,opacity .14s ease;
+    background:#272c2e;border:0;box-shadow:none}
+  .mobile-nav-pill:before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:0 2px 2px 0;
+    background:linear-gradient(180deg,#82a9cf 0%,#75b9ad 54%,#dfbd78 100%)}
+  .mobile-nav-pill:after{content:none!important;display:none!important}
+  .mobile-nav-list.has-active-pill .mobile-nav-pill{opacity:1}
+  body:not(.dark) .mobile-nav-pill{background:#e5ebeb;border:0;box-shadow:none}
+  .mobile-nav-foot{border-top:1px solid #dce2e5!important;background:transparent!important}
+  .mobile-nav-footcopy strong{color:#35434c!important}.mobile-nav-footcopy small{color:#829099!important}
+  body.dark .mobile-nav-foot{border-top:1px solid #303638!important}
+  body.dark .mobile-nav-footcopy strong{color:#e3e8ea!important} body.dark .mobile-nav-footcopy small{color:#92999d!important}
+  .mobile-menu-button{background:linear-gradient(145deg,#303b45 0%,#202a33 52%,#151d25 100%)!important;color:#edf2f5!important}
+  .mobile-nav-list{position:relative!important;isolation:isolate!important}
+  .mobile-nav-pill{z-index:1!important}
+  .mobile-nav-link{z-index:2!important;background:transparent!important}
+  .mobile-nav-link.active{background:transparent!important}
+  .mobile-nav-link.active:before,.mobile-nav-link.active:after{content:none!important;display:none!important}
+}
+
+
+/* Shaktigarh Tournament Manager — v1.0.0
+   Graphite dark palette: neutral charcoal replaces the blue-tinted page backdrop. */
+body.dark{
+  --bg:#17191b;
+  --panel:#202326;
+  --panel2:#292d30;
+  --ink:#eceeed;
+  --muted:#a0a6a6;
+  --line:#3a4043;
+  --blue:#8ca6bd;
+  --teal:#79b4a8;
+  --gold:#d7b875;
+  --red:#d88a83;
+  --shadow:0 14px 38px rgba(0,0,0,.34);
+  background:var(--bg)!important;
+  color:var(--ink)!important;
+}
+body.dark .card,
+body.dark .node,
+body.dark .stage-inspector,
+body.dark .flow-stage{background:var(--panel)!important;border-color:var(--line)!important}
+body.dark .stat,
+body.dark .team-row,
+body.dark .stage-row,
+body.dark .match-row,
+body.dark .canvas-wrap,
+body.dark .bracket-scroll{background:var(--panel2)!important;border-color:var(--line)!important}
+body.dark .tabs,
+body.dark .dock-wrap>.tabs{background:#202326!important;background-color:#202326!important;border-color:#3a4043!important;box-shadow:0 10px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.045)!important}
+body.dark .tabs:before{background:linear-gradient(110deg,rgba(255,255,255,.045),transparent 40%,rgba(255,255,255,.018) 78%)!important}
+body.dark .mobile-nav-pane{background:#17191b!important;border-right-color:#34393b!important}
+body.dark .mobile-nav-foot{border-top-color:#34393b!important}
+body.dark .btn,
+body.dark input,
+body.dark select,
+body.dark textarea{background:var(--panel2);border-color:var(--line);color:var(--ink)}
+
+/* v1.0.1 — restore the spectrum workspace hero in dark mode, simplify drawer header,
+   and remove browser tap/focus rectangles on touch devices. */
+body.dark .card.hero{
+  background:linear-gradient(115deg,#6688aa 0%,#579b94 65%,#c4a05a 100%)!important;
+  color:#fff!important;
+  border:0!important;
+}
+@media(max-width:760px){
+  .mobile-nav-head{justify-content:flex-start!important;padding-left:20px!important;padding-right:18px!important;gap:0!important}
+  .mobile-nav-brand{margin:0!important;transform:translateX(-7px)}
+  .mobile-nav-pane.open .mobile-nav-brand{transform:none}
+  .mobile-nav-trigger{display:none!important}
+}
+/* Suppress Android/iOS rectangular tap flashes while retaining keyboard focus cues. */
+html,body,button,a,[role="button"],input,select,textarea{
+  -webkit-tap-highlight-color:transparent!important;
+}
+@media (hover:none) and (pointer:coarse){
+  button:focus:not(:focus-visible),a:focus:not(:focus-visible),[role="button"]:focus:not(:focus-visible){
+    outline:none!important;box-shadow:none!important;
+  }
+  button, a, [role="button"]{-webkit-touch-callout:none;}
+}
+
+
+
+/* v1.0.2 — preserve signature-colour surfaces in both themes.
+   Dark graphite overrides must not flatten branded spectrum buttons or containers. */
+body.dark .btn.primary{
+  background:linear-gradient(110deg,var(--blue),var(--teal))!important;
+  color:#fff!important;
+  border:0!important;
+}
+body.dark .btn.gold{
+  background:var(--gold)!important;
+  color:#26313b!important;
+  border:0!important;
+}
+body.dark .card.hero,
+body.dark .hero{
+  background:linear-gradient(115deg,#6688aa 0%,#579b94 65%,#c4a05a 100%)!important;
+  color:#fff!important;
+  border:0!important;
+}
+body.dark .card.hero .eyebrow,
+body.dark .hero .eyebrow{color:#ffffffb8!important}
+body.dark .card.hero p,
+body.dark .hero p{color:#ffffffd9!important}
+body.dark .card.hero .btn{color:#fff!important}
+body.dark .card.hero .btn:first-child{background:#ffffff!important;color:#263746!important}
+body.dark .card.hero .btn:nth-child(2){background:#ffffff22!important;border-color:#ffffff66!important;color:#fff!important}
+
+
+/* v1.0.5 — responsive cricket fixture cards and consistent top-pane edge alignment. */
+.top{width:100%;justify-content:space-between}
+.top .brand{margin-right:auto;min-width:0}
+.top-actions{margin-left:auto;justify-content:flex-end;align-items:center}
+.fixture-list{display:grid;gap:12px;min-width:0}
+.fixture-card{min-width:0;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);display:grid;gap:13px}
+.fixture-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0}
+.fixture-card-head>div{min-width:0}.fixture-card-head strong{display:block;font-size:13px;overflow-wrap:anywhere}.fixture-card-head small{display:block;color:var(--muted);margin-top:3px}
+.fixture-scoreboard{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:12px;padding:13px;border-radius:11px;background:var(--panel);border:1px solid var(--line)}
+.fixture-side{display:grid;gap:6px;min-width:0}.fixture-side b{font-size:13px;overflow-wrap:anywhere}.fixture-side label,.fixture-meta-grid label{font-size:10px;color:var(--muted);font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+.fixture-side input{width:100%;min-width:0;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}.fixture-vs{font-size:10px;letter-spacing:.12em;color:var(--muted);font-weight:800}
+.fixture-meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.fixture-meta-grid label{display:grid;gap:5px;min-width:0}.fixture-meta-grid input,.fixture-meta-grid select{min-width:0;width:100%;font-size:12px}.fixture-card-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:10px}
+@media(min-width:1100px){.fixture-list{grid-template-columns:repeat(2,minmax(0,1fr))}.fixture-card{align-content:start}}
+@media(max-width:760px){.top{width:100%;align-items:center;gap:10px}.top-actions{margin-left:auto;gap:6px}.fixture-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fixture-card{padding:12px}.fixture-scoreboard{gap:8px;padding:10px}.fixture-side b{font-size:12px}.fixture-side input{font-size:12px;padding:8px 7px}}
+@media(max-width:380px){.fixture-scoreboard{grid-template-columns:minmax(0,1fr);gap:8px}.fixture-vs{text-align:center}.fixture-side{grid-template-columns:1fr;}.fixture-side input{max-width:100%}}
+
+
+/* v1.0.5 — fixtures and standings side-by-side on desktop */
+.fixtures-results-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.85fr);gap:14px;align-items:start}
+.fixture-schedule-panel,.fixture-standings-panel{min-width:0}
+.fixture-standings-panel{position:sticky;top:14px;max-height:calc(100vh - 28px);overflow:auto}
+.fixture-standings-panel #standingsWrap{margin-top:4px}
+.fixture-standings-panel #standingsWrap>h3:first-child{margin-top:4px!important}
+.fixture-standings-panel .grid{grid-template-columns:minmax(0,1fr)!important}
+.fixture-standings-panel table{width:100%;min-width:0}
+.fixture-standings-panel th,.fixture-standings-panel td{padding:8px 6px;font-size:11px;white-space:nowrap}
+@media(max-width:900px){.fixtures-results-layout{grid-template-columns:minmax(0,1fr)}.fixture-standings-panel{position:static;max-height:none;overflow:visible}}
+
+/* v1.0.12 — keep the selected state visible from first paint and restore the sliding indicator. */
+.fixture-stage-tabs{position:relative!important;isolation:isolate;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;gap:4px;padding:5px;width:min(100%,360px)!important;max-width:100%;min-height:44px;border:1px solid var(--line);background:var(--panel2);border-radius:13px;margin:0 0 14px;overflow:hidden}
+.fixture-stage-slider{display:block!important;position:absolute!important;z-index:0!important;left:5px!important;top:5px!important;bottom:5px!important;width:calc((100% - 14px)/2)!important;border-radius:9px;background:rgba(109,145,181,.25);box-shadow:inset 0 0 0 1px rgba(109,145,181,.30);transform:translateX(0);transition:transform .32s cubic-bezier(.22,.8,.25,1),background-color .22s ease,box-shadow .22s ease;pointer-events:none}
+.fixture-stage-tabs.knockout-active .fixture-stage-slider{transform:translateX(calc(100% + 4px));background:rgba(99,169,158,.25);box-shadow:inset 0 0 0 1px rgba(99,169,158,.32)}
+.fixture-stage-tab{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;min-width:0;width:100%;min-height:34px;border:0;background:transparent!important;color:var(--muted)!important;font-weight:700;font-size:12px;padding:9px 8px;border-radius:9px;cursor:pointer;transition:color .2s ease,transform .2s ease;white-space:nowrap}
+.fixture-stage-tab.active{background:transparent!important;color:var(--ink)!important;box-shadow:none!important}
+body.dark .fixture-stage-slider{background:rgba(130,169,207,.27);box-shadow:inset 0 0 0 1px rgba(130,169,207,.34)}
+body.dark .fixture-stage-tabs.knockout-active .fixture-stage-slider{background:rgba(117,185,173,.27);box-shadow:inset 0 0 0 1px rgba(117,185,173,.35)}
+.fixture-stage-tab:active{transform:scale(.975)}
+.fixture-stage-pane{min-width:0}.fixture-pane-actions{margin:0 0 12px}.knockout-round-list{display:grid;gap:14px}.knockout-round-card{min-width:0}.knockout-round-card.knockout-round{border-color:color-mix(in srgb,var(--teal) 72%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--teal) 16%,transparent),var(--shadow)}.knockout-round-card.final-round{border-color:color-mix(in srgb,var(--gold) 78%,var(--line));box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 19%,transparent),var(--shadow)}.knockout-round-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}.knockout-round-head h3{margin:0;font-size:16px}.knockout-round-matches{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.knockout-team-select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--ink);padding:9px;font-weight:650}.knockout-match-card{min-width:0;border:1px solid color-mix(in srgb,var(--teal) 76%,var(--line));border-radius:14px;padding:15px;background:var(--panel2);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--teal) 14%,transparent);display:grid;gap:13px}.knockout-match-card.final-match{border-color:color-mix(in srgb,var(--gold) 82%,var(--line));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 17%,transparent)}
+.fixture-card.group-stage-match{border-color:color-mix(in srgb,var(--blue) 76%,var(--line));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--blue) 14%,transparent),var(--shadow)}.knockout-match-title{font-size:11px;color:var(--muted);font-weight:750;letter-spacing:.06em;margin-bottom:9px}.knockout-match-card .fixture-scoreboard{margin-bottom:10px}.knockout-match-card .fixture-side label{margin-bottom:5px}.knockout-match-card .fixture-meta-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.knockout-match-card .fixture-card-actions{margin-top:9px}
+@media(max-width:680px){.fixture-stage-tabs{width:100%}.fixture-stage-tab{flex:1;padding-inline:8px}.knockout-round-matches{grid-template-columns:minmax(0,1fr)}}
+
+
+/* v1.0.13 — keep round containers and their match cards on the same spectrum outline in both themes. */
+.flow-stage.group{border:1px solid color-mix(in srgb,var(--blue) 72%,var(--line))!important;border-top:3px solid var(--blue)!important}
+.flow-stage.knockout{border:1px solid color-mix(in srgb,var(--teal) 72%,var(--line))!important;border-top:3px solid var(--teal)!important}
+.flow-stage.final{border:1px solid color-mix(in srgb,var(--gold) 76%,var(--line))!important;border-top:3px solid var(--gold)!important}
+.flow-stage.group .flow-match{border-color:color-mix(in srgb,var(--blue) 72%,var(--line))!important}
+.flow-stage.knockout .flow-match{border-color:color-mix(in srgb,var(--teal) 72%,var(--line))!important}
+.flow-stage.final .flow-match{border-color:color-mix(in srgb,var(--gold) 76%,var(--line))!important}
+body.dark .flow-stage.group{border-color:color-mix(in srgb,var(--blue) 78%,#202326)!important;border-top-color:var(--blue)!important}
+body.dark .flow-stage.knockout{border-color:color-mix(in srgb,var(--teal) 78%,#202326)!important;border-top-color:var(--teal)!important}
+body.dark .flow-stage.final{border-color:color-mix(in srgb,var(--gold) 80%,#202326)!important;border-top-color:var(--gold)!important}
+body.dark .flow-stage.group .flow-match{border-color:color-mix(in srgb,var(--blue) 78%,#202326)!important}
+body.dark .flow-stage.knockout .flow-match{border-color:color-mix(in srgb,var(--teal) 78%,#202326)!important}
+body.dark .flow-stage.final .flow-match{border-color:color-mix(in srgb,var(--gold) 80%,#202326)!important}
+/* v1.0.14 — target the Fixtures & Results knockout round containers (not only bracket flow-stage nodes). */
+body.dark .knockout-round-card.knockout-round{border:1px solid color-mix(in srgb,var(--teal) 76%,#202326)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--teal) 16%,transparent),var(--shadow)!important}
+body.dark .knockout-round-card.final-round{border:1px solid color-mix(in srgb,var(--gold) 80%,#202326)!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 18%,transparent),var(--shadow)!important}
+body.dark .knockout-round-card.knockout-round .knockout-match-card{border-color:color-mix(in srgb,var(--teal) 76%,#202326)!important}
+body.dark .knockout-round-card.final-round .knockout-match-card{border-color:color-mix(in srgb,var(--gold) 80%,#202326)!important}
+
+/* Slimmer desktop navbar; mobile navigation is intentionally unaffected. */
+@media(min-width:761px){
+  .dock-wrap>.tabs{min-height:50px!important;padding:3px 10px!important}
+  .dock-wrap>.tabs>.tab{min-height:36px!important;padding-top:0!important;padding-bottom:0!important}
+}
+
+
+/* v1.0.15 — Format designer mode selector and stage reordering */
+.format-mode-tabs{margin:0 0 14px;width:min(100%,360px)!important}
+.format-mode-tabs.structured-active .fixture-stage-slider{transform:translateX(calc(100% + 4px));background:rgba(99,169,158,.25);box-shadow:inset 0 0 0 1px rgba(99,169,158,.32)}
+body.dark .format-mode-tabs.structured-active .fixture-stage-slider{background:rgba(117,185,173,.27);box-shadow:inset 0 0 0 1px rgba(117,185,173,.35)}
+.format-mode-tabs .fixture-stage-tab{font-size:12px}
+.stage-row{position:relative;transition:transform .24s cubic-bezier(.2,.8,.2,1),opacity .2s ease,border-color .2s ease,background-color .2s ease;will-change:transform}
+.stage-row[draggable="true"]{cursor:grab;touch-action:pan-y}
+.stage-row.dragging{opacity:.42;transform:scale(.985);border-style:dashed}
+.stage-row.drag-over{border-color:var(--teal);background:color-mix(in srgb,var(--teal) 10%,var(--panel2));transform:translateY(-2px)}
+.stage-drag-handle{display:grid;place-items:center;flex:none;width:28px;height:34px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:16px;letter-spacing:-3px;cursor:grab;user-select:none}
+.node{touch-action:none;transition:box-shadow .2s ease,outline-color .2s ease}
+.node:active{cursor:grabbing}
+@media(prefers-reduced-motion:reduce){.stage-row,.node,.fixture-stage-slider{transition:none!important}}
+
+/* v1.0.16 — innings completion controls and NRR table */
+.innings-extra{display:flex;align-items:center;gap:7px;margin-top:6px;flex-wrap:wrap;font-size:10px;color:var(--muted)}
+.innings-extra label{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.innings-extra input[type=checkbox]{accent-color:var(--teal);width:14px;height:14px;margin:0}
+.fixture-meta-grid .overs-limit-field{min-width:100px}
+.nrr-cell{font-variant-numeric:tabular-nums;font-weight:700}
+.nrr-positive{color:var(--teal)}.nrr-negative{color:var(--danger)}
+@media(max-width:520px){.innings-extra{font-size:10px}}
+
+/* v1.0.17 — structured inspector target and calmer, consistently spaced notes */
+.notice{border:1px solid var(--line)!important;border-left:1px solid var(--line)!important;border-radius:11px;padding:12px 14px;margin:14px 0!important;background:color-mix(in srgb,var(--panel2) 76%,var(--panel))!important;line-height:1.55;color:var(--muted)}
+.notice.error{border-color:color-mix(in srgb,var(--red) 48%,var(--line))!important}
+.notice.warning{border-color:color-mix(in srgb,var(--gold) 52%,var(--line))!important}
+.card>.notice:first-child{margin-top:0!important}.card>.notice:last-child{margin-bottom:0!important}
+.card>.notice+.notice{margin-top:10px!important}
+#structuredInspector{min-width:0}#structuredInspector .route-editor{margin-top:14px;padding-top:13px}
+#structuredInspector .match-config{margin:10px 0;padding:12px}
+#structuredInspector>.field:first-child{margin-top:2px}
+@media(max-width:760px){.notice{margin:12px 0!important;padding:11px 12px}.card>.notice:last-child{margin-bottom:0!important}}
+
+/* v1.0.22 — size the outlined menu button to match the SC logo box */
+@media(max-width:760px){
+  header.top{display:grid!important;grid-template-columns:31px minmax(0,1fr) auto!important;align-items:center!important;justify-content:initial!important;column-gap:10px!important}
+  header.top .mobile-menu-button{grid-column:1!important;grid-row:1!important}
+  header.top .brand{grid-column:2!important;grid-row:1!important;min-width:0!important;width:100%!important;flex:1 1 auto!important;margin:0!important}
+  header.top .top-actions{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:5px!important;min-width:max-content!important;flex:0 0 auto!important;margin:0!important}
+  header.top .mobile-menu-button,
+  body.dark header.top .mobile-menu-button,
+  body:not(.dark) header.top .mobile-menu-button{
+    display:flex!important;position:relative!important;inset:auto!important;
+    flex:0 0 31px!important;width:31px!important;min-width:31px!important;height:31px!important;
+    box-sizing:border-box!important;margin:0!important;padding:6px!important;
+    flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3.5px!important;
+    border:1px solid var(--line)!important;border-radius:10px!important;
+    background:var(--panel)!important;background-image:none!important;color:var(--ink)!important;
+    outline:none!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important;
+    -webkit-appearance:none!important;appearance:none!important;cursor:pointer!important;
+    transform:none;transition:border-color .18s ease,background-color .18s ease,box-shadow .18s ease,transform .2s ease!important;
+  }
+  header.top .mobile-menu-button:before,header.top .mobile-menu-button:after{content:none!important;display:none!important}
+  header.top .mobile-menu-button span{
+    display:block!important;position:relative!important;flex:none!important;width:16px!important;height:1.8px!important;
+    margin:0!important;border:0!important;border-radius:2px!important;background:currentColor!important;
+    background-image:none!important;box-shadow:none!important;opacity:1!important;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .18s ease!important;
+  }
+  header.top .mobile-menu-button.open span:first-child{transform:translateY(5.3px) rotate(45deg)!important}
+  header.top .mobile-menu-button.open span:nth-child(2){opacity:0!important}
+  header.top .mobile-menu-button.open span:last-child{transform:translateY(-5.3px) rotate(-45deg)!important}
+  header.top .mobile-menu-button:hover{border-color:color-mix(in srgb,var(--teal) 48%,var(--line))!important}
+  header.top .mobile-menu-button:active{transform:scale(.96)!important;background:var(--panel2)!important;box-shadow:none!important}
+  header.top .mobile-menu-button:focus{outline:none!important}
+  header.top .mobile-menu-button:focus-visible{outline:2px solid var(--teal)!important;outline-offset:2px!important}
+}
+
+/* v1.0.24 — align header to the app content grid; stack bracket stages vertically on phones. */
+@media(min-width:761px){
+  .app{padding-left:18px!important;padding-right:18px!important}
+  header.top{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important;display:flex!important;align-items:center!important;justify-content:space-between!important}
+  header.top .brand{margin-left:0!important;margin-right:auto!important}
+  header.top .top-actions{margin-left:auto!important;margin-right:0!important;justify-content:flex-end!important}
+}
+/* Category colour remains on the complete outline, never only the top edge. */
+.flow-stage.group{border:1.5px solid color-mix(in srgb,var(--blue) 76%,var(--line))!important;border-top:1.5px solid color-mix(in srgb,var(--blue) 76%,var(--line))!important}
+.flow-stage.knockout{border:1.5px solid color-mix(in srgb,var(--teal) 76%,var(--line))!important;border-top:1.5px solid color-mix(in srgb,var(--teal) 76%,var(--line))!important}
+.flow-stage.final{border:1.5px solid color-mix(in srgb,var(--gold) 80%,var(--line))!important;border-top:1.5px solid color-mix(in srgb,var(--gold) 80%,var(--line))!important}
+.flow-stage.placement,.flow-stage.league,.flow-stage.custom{border:1px solid var(--line)!important;border-top:1px solid var(--line)!important}
+body.dark .flow-stage.group{border-color:color-mix(in srgb,var(--blue) 82%,#202326)!important;border-top-color:color-mix(in srgb,var(--blue) 82%,#202326)!important}
+body.dark .flow-stage.knockout{border-color:color-mix(in srgb,var(--teal) 82%,#202326)!important;border-top-color:color-mix(in srgb,var(--teal) 82%,#202326)!important}
+body.dark .flow-stage.final{border-color:color-mix(in srgb,var(--gold) 84%,#202326)!important;border-top-color:color-mix(in srgb,var(--gold) 84%,#202326)!important}
+.flow-column-title,.flow-stage .eyebrow,.flow-group b,.flow-table-head{text-transform:none!important;letter-spacing:.02em!important}
+.flow-column-title{font-size:10px!important;font-weight:650!important;color:var(--muted)!important}
+.flow-group b{font-size:9px!important;font-weight:650!important}
+.flow-table-head{font-size:9px!important}
+@media(max-width:760px){
+  #bracketContent.bracket-scroll{overflow-x:hidden!important;overflow-y:visible!important;padding:12px 8px!important}
+  #bracketContent .bracket-flow{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:14px!important;min-width:0!important;width:100%!important;padding:4px 2px 12px!important}
+  #bracketContent .flow-column{width:100%!important;min-width:0!important;gap:7px!important}
+  #bracketContent .flow-column-title{padding:0 2px!important}
+  #bracketContent .flow-stage{width:100%!important;max-width:none!important;padding:10px!important}
+  #bracketContent .flow-stage h3{font-size:12px!important}
+  #bracketContent .flow-stage .flow-team,#bracketContent .flow-stage .flow-participant{font-size:10px!important;min-height:27px!important;padding:5px 7px!important}
+  #bracketContent .flow-stage .flow-match{padding:7px!important}
+}
+
+
+/* v1.0.25 — align desktop masthead to the app content box and clear the sticky masthead above standings. */
+@media (min-width: 761px){
+  .app{max-width:1500px!important;padding-left:18px!important;padding-right:18px!important;margin-left:auto!important;margin-right:auto!important}
+  header.top{
+    box-sizing:border-box!important;
+    display:flex!important;
+    width:100%!important;
+    max-width:none!important;
+    margin:0 0 18px!important;
+    padding:8px 0!important;
+    left:auto!important;right:auto!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+    gap:16px!important;
+  }
+  header.top .brand{margin-left:0!important;margin-right:auto!important;flex:0 1 auto!important}
+  header.top .top-actions{margin-left:auto!important;margin-right:0!important;flex:0 0 auto!important;justify-content:flex-end!important}
+  .fixture-standings-panel{
+    position:sticky!important;
+    top:82px!important;
+    max-height:calc(100vh - 98px)!important;
+    overflow:auto!important;
+    scroll-margin-top:82px!important;
+  }
+}
+@media (max-width: 900px){
+  .fixture-standings-panel{top:auto!important;max-height:none!important}
+}
+
+.cloud-panel{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:-3px 0 17px;padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--panel) 82%,transparent);box-shadow:var(--shadow)}.cloud-status{display:flex;align-items:center;gap:10px;min-width:220px;flex:1}.cloud-status strong{display:block;font-size:12px}.cloud-status small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.cloud-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 15%,transparent);flex:none}.cloud-dot.online{background:var(--teal);box-shadow:0 0 0 4px color-mix(in srgb,var(--teal) 15%,transparent)}.cloud-dot.error{background:var(--red);box-shadow:0 0 0 4px color-mix(in srgb,var(--red) 15%,transparent)}.cloud-controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.cloud-controls input{width:155px;padding:8px 9px;font-size:11px}.cloud-controls .btn{white-space:nowrap}.hidden{display:none!important}body.public-view main button,body.public-view main input,body.public-view main select,body.public-view main textarea{pointer-events:none!important;opacity:.72!important}body.public-view main .node{cursor:default!important}body.public-view main .node-actions{display:none!important}@media(max-width:760px){.cloud-panel{align-items:stretch}.cloud-status{min-width:100%}.cloud-controls{width:100%}.cloud-controls input{flex:1;min-width:120px}.cloud-controls .btn{flex:1}}
+</style>
+<style id="v1-0-26-full-width-layout">
+/* v1.0.26 — remove the desktop content-width cap; keep only a consistent page gutter. */
+@media (min-width: 761px){
+  .app{
+    width:100%!important;
+    max-width:none!important;
+    margin-left:0!important;
+    margin-right:0!important;
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+  header.top{width:100%!important;max-width:none!important;margin-left:0!important;margin-right:0!important}
+  .view,.view.active{width:100%!important;max-width:none!important}
+}
+</style>
+
+<style id="v1-0-29-header-right-alignment">
+/* v1.0.29 — align the fixed masthead controls to the same right content gutter as the pages. */
+@media (min-width: 761px){
+  header.top{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:16px!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:none!important;
+    left:0!important;right:0!important;
+    padding:8px 18px!important;
+    overflow:visible!important;
+  }
+  header.top .brand{
+    flex:0 1 auto!important;
+    min-width:0!important;
+    margin:0 auto 0 0!important;
+  }
+  header.top .top-actions{
+    display:flex!important;
+    flex:0 0 auto!important;
+    flex-flow:row nowrap!important;
+    align-items:center!important;
+    justify-content:flex-end!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    margin:0 0 0 auto!important;
+    padding:0!important;
+    gap:8px!important;
+  }
+  header.top .top-actions > #themeToggle,
+  header.top .top-actions > #exportBtn,
+  header.top .top-actions > #importBtn{
+    display:inline-flex!important;
+    flex:0 0 auto!important;
+    width:auto!important;
+    min-width:max-content!important;
+    max-width:none!important;
+    white-space:nowrap!important;
+  }
+  header.top .top-actions > #importFile{display:none!important}
+}
+</style>
+
+
+<style id="v1-0-30-theme-toggle-restoration">
+/* v1.0.30 — preserve the original fixed dimensions and animated sun/moon switch.
+   The v1.0.29 header rule used width:auto on every action, overriding .theme's 62px track. */
+@media (min-width:761px){
+  header.top .top-actions > #themeToggle{
+    box-sizing:border-box!important;
+    display:inline-flex!important;
+    position:relative!important;
+    flex:0 0 62px!important;
+    width:62px!important;
+    min-width:62px!important;
+    max-width:62px!important;
+    height:34px!important;
+    min-height:34px!important;
+    padding:3px!important;
+    border-radius:999px!important;
+    overflow:hidden!important;
+  }
+  header.top .top-actions > #themeToggle .theme-icon{
+    position:absolute!important;top:3px!important;width:26px!important;height:26px!important;
+  }
+  header.top .top-actions > #themeToggle .theme-thumb{
+    position:absolute!important;left:3px!important;top:3px!important;width:26px!important;height:26px!important;
+  }
+  header.top .top-actions > #themeToggle[aria-checked="true"] .theme-thumb{transform:translateX(28px)!important}
+}
+</style>
+
+</head>
+<body><div class="app">
+<header class="top"><button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobileNavPane"><span></span><span></span><span></span></button><div class="brand"><div class="mark" aria-label="Shaktigarh Cricket">SC</div><div><h1>Shaktigarh Cricket</h1><p>Tournament Manager · Format studio</p></div></div><div class="top-actions"><button class="theme" id="themeToggle" type="button" role="switch" aria-label="Toggle light and dark mode" aria-checked="false" onclick="toggleTheme()"><span class="theme-icon" aria-hidden="true">☀</span><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-thumb"></span></button><button class="btn" id="exportBtn">Export</button><button class="btn" id="importBtn">Import</button><input type="file" id="importFile" accept="application/json" class="hidden"></div></header>
+<section class="cloud-panel" id="cloudPanel" aria-label="Tournament cloud publishing">
+ <div class="cloud-status"><span class="cloud-dot" id="cloudDot"></span><div><strong id="cloudHeading">Connecting to tournament cloud…</strong><small id="cloudMessage">Public visitors see the latest published tournament. Owner drafts remain private.</small></div></div>
+ <div class="cloud-controls" id="cloudLoginControls"><input id="cloudEmail" type="email" autocomplete="username" placeholder="Owner email" aria-label="Owner email"><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="Password" aria-label="Owner password"><button class="btn primary" id="cloudLogin">Owner login</button></div>
+ <div class="cloud-controls hidden" id="cloudOwnerControls"><span class="pill ok" id="cloudOwnerLabel">Owner mode</span><button class="btn gold" id="cloudPublish">Publish latest changes</button><button class="btn" id="cloudLogout">Log out</button></div>
+</section>
+<div class="mobile-nav-scrim" id="mobileNavScrim"></div>
+<aside class="mobile-nav-pane" id="mobileNavPane" aria-label="Tournament navigation">
+ <div class="mobile-nav-head"><div class="mobile-nav-brand"><strong>SHAKTIGARH</strong><small>TOURNAMENT MANAGER</small></div></div>
+ <nav class="mobile-nav-list" id="mobileNavList" aria-label="Tournament sections">
+  <span class="mobile-nav-pill" id="mobileNavPill" aria-hidden="true"></span>
+  <div class="mobile-nav-label">Workspace</div>
+  <button class="mobile-nav-link active" data-mobile-view="overview"><span class="mobile-nav-glyph">⌂</span><span class="mobile-nav-name">Overview</span></button>
+  <button class="mobile-nav-link" data-mobile-view="teams"><span class="mobile-nav-glyph">♧</span><span class="mobile-nav-name">Teams &amp; squads</span></button>
+  <button class="mobile-nav-link" data-mobile-view="format"><span class="mobile-nav-glyph">▦</span><span class="mobile-nav-name">Format designer</span></button>
+  <button class="mobile-nav-link" data-mobile-view="bracket"><span class="mobile-nav-glyph">⑂</span><span class="mobile-nav-name">Bracket viewer</span></button>
+  <div class="mobile-nav-label">Match centre</div>
+  <button class="mobile-nav-link" data-mobile-view="schedule"><span class="mobile-nav-glyph">◷</span><span class="mobile-nav-name">Fixtures &amp; results</span></button>
+  <button class="mobile-nav-link" data-mobile-view="rules"><span class="mobile-nav-glyph">⚙</span><span class="mobile-nav-name">Playing conditions</span></button>
+ </nav>
+ <div class="mobile-nav-foot"><div class="mobile-nav-seal">SC</div><div class="mobile-nav-footcopy"><strong>SHAKTIGARH CRICKET</strong><small>Competition workspace</small></div></div>
+</aside>
+<div class="dock-wrap"><nav class="tabs" id="tabs"><span class="tab-pill" id="tabPill" aria-hidden="true"></span><button class="tab active" data-view="overview">Overview</button><button class="tab" data-view="teams">Teams & squads</button><button class="tab" data-view="format">Format designer</button><button class="tab" data-view="bracket">Bracket viewer</button><button class="tab" data-view="schedule">Fixtures & results</button><button class="tab" data-view="rules">Playing conditions</button></nav></div>
+<main>
+<section class="view active" id="overview"><div class="grid cols2"><div class="card hero"><div class="eyebrow" style="color:#ffffffb8">Tournament workspace</div><h2 id="heroName">Shaktigarh Premier League</h2><p id="heroMeta">Build your format. Validate the logic. Run the tournament.</p><div class="row wrap" style="margin-top:18px"><button class="btn" style="background:#ffffff;color:#263746;border:0" onclick="showView('format')">Open format designer →</button><button class="btn" style="background:#ffffff22;color:white;border-color:#ffffff66" onclick="showView('bracket')">View bracket</button></div></div><div class="card"><div class="section-head"><h2>At a glance</h2><span class="pill ok" id="saveState">Saved locally</span></div><div class="stats"><div class="stat"><strong id="statTeams">4</strong><span>Teams</span></div><div class="stat"><strong id="statStages">3</strong><span>Stages</span></div><div class="stat"><strong id="statMatches">0</strong><span>Fixtures</span></div><div class="stat"><strong id="statDone">0</strong><span>Completed</span></div></div></div></div>
+<div class="grid cols2" style="margin-top:14px"><div class="card"><div class="section-head"><h2>Tournament details</h2><span class="pill">Workspace</span></div><div class="field"><label>Tournament name</label><input id="tName" placeholder="Tournament name"></div><div class="formgrid"><div class="field"><label>Season / edition</label><input id="tEdition" placeholder="2026"></div><div class="field"><label>Venue / location</label><input id="tVenue" placeholder="Shaktigarh"></div></div><div class="field"><label>Short description</label><textarea id="tDesc" placeholder="A short note about the tournament"></textarea></div><button class="btn primary" id="saveDetails">Save details</button></div><div class="card"><div class="section-head"><h2>Format health</h2><button class="btn small" onclick="validateTournament()">Validate tournament</button></div><div id="overviewValidation" class="checks"><div class="empty">Run validation to inspect your tournament structure.</div></div><div class="notice">Validation checks structure and progression logic. It does not certify playing rules, umpiring decisions or external competition regulations.</div></div></div>
+<div class="card" style="margin-top:14px"><div class="section-head"><h2>Quick actions</h2><span class="muted" style="font-size:11px">Continue building your tournament</span></div><div class="row wrap"><button class="btn" onclick="showView('teams')">Manage teams</button><button class="btn" onclick="showView('format')">Edit tournament format</button><button class="btn" onclick="generateFixtures()">Generate group fixtures</button><button class="btn" onclick="showView('schedule')">Enter match results</button><button class="btn" onclick="showView('bracket')">Open standard bracket</button></div></div></section>
+<section class="view" id="teams"><div class="grid cols2"><div class="card"><div class="section-head"><h2>Teams</h2><button class="btn primary small" id="addTeam">+ Add team</button></div><div class="field"><label>Players per squad (target)</label><input type="number" min="1" max="40" id="squadSize" value="12"></div><div id="teamList" class="team-list"></div></div><div class="card"><h2>Team editor</h2><div id="teamEditor" class="empty">Select a team to edit its details and squad.</div></div></div></section>
+<section class="view" id="format"><div class="section-head"><div><div class="eyebrow">One tournament model · two editing styles</div><h2 style="margin:3px 0">Format designer</h2></div><div class="fixture-stage-tabs format-mode-tabs visual-active" id="formatModeTabs" role="tablist" aria-label="Format designer mode"><span class="fixture-stage-slider" id="formatModeSlider" aria-hidden="true"></span><button class="fixture-stage-tab active" id="visualMode" role="tab" aria-selected="true" onclick="setMode('visual')">Visual mode</button><button class="fixture-stage-tab" id="structuredMode" role="tab" aria-selected="false" onclick="setMode('structured')">Structured mode</button></div></div>
+<div id="visualEditor"><div class="grid" style="grid-template-columns:minmax(0,1fr) 275px;gap:14px"><div class="card"><div class="section-head"><h2>Format canvas</h2><div class="row wrap"><button class="btn small" id="autoArrange">Auto arrange</button><button class="btn small" id="addStage">+ Add stage</button></div></div><div class="canvas-wrap"><div class="canvas" id="canvas"><svg class="connector-layer" id="connectors"></svg><div id="nodes"></div></div></div><p class="bracket-note">Drag stages to arrange them. Use “Connect” on a stage to define where its qualifiers or match winners go. Select a stage to edit its details.</p></div><div class="card"><h2>Stage inspector</h2><div id="stageInspector" class="empty">Select a stage on the canvas.</div><div class="notice">The canvas is a format editor. Actual fixtures and bracket positions are generated from the same stage data.</div></div></div></div>
+<div id="structuredEditor" class="hidden"><div class="grid cols2"><div class="card"><div class="section-head"><h2>Stages</h2><button class="btn primary small" onclick="addStagePrompt()">+ Add stage</button></div><div id="stageList" class="stage-list"></div></div><div class="card"><h2>Selected stage configuration</h2><div id="structuredInspector" class="empty">Select a stage to configure it.</div></div></div></div>
+<div class="card" style="margin-top:14px"><div class="section-head"><h2>Format validation</h2><button class="btn" onclick="validateTournament()">Validate tournament</button></div><div id="formatValidation" class="checks"><div class="empty">Validation results will appear here.</div></div></div></section>
+<section class="view" id="bracket"><div class="section-head"><div><div class="eyebrow">Tournament progression</div><h2 style="margin:3px 0">Tournament progression map</h2></div><div class="row wrap"><button class="btn" onclick="showView('format')">Edit format</button><button class="btn primary" onclick="showView('schedule')">Enter results</button></div></div><div class="notice">Stages are shown side by side with group tables and knockout match slots. Participant labels show the configured progression; the bracket view intentionally has no connector lines.</div><div class="card"><div id="bracketContent" class="bracket-scroll"><div class="empty">Add knockout stages to see the bracket.</div></div></div></section>
+<section class="view" id="schedule"><div class="section-head"><div><div class="eyebrow">Match operations</div><h2 style="margin:3px 0">Fixtures & results</h2></div></div>
+<div class="fixture-stage-tabs group-active" id="fixtureStageTabs" role="tablist" aria-label="Fixture stage"><span class="fixture-stage-slider" id="fixtureStageSlider" aria-hidden="true"></span><button class="fixture-stage-tab active" id="groupStageTab" role="tab" aria-selected="true" onclick="switchFixtureTab('group')">Group Stage</button><button class="fixture-stage-tab" id="knockoutStageTab" role="tab" aria-selected="false" onclick="switchFixtureTab('knockout')">Knockout Stage</button></div>
+<div id="groupStagePane" class="fixture-stage-pane"><div class="row wrap fixture-pane-actions"><button class="btn" onclick="generateFixtures()">Generate group fixtures</button><button class="btn primary" onclick="addFixture()">+ Add fixture</button></div><div class="fixtures-results-layout"><div class="card fixture-schedule-panel"><div class="row between wrap" style="margin-bottom:10px"><div><h2 style="margin:0">Manual fixtures & match schedule</h2><p class="muted" style="font-size:11px;margin:3px 0">Add matches and assign scores, date, time and venue.</p></div><span class="pill" id="fixtureCount">0 fixtures</span></div><div id="fixtureRows" class="fixture-list"></div><div id="scheduleEmpty" class="empty">No fixtures yet. Generate group fixtures from your group-stage settings or add a match manually.</div></div><aside class="card fixture-standings-panel"><div class="row between wrap" style="margin-bottom:10px"><div><div class="eyebrow">Points & standings</div><h2 style="margin:3px 0 0">League stage table</h2></div></div><div id="standingsWrap"></div><p class="muted" style="font-size:10px;margin:8px 0 0">NRR uses completed matches only. Mark an innings All out when applicable; that innings is charged the full overs quota.</p></aside></div></div>
+<div id="knockoutStagePane" class="fixture-stage-pane hidden"><div class="row between wrap fixture-pane-actions"><div><h2 style="margin:0">Knockout rounds</h2><p class="muted" style="font-size:11px;margin:3px 0">Create each round, add its matchups, and record the results separately from the league table.</p></div><button class="btn primary" onclick="addKnockoutStage()">+ Create knockout round</button></div><div id="knockoutRounds" class="knockout-round-list"></div><div id="knockoutEmpty" class="empty">No knockout rounds yet. Create a round to begin building your knockout stage.</div></div></section>
+<section class="view" id="rules"><div class="grid cols2"><div class="card"><h2>Match conditions</h2><div class="formgrid"><div class="field"><label>Ball type</label><select id="ballType"><option>Leather</option><option>Tennis</option><option>Season / wind ball</option><option>Other</option></select></div><div class="field"><label>Overs format</label><select id="overType"><option>Limited overs</option><option>Timed / declaration</option><option>Pairs / custom</option></select></div><div class="field"><label>Overs per innings</label><input id="overs" type="number" min="1" value="10"></div><div class="field"><label>Players per side</label><input id="playersSide" type="number" min="2" value="11"></div><div class="field"><label>Powerplay overs</label><input id="powerplay" type="number" min="0" value="0"></div><div class="field"><label>Bowler maximum overs</label><input id="bowlerMax" type="number" min="1" value="2"></div></div><div class="field"><label>Playing conditions / special rules</label><textarea id="conditions" placeholder="Wide / no-ball rules, substitutes, tie-breaker, DLS, boundary rules..."></textarea></div><button class="btn primary" id="saveRules">Save playing conditions</button></div><div class="card"><h2>Points & tie-breakers</h2><div class="formgrid"><div class="field"><label>Win points</label><input id="winPts" type="number" value="2"></div><div class="field"><label>Tie / no result points</label><input id="tiePts" type="number" value="1"></div><div class="field"><label>Loss points</label><input id="lossPts" type="number" value="0"></div></div><div class="field"><label>Tie-breaker order</label><textarea id="tiebreakers">1. Points
+2. Net run rate
+3. Head-to-head
+4. Runs scored</textarea></div><button class="btn primary" id="savePoints">Save points system</button><div class="notice">These settings are stored with the tournament. NRR is calculated automatically from completed group-stage innings scores, overs faced and the All out indicators. For accurate NRR, enter scores in the format 145/6 (18.3 ov).</div></div></div></section>
+</main><div class="footer">SHAKTIGARH CRICKET · TOURNAMENT MANAGER · v1.0.39 · Cloud drafts are private until published</div></div>
+<div class="modal-backdrop" id="modal"><div class="modal"><div class="section-head"><h2 id="modalTitle">Add stage</h2><button class="btn small" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div><div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const $=id=>document.getElementById(id);const uid=()=>Math.random().toString(36).slice(2,9);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const defaults=()=>({meta:{name:'Shaktigarh Premier League',edition:'2026',venue:'Shaktigarh',desc:''},squadSize:12,teams:[{id:'t1',name:'Shaktigarh Strikers',captain:'',color:'#6689ad',players:[]},{id:'t2',name:'Shaktigarh Royals',captain:'',color:'#5d9c91',players:[]},{id:'t3',name:'Shaktigarh Warriors',captain:'',color:'#c3a05f',players:[]},{id:'t4',name:'Shaktigarh Titans',captain:'',color:'#a87983',players:[]}],stages:[{id:'s1',name:'League Stage',type:'group',groupCount:1,teamsPerGroup:4,rounds:'single',qualify:4,qualifyRule:'Top teams from each group',x:45,y:80,connections:['s2']},{id:'s2',name:'Knockout 1',type:'knockout',matchCount:2,participants:'Configured participant slots',matchDefs:[{label:'Qualifier 1',a:'g|s1|1|3',b:'g|s1|1|4'},{label:'Qualifier 2',a:'w|s2|0',b:'g|s1|1|2'}],x:315,y:80,connections:['s3']},{id:'s3',name:'Final',type:'final',matchCount:1,participants:'Configured participant slots',matchDefs:[{label:'Final',a:'w|s2|1',b:'g|s1|1|1'}],x:585,y:145,connections:[]}],fixtures:[],rules:{ball:'Leather',overType:'Limited overs',overs:10,players:11,powerplay:0,bowlerMax:2,conditions:'',win:2,tie:1,loss:0,tiebreakers:'1. Points\n2. Net run rate\n3. Head-to-head\n4. Runs scored'}});
+let data=load(),selectedTeam=null,selectedStage=null,mode='visual',dragNode=null;
+function load(){try{return JSON.parse(localStorage.getItem('shaktiTournament'))||defaults()}catch(e){return defaults()}}function save(){localStorage.setItem('shaktiTournament',JSON.stringify(data));$('saveState').textContent='Saved locally';renderStats();if(window.tournamentCloudSave)window.tournamentCloudSave()}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1900)}
+function moveTabPill(v){const nav=$('tabs'),pill=$('tabPill'),tab=[...document.querySelectorAll('.tab')].find(b=>b.dataset.view===v);if(!nav||!pill||!tab)return;const left=tab.offsetLeft-nav.clientLeft; pill.style.width=tab.offsetWidth+'px';pill.style.transform=`translate3d(${left}px,0,0)`;const visibleLeft=tab.offsetLeft-nav.scrollLeft,visibleRight=visibleLeft+tab.offsetWidth;if(visibleLeft<nav.clientLeft+6)nav.scrollTo({left:Math.max(0,tab.offsetLeft-nav.clientLeft-6),behavior:'smooth'});else if(visibleRight>nav.clientWidth-6)nav.scrollTo({left:Math.max(0,tab.offsetLeft+tab.offsetWidth-nav.clientWidth+6),behavior:'smooth'})}
+function moveMobilePill(v){const list=$('mobileNavList'),pill=$('mobileNavPill'),link=[...document.querySelectorAll('.mobile-nav-link')].find(x=>x.dataset.mobileView===v);if(!list||!pill||!link)return;const lr=list.getBoundingClientRect(),br=link.getBoundingClientRect();const x=br.left-lr.left+list.scrollLeft,y=br.top-lr.top+list.scrollTop; pill.style.width=br.width+'px';pill.style.height=br.height+'px';pill.style.transform=`translate3d(${x}px,${y}px,0)`;list.classList.add('has-active-pill')}
+function showView(v){const current=document.querySelector('.view.active');if(current&&current.id===v){closeMobileNav();return}document.querySelectorAll('.view').forEach(x=>x.classList.toggle('active',x.id===v));document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.view===v));document.querySelectorAll('.mobile-nav-link').forEach(x=>x.classList.toggle('active',x.dataset.mobileView===v));moveTabPill(v);moveMobilePill(v);closeMobileNav();if(v==='bracket')renderBracket();if(v==='schedule')renderFixtures();if(v==='format')renderFormat()}
+const mobilePane=$('mobileNavPane'),mobileScrim=$('mobileNavScrim'),mobileMenuButton=$('mobileMenuButton');
+function closeMobileNav(){if(!mobilePane)return;mobilePane.classList.remove('open');mobileScrim.classList.remove('open');document.body.classList.remove('mobile-nav-open');mobileMenuButton.classList.remove('open');mobileMenuButton.setAttribute('aria-expanded','false');mobileMenuButton.setAttribute('aria-label','Open navigation')}
+function toggleMobileNav(){const open=!mobilePane.classList.contains('open');mobilePane.classList.toggle('open',open);mobileScrim.classList.toggle('open',open);document.body.classList.toggle('mobile-nav-open',open);mobileMenuButton.classList.toggle('open',open);mobileMenuButton.setAttribute('aria-expanded',String(open));mobileMenuButton.setAttribute('aria-label',open?'Close navigation':'Open navigation')}
+mobileMenuButton.addEventListener('click',toggleMobileNav);mobileScrim.addEventListener('click',closeMobileNav);
+document.querySelectorAll('.mobile-nav-link').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.mobileView)));
+document.querySelectorAll('.mobile-nav-link').forEach(b=>b.addEventListener('transitionend',e=>{if(e.propertyName==='width'){const active=document.querySelector('.mobile-nav-link.active');if(active)moveMobilePill(active.dataset.mobileView)}}));$('mobileNavList').addEventListener('scroll',()=>{const active=document.querySelector('.mobile-nav-link.active');if(active)moveMobilePill(active.dataset.mobileView)},{passive:true});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileNav()});
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>showView(b.dataset.view));
+requestAnimationFrame(()=>{const active=document.querySelector('.tab.active');if(active){moveTabPill(active.dataset.view);moveMobilePill(active.dataset.view)}});window.addEventListener('resize',()=>{const active=document.querySelector('.tab.active');if(active){moveTabPill(active.dataset.view);moveMobilePill(active.dataset.view)}});
+window.addEventListener('load',()=>{const active=document.querySelector('.tab.active');if(active)requestAnimationFrame(()=>requestAnimationFrame(()=>{moveTabPill(active.dataset.view);moveMobilePill(active.dataset.view)}))},{once:true});document.fonts?.ready?.then(()=>{const active=document.querySelector('.tab.active');if(active)requestAnimationFrame(()=>moveTabPill(active.dataset.view))});
+// Navigation uses native sticky positioning; no scroll-time fixed-position toggling.
+function syncThemeControl(){const dark=document.body.classList.contains('dark'),b=$('themeToggle');b.setAttribute('aria-checked',String(dark));b.setAttribute('aria-label',dark?'Dark theme enabled. Switch to light theme':'Light theme enabled. Switch to dark theme');b.title=dark?'Switch to light mode':'Switch to dark mode'}
+function toggleTheme(){const dark=!document.body.classList.contains('dark');document.body.classList.toggle('dark',dark);localStorage.setItem('shaktiTheme',dark?'dark':'light');syncThemeControl()}
+if(localStorage.getItem('shaktiTheme')==='dark')document.body.classList.add('dark');syncThemeControl();
+function renderStats(){$('heroName').textContent=data.meta.name;$('heroMeta').textContent=[data.meta.edition,data.meta.venue].filter(Boolean).join(' · ')+' · Build your format. Validate the logic. Run the tournament.';$('statTeams').textContent=data.teams.length;$('statStages').textContent=data.stages.length;$('statMatches').textContent=data.fixtures.length;$('statDone').textContent=data.fixtures.filter(f=>f.status==='Completed').length;$('fixtureCount').textContent=data.fixtures.length+' fixtures'}
+function fillDetails(){['tName','tEdition','tVenue','tDesc'].forEach((id,i)=>$(id).value=[data.meta.name,data.meta.edition,data.meta.venue,data.meta.desc][i]);$('squadSize').value=data.squadSize}
+$('saveDetails').onclick=()=>{data.meta={name:$('tName').value.trim()||'Untitled tournament',edition:$('tEdition').value,venue:$('tVenue').value,desc:$('tDesc').value};save();toast('Tournament details saved')};
+function renderTeams(){$('teamList').innerHTML=data.teams.map(t=>`<div class="team-row"><span class="swatch" style="background:${esc(t.color)}"></span><div class="team-main"><strong>${esc(t.name)}</strong><small>${esc(t.captain||'Captain not set')} · ${(t.players||[]).length} players</small></div><button class="btn small" onclick="selectTeam('${t.id}')">Edit</button></div>`).join('')||'<div class="empty">No teams added yet.</div>';if(selectedTeam&&!data.teams.some(t=>t.id===selectedTeam))selectedTeam=null;if(!selectedTeam&&data.teams.length)selectedTeam=data.teams[0].id;renderTeamEditor()}
+function selectTeam(id){selectedTeam=id;renderTeamEditor()}
+function renderTeamEditor(){let t=data.teams.find(x=>x.id===selectedTeam);if(!t){$('teamEditor').innerHTML='<div class="empty">Select a team to edit its details and squad.</div>';return}$('teamEditor').innerHTML=`<div class="field"><label>Team name</label><input id="editTeamName" value="${esc(t.name)}"></div><div class="formgrid"><div class="field"><label>Captain</label><input id="editCaptain" value="${esc(t.captain)}"></div><div class="field"><label>Team colour</label><input id="editColor" type="color" value="${esc(t.color)}" style="height:39px;padding:4px"></div></div><div class="field"><label>Squad players · one name per line</label><textarea id="editPlayers" rows="9">${esc((t.players||[]).join('\n'))}</textarea></div><div class="row between"><button class="btn primary" onclick="saveTeam('${t.id}')">Save team</button><button class="btn danger" onclick="deleteTeam('${t.id}')">Delete team</button></div><p class="muted" style="font-size:11px">Target squad size: ${data.squadSize}. Squad size is advisory; incomplete squads are allowed while designing.</p>`}
+function saveTeam(id){let t=data.teams.find(x=>x.id===id);t.name=$('editTeamName').value.trim()||'Unnamed team';t.captain=$('editCaptain').value;t.color=$('editColor').value;t.players=$('editPlayers').value.split('\n').map(x=>x.trim()).filter(Boolean);save();renderTeams();toast('Team saved')}
+function deleteTeam(id){if(!confirm('Delete this team? Fixtures using it may need to be updated.'))return;data.teams=data.teams.filter(t=>t.id!==id);selectedTeam=null;save();renderTeams()}
+$('squadSize').onchange=()=>{data.squadSize=Math.max(1,+$('squadSize').value||1);save()};$('addTeam').onclick=()=>{let t={id:uid(),name:'New team',captain:'',color:'#6689ad',players:[]};data.teams.push(t);selectedTeam=t.id;save();renderTeams()};
+const typeLabel=t=>({group:'Group stage',league:'League stage',knockout:'Knockout round',final:'Final',placement:'Placement',custom:'Custom stage'}[t]||t);
+function renderFormat(){if(mode==='visual')renderCanvas();else renderStructured();renderInspector()}
+function renderCanvas(){let nodes=$('nodes');nodes.innerHTML=data.stages.map(s=>`<div class="node ${selectedStage===s.id?'selected':''}" data-id="${s.id}" style="left:${Math.max(0,+s.x||0)}px;top:${Math.max(0,+s.y||0)}px"><div class="node-type">${typeLabel(s.type)}</div><strong>${esc(s.name)}</strong><small>${s.type==='group'||s.type==='league'?`${s.groupCount||1} group(s) · ${s.teamsPerGroup||data.teams.length} teams/group · ${s.qualify??2} qualify`:s.type==='knockout'||s.type==='final'?`${s.matchCount||1} match(es) · ${esc(s.participants||'Participants TBD')}`:esc(s.description||'Configure this stage')}</small><div class="node-actions"><button class="btn small" onclick="event.stopPropagation();selectStage('${s.id}')">Edit</button><button class="btn small" onclick="event.stopPropagation();connectStage('${s.id}')">Connect</button></div></div>`).join('');const maxX=Math.max(760,...data.stages.map(s=>(+s.x||0)+210)),maxY=Math.max(390,...data.stages.map(s=>(+s.y||0)+150));$('canvas').style.minWidth=maxX+'px';$('canvas').style.minHeight=maxY+'px';nodes.querySelectorAll('.node').forEach(n=>{n.addEventListener('click',()=>{if(n.dataset.moved)return;selectStage(n.dataset.id)});n.addEventListener('pointerdown',startDrag)});drawConnectors()}
+function drawConnectors(){let svg=$('connectors');svg.innerHTML='';let canvas=$('canvas');svg.setAttribute('width',canvas.scrollWidth);svg.setAttribute('height',canvas.scrollHeight);data.stages.forEach(s=>(s.connections||[]).forEach(id=>{let d=data.stages.find(x=>x.id===id);if(!d)return;let x1=(s.x||0)+190,y1=(s.y||0)+55,x2=(d.x||0),y2=(d.y||0)+55,mid=(x1+x2)/2;let p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',`M ${x1} ${y1} C ${mid} ${y1}, ${mid} ${y2}, ${x2} ${y2}`);svg.appendChild(p)}))}
+function startDrag(e){if(e.target.closest('button'))return;let el=e.currentTarget,id=el.dataset.id,s=data.stages.find(x=>x.id===id),sx=e.clientX,sy=e.clientY,ox=s.x||0,oy=s.y||0,moved=false;try{el.setPointerCapture(e.pointerId)}catch(_){}function move(ev){const dx=ev.clientX-sx,dy=ev.clientY-sy;if(Math.abs(dx)+Math.abs(dy)>3)moved=true;s.x=Math.max(0,ox+dx);s.y=Math.max(0,oy+dy);el.style.left=s.x+'px';el.style.top=s.y+'px';drawConnectors()}function up(){el.removeEventListener('pointermove',move);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);if(moved){save();el.dataset.moved='1';setTimeout(()=>delete el.dataset.moved,80)}}el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)}
+function selectStage(id){selectedStage=id;renderCanvas();renderInspector();renderStructured()}
+function renderInspector(){let s=data.stages.find(x=>x.id===selectedStage);let html=s?stageForm(s):'<div class="empty">Select a stage to configure it.</div>';const visual=$('stageInspector'),structured=$('structuredInspector');if(mode==='structured'){if(visual)visual.innerHTML='';if(structured)structured.innerHTML=html}else{if(structured)structured.innerHTML='';if(visual)visual.innerHTML=s?html:'<div class="empty">Select a stage on the canvas.</div>'}}
+function sourceOptions(excludeStage,currentMatch){let opts=[{value:'',label:'Choose participant source'}];data.stages.filter(x=>(x.type==='group'||x.type==='league')).forEach(gs=>{let groups=Math.max(1,+gs.groupCount||1),places=Math.max(1,+gs.teamsPerGroup||data.teams.length);for(let g=1;g<=groups;g++)for(let r=1;r<=places;r++){let letter=String.fromCharCode(64+g);opts.push({value:`g|${gs.id}|${g}|${r}`,label:`${gs.name} · ${letter}${r} (${r}${r===1?'st':r===2?'nd':r===3?'rd':'th'} place)`})}});data.stages.filter(x=>x.type!=='group'&&x.type!=='league').forEach(ms=>{let count=Math.max(1,+ms.matchCount||1);for(let i=0;i<count;i++){if(ms.id===excludeStage&&i>=currentMatch)continue;opts.push({value:`w|${ms.id}|${i}`,label:`${ms.name} · Match ${i+1} winner`});opts.push({value:`l|${ms.id}|${i}`,label:`${ms.name} · Match ${i+1} loser`})}});return opts}
+function stageForm(s){let isGroup=s.type==='group'||s.type==='league';let matches=Math.max(1,+s.matchCount||1),defs=Array.from({length:matches},(_,i)=>(s.matchDefs||[])[i]||{label:`Match ${i+1}`,a:'',b:''});return `<div class="field"><label>Stage name</label><input id="stName" value="${esc(s.name)}"></div><div class="field"><label>Stage type</label><select id="stType">${['group','league','knockout','final','placement','custom'].map(x=>`<option value="${x}" ${s.type===x?'selected':''}>${typeLabel(x)}</option>`).join('')}</select></div>${isGroup?`<div class="formgrid"><div class="field"><label>Number of groups</label><input id="stGroups" type="number" min="1" value="${s.groupCount||1}"></div><div class="field"><label>Teams per group</label><input id="stTeams" type="number" min="2" value="${s.teamsPerGroup||data.teams.length}"></div><div class="field"><label>Round robin</label><select id="stRounds"><option value="single" ${s.rounds!=='double'?'selected':''}>Single round</option><option value="double" ${s.rounds==='double'?'selected':''}>Double round</option></select></div><div class="field"><label>Qualifiers per group</label><input id="stQualify" type="number" min="0" value="${s.qualify??2}"></div></div><div class="field"><label>Qualification rule</label><input id="stQualRule" value="${esc(s.qualifyRule||'Top teams from each group')}"></div><div class="route-editor"><b style="font-size:11px">Group-position destinations</b><p class="muted" style="font-size:10px;margin:4px 0 8px">Optional stage-level overview. Exact match slots are configured in each knockout stage.</p>${Array.from({length:Math.max(0,(s.qualify||0)*(s.groupCount||1))},(_,i)=>{let g=Math.floor(i/(s.qualify||1)),r=i%(s.qualify||1)+1,key=`${g+1}-${r}`,dest=(s.rankRoutes||{})[key]||((s.connections||[]).length===1?s.connections[0]:'');return `<div class="route-row"><span style="font-size:11px">Group ${String.fromCharCode(65+g)} · ${r}${r===1?'st':r===2?'nd':r===3?'rd':'th'} place</span><select onchange="setRankRoute('${s.id}','${key}',this.value)"><option value="">Choose destination</option>${(s.connections||[]).map(id=>data.stages.find(x=>x.id===id)).filter(Boolean).map(d=>`<option value="${d.id}" ${dest===d.id?'selected':''}>${esc(d.name)}</option>`).join('')}</select></div>`}).join('')||'<div class="muted" style="font-size:10px">Set qualifiers per group to configure rank paths.</div>'}</div>`:`<div class="field"><label>Number of matches / ties</label><input id="stMatches" type="number" min="1" value="${matches}"></div><div class="field"><label>Participant source note</label><textarea id="stParticipants">${esc(s.participants||'Configure each participant slot below.')}</textarea></div><div class="route-editor"><b style="font-size:11px">Match-by-match participants</b><p class="muted" style="font-size:10px;margin:4px 0 8px">Choose the exact source for both sides of every match. Group positions and earlier match winners / losers are available.</p>${defs.map((m,i)=>{let opts=sourceOptions(s.id,i);return `<div class="match-config"><div class="match-config-head">${esc(m.label||`Match ${i+1}`)}</div><div class="field"><label>Match label</label><input id="matchLabel${i}" value="${esc(m.label||`Match ${i+1}`)}"></div><div class="field"><label>Participant 1</label><select id="matchA${i}">${opts.map(o=>`<option value="${esc(o.value)}" ${m.a===o.value?'selected':''}>${esc(o.label)}</option>`).join('')}</select></div><div class="field"><label>Participant 2</label><select id="matchB${i}">${opts.map(o=>`<option value="${esc(o.value)}" ${m.b===o.value?'selected':''}>${esc(o.label)}</option>`).join('')}</select></div></div>`}).join('')}</div>`}<div class="field"><label>Notes / custom rules</label><textarea id="stDesc">${esc(s.description||'')}</textarea></div><div class="field"><label>Progression connects to</label><div class="muted" style="font-size:11px">${(s.connections||[]).map(id=>data.stages.find(x=>x.id===id)?.name||'Missing stage').join(' → ')||'No outgoing connection'}</div></div><div class="row wrap"><button class="btn primary" onclick="saveStage('${s.id}')">Save stage</button><button class="btn" onclick="connectStage('${s.id}')">Connect</button><button class="btn danger" onclick="deleteStage('${s.id}')">Delete</button></div>`}
+function setRankRoute(id,key,dest){let s=data.stages.find(x=>x.id===id);s.rankRoutes=s.rankRoutes||{};if(dest){s.rankRoutes[key]=dest;s.connections=s.connections||[];if(!s.connections.includes(dest))s.connections.push(dest)}else delete s.rankRoutes[key];save();renderFormat();renderBracket()}
+function saveStage(id){let s=data.stages.find(x=>x.id===id);s.name=$('stName').value.trim()||'Untitled stage';s.type=$('stType').value;s.description=$('stDesc').value;if(s.type==='group'||s.type==='league'){s.groupCount=Math.max(1,+$('stGroups').value||1);s.teamsPerGroup=Math.max(2,+$('stTeams').value||2);s.rounds=$('stRounds').value;s.qualify=Math.max(0,+$('stQualify').value||0);s.qualifyRule=$('stQualRule').value}else{s.matchCount=Math.max(1,+$('stMatches').value||1);s.participants=$('stParticipants').value;s.matchDefs=Array.from({length:s.matchCount},(_,i)=>({label:$(`matchLabel${i}`)?.value||`Match ${i+1}`,a:$(`matchA${i}`)?.value||'',b:$(`matchB${i}`)?.value||''}))}save();renderFormat();renderBracket();toast('Stage updated')}
+function addStagePrompt(){openModal('Add tournament stage',`<div class="field"><label>Stage name</label><input id="newStageName" value="New stage"></div><div class="field"><label>Stage type</label><select id="newStageType"><option value="group">Group stage</option><option value="league">League stage</option><option value="knockout">Knockout round</option><option value="final">Final</option><option value="placement">Placement</option><option value="custom">Custom stage</option></select></div><button class="btn primary" onclick="createStage()">Add stage</button>`)}
+function createStage(){let s={id:uid(),name:$('newStageName').value||'New stage',type:$('newStageType').value,x:50+(data.stages.length%3)*260,y:80+Math.floor(data.stages.length/3)*150,connections:[],groupCount:1,teamsPerGroup:Math.max(2,data.teams.length),rounds:'single',qualify:2,matchCount:1,participants:'Configure each participant slot.',matchDefs:[{label:'Match 1',a:'',b:''}]};data.stages.push(s);selectedStage=s.id;save();closeModal();renderFormat();toast('Stage added')}
+function addStage(){addStagePrompt()}function deleteStage(id){if(!confirm('Delete this stage and its connections?'))return;data.stages=data.stages.filter(s=>s.id!==id);data.stages.forEach(s=>s.connections=(s.connections||[]).filter(x=>x!==id));selectedStage=null;save();renderFormat();renderBracket()}
+function connectStage(id){let s=data.stages.find(x=>x.id===id);openModal('Connect stage',`<p class="muted" style="font-size:12px">Choose the stage that receives qualifiers, winners or output from <b>${esc(s.name)}</b>.</p><div class="field"><label>Destination stage</label><select id="connectDest">${data.stages.filter(x=>x.id!==id).map(x=>`<option value="${x.id}">${esc(x.name)} · ${typeLabel(x.type)}</option>`).join('')}</select></div><button class="btn primary" onclick="applyConnection('${id}')">Connect stages</button><button class="btn" onclick="clearConnections('${id}')">Clear outgoing connections</button>`)}
+function applyConnection(id){let dest=$('connectDest').value;if(!dest)return;let s=data.stages.find(x=>x.id===id);s.connections=s.connections||[];if(!s.connections.includes(dest))s.connections.push(dest);save();closeModal();renderFormat();toast('Progression connected')}
+function clearConnections(id){data.stages.find(x=>x.id===id).connections=[];save();closeModal();renderFormat()}
+function setMode(m){mode=m;const tabs=$('formatModeTabs');tabs.classList.toggle('visual-active',m==='visual');tabs.classList.toggle('structured-active',m==='structured');$('visualEditor').classList.toggle('hidden',m!=='visual');$('structuredEditor').classList.toggle('hidden',m!=='structured');$('visualMode').classList.toggle('active',m==='visual');$('structuredMode').classList.toggle('active',m==='structured');$('visualMode').setAttribute('aria-selected',String(m==='visual'));$('structuredMode').setAttribute('aria-selected',String(m==='structured'));renderFormat()}$('addStage').addEventListener('click',addStagePrompt);
+function renderStructured(){const host=$('stageList');host.innerHTML=data.stages.map((s,i)=>`<div class="stage-row" draggable="true" data-stage-id="${s.id}" aria-label="${esc(s.name)}, position ${i+1}. Drag to reorder"><span class="stage-drag-handle" aria-hidden="true" title="Drag to reorder">⠿</span><div class="team-main"><strong>${esc(s.name)}</strong><small>${typeLabel(s.type)}</small></div><span class="pill">${i+1}</span><button class="btn small" onclick="selectStage('${s.id}')">Configure</button></div>`).join('')||'<div class="empty">No stages added.</div>';let dragged=null;host.querySelectorAll('.stage-row').forEach(row=>{row.addEventListener('dragstart',e=>{dragged=row;row.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',row.dataset.stageId)});row.addEventListener('dragover',e=>{if(!dragged||dragged===row)return;e.preventDefault();row.classList.add('drag-over');e.dataTransfer.dropEffect='move'});row.addEventListener('dragleave',()=>row.classList.remove('drag-over'));row.addEventListener('drop',e=>{e.preventDefault();row.classList.remove('drag-over');if(!dragged||dragged===row)return;const from=data.stages.findIndex(x=>x.id===dragged.dataset.stageId),to=data.stages.findIndex(x=>x.id===row.dataset.stageId);if(from<0||to<0)return;const oldRects=new Map(Array.from(host.children).map(el=>[el.dataset.stageId,el.getBoundingClientRect()]));const [item]=data.stages.splice(from,1);data.stages.splice(to,0,item);save();renderStructured();renderCanvas();renderBracket();host.querySelectorAll('.stage-row').forEach(el=>{const old=oldRects.get(el.dataset.stageId);if(!old)return;const now=el.getBoundingClientRect(),dx=old.left-now.left,dy=old.top-now.top;if(dx||dy){el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'translate(0,0)'}],{duration:280,easing:'cubic-bezier(.2,.8,.2,1)'})}});toast('Stage order updated')});row.addEventListener('dragend',()=>{row.classList.remove('dragging');host.querySelectorAll('.stage-row').forEach(x=>x.classList.remove('drag-over'));dragged=null})})}
+$('autoArrange').onclick=()=>{data.stages.forEach((s,i)=>{s.x=35+(i%3)*255;s.y=55+Math.floor(i/3)*170});save();renderCanvas()};
+function validateTournament(){let issues=[];if(data.teams.length<2)issues.push(['error','At least two teams are required.']);if(!data.stages.length)issues.push(['error','Add at least one tournament stage.']);let groups=data.stages.filter(s=>s.type==='group'||s.type==='league');groups.forEach(s=>{if(s.teamsPerGroup<2)issues.push(['error',`${s.name}: a group needs at least two teams.`]);if(s.qualify>s.teamsPerGroup)issues.push(['error',`${s.name}: qualifiers per group exceed teams per group.`]);if(s.groupCount*s.teamsPerGroup>data.teams.length)issues.push(['warning',`${s.name}: configured group capacity exceeds the number of registered teams.`]);if(s.qualify*s.groupCount<2&&data.stages.some(x=>x.type==='knockout'||x.type==='final'))issues.push(['error',`${s.name}: fewer than two teams qualify for the knockout phase.`])});data.stages.forEach(s=>{(s.connections||[]).forEach(id=>{if(!data.stages.some(x=>x.id===id))issues.push(['error',`${s.name}: connection points to a missing stage.`])});if((s.type==='knockout'||s.type==='final')&&!s.participants?.trim())issues.push(['error',`${s.name}: participant source is missing.`]);if(!(s.connections||[]).length&&s.type!=='final'&&data.stages.length>1)issues.push(['warning',`${s.name}: no outgoing progression connection.`])});let incoming=new Set(data.stages.flatMap(s=>s.connections||[]));if(data.stages.length&&!data.stages.some(s=>!incoming.has(s.id)))issues.push(['error','No starting stage found; every stage has an incoming connection.']);let finals=data.stages.filter(s=>s.type==='final');if(!finals.length)issues.push(['warning','No stage is marked as the final.']);if(!issues.length)issues.push(['ok','No structural issues found. Your format is ready for fixture setup.']);let html=issues.map(([type,msg])=>`<div class="check ${type==='ok'?'':type}"><span class="dot"></span><div><b>${type==='ok'?'Passed':type==='error'?'Error': 'Warning'}</b>${esc(msg)}</div></div>`).join('');$('formatValidation').innerHTML=html;$('overviewValidation').innerHTML=html;toast(issues.some(x=>x[0]==='error')?'Validation found errors':'Validation complete');return issues}
+function groupFixtures(stage){let n=stage.teamsPerGroup||data.teams.length,g=stage.groupCount||1,teams=data.teams.slice(0,n*g);let groups=Array.from({length:g},(_,i)=>teams.slice(i*n,(i+1)*n));let made=[];groups.forEach((arr,gi)=>{for(let i=0;i<arr.length;i++)for(let j=i+1;j<arr.length;j++){made.push({id:uid(),label:`${stage.name} · G${gi+1}`,stageId:stage.id,teamA:arr[i].id,teamB:arr[j].id,date:'',time:'',venue:data.meta.venue||'',scoreA:'',scoreB:'',allOutA:false,allOutB:false,oversLimit:(+data.rules.overs||10),status:'Scheduled',winner:null,round:1});if(stage.rounds==='double')made.push({id:uid(),label:`${stage.name} · G${gi+1}`,stageId:stage.id,teamA:arr[j].id,teamB:arr[i].id,date:'',time:'',venue:data.meta.venue||'',scoreA:'',scoreB:'',allOutA:false,allOutB:false,oversLimit:(+data.rules.overs||10),status:'Scheduled',winner:null,round:2})}});return made}
+function generateFixtures(){let stages=data.stages.filter(s=>s.type==='group'||s.type==='league');if(!stages.length){toast('No group or league stage configured');return}stages.forEach(s=>{let existing=data.fixtures.some(f=>f.stageId===s.id);if(existing){if(!confirm(`Fixtures already exist for ${s.name}. Replace them?`))return;data.fixtures=data.fixtures.filter(f=>f.stageId!==s.id)}data.fixtures.push(...groupFixtures(s))});save();renderFixtures();toast('Group fixtures generated')}
+function addFixture(){let f={id:uid(),label:'Manual fixture',stageId:data.stages.find(s=>s.type==='group'||s.type==='league')?.id||'',teamA:data.teams[0]?.id||'',teamB:data.teams[1]?.id||'',date:'',time:'',venue:data.meta.venue||'',scoreA:'',scoreB:'',allOutA:false,allOutB:false,oversLimit:(+data.rules.overs||10),status:'Scheduled',winner:null};data.fixtures.push(f);save();renderFixtures()}
+function teamName(id){return data.teams.find(t=>t.id===id)?.name||'TBD'}
+function scoreRuns(score){let m=String(score??'').trim().match(/^(\d+)/);return m?Number(m[1]):0}
+function positionFixtureStageSlider(tab){const bar=$('fixtureStageTabs');if(!bar)return;bar.classList.toggle('group-active',tab==='group');bar.classList.toggle('knockout-active',tab==='knockout')}
+function switchFixtureTab(tab){const group=tab==='group';$('groupStagePane').classList.toggle('hidden',!group);$('knockoutStagePane').classList.toggle('hidden',group);$('groupStageTab').classList.toggle('active',group);$('knockoutStageTab').classList.toggle('active',!group);$('groupStageTab').setAttribute('aria-selected',String(group));$('knockoutStageTab').setAttribute('aria-selected',String(!group));positionFixtureStageSlider(tab);if(!group)renderKnockoutRounds()}
+function renderFixtures(){let groupStages=data.stages.filter(s=>s.type==='group'||s.type==='league').map(s=>s.id);let groupFixturesList=data.fixtures.filter(f=>groupStages.includes(f.stageId)||!data.stages.some(s=>s.id===f.stageId));$('fixtureRows').innerHTML=groupFixturesList.map(f=>{let stage=data.stages.find(s=>s.id===f.stageId)?.name||'Manual';let a=teamName(f.teamA),b=teamName(f.teamB);return `<article class="fixture-card group-stage-match"><div class="fixture-card-head"><div><strong>${esc(f.label||'Match')}</strong></div><span class="pill ${f.status==='Completed'?'ok':f.status==='Live'?'warn':''}">${esc(f.status||'Scheduled')}</span></div><div class="fixture-scoreboard"><div class="fixture-side"><b>${esc(a)}</b><label>Innings 1</label><input aria-label="${esc(a)} innings score" type="text" inputmode="text" placeholder="145/6 (20 ov)" value="${esc(f.scoreA)}" onchange="updateFixture('${f.id}','scoreA',this.value)"><div class="innings-extra"><label><input type="checkbox" ${f.allOutA?'checked':''} onchange="updateFixture('${f.id}','allOutA',this.checked)"> All out</label></div></div><div class="fixture-vs">VS</div><div class="fixture-side"><b>${esc(b)}</b><label>Innings 1</label><input aria-label="${esc(b)} innings score" type="text" inputmode="text" placeholder="142/8 (20 ov)" value="${esc(f.scoreB)}" onchange="updateFixture('${f.id}','scoreB',this.value)"><div class="innings-extra"><label><input type="checkbox" ${f.allOutB?'checked':''} onchange="updateFixture('${f.id}','allOutB',this.checked)"> All out</label></div></div></div><div class="fixture-meta-grid"><label class="overs-limit-field">Overs / innings<input type="number" min="1" step="1" value="${esc(f.oversLimit??data.rules.overs??10)}" onchange="updateFixture('${f.id}','oversLimit',this.value)"></label><label>Date<input type="date" value="${esc(f.date)}" onchange="updateFixture('${f.id}','date',this.value)"></label><label>Time<input type="time" value="${esc(f.time)}" onchange="updateFixture('${f.id}','time',this.value)"></label><label class="venue-field">Venue<input value="${esc(f.venue)}" placeholder="Ground / venue" onchange="updateFixture('${f.id}','venue',this.value)"></label><label>Status<select onchange="setFixtureStatus('${f.id}',this.value)"><option ${f.status==='Scheduled'?'selected':''}>Scheduled</option><option ${f.status==='Live'?'selected':''}>Live</option><option ${f.status==='Completed'?'selected':''}>Completed</option><option ${f.status==='Abandoned'?'selected':''}>Abandoned</option></select></label></div><div class="fixture-card-actions"><button class="btn small danger" onclick="deleteFixture('${f.id}')">Delete fixture</button></div></article>`}).join('');$('scheduleEmpty').classList.toggle('hidden',groupFixturesList.length>0);renderStandings();renderKnockoutRounds();renderStats()}
+function addKnockoutStage(){let name=prompt('Name this knockout round (e.g. Quarter-finals, Semi-finals or Final):','Quarter-finals');if(!name||!name.trim())return;let clean=name.trim(),type=/^final$/i.test(clean)?'final':'knockout';let st={id:uid(),name:clean,type,matchCount:0,participants:'Select teams for each match',matchDefs:[],connections:[]};data.stages.push(st);save();renderKnockoutRounds();renderBracket();toast(`${clean} round created`)}
+function addKnockoutFixture(stageId){let st=data.stages.find(s=>s.id===stageId);if(!st)return;let count=data.fixtures.filter(f=>f.stageId===stageId).length;let f={id:uid(),label:`${st.name} · Match ${count+1}`,stageId,teamA:'',teamB:'',date:'',time:'',venue:data.meta.venue||'',scoreA:'',scoreB:'',allOutA:false,allOutB:false,oversLimit:(+data.rules.overs||10),status:'Scheduled',winner:null};data.fixtures.push(f);st.matchCount=Math.max(+st.matchCount||0,count+1);st.matchDefs=st.matchDefs||[];if(!st.matchDefs[count])st.matchDefs[count]={label:f.label,a:'',b:''};save();renderKnockoutRounds();renderBracket()}
+function knockoutTeamOptions(selected){return `<option value="">Select team</option>`+data.teams.map(t=>`<option value="${esc(t.id)}" ${t.id===selected?'selected':''}>${esc(t.name)}</option>`).join('')}
+function renderKnockoutRounds(){let rounds=data.stages.filter(s=>s.type==='knockout'||s.type==='final');$('knockoutEmpty').classList.toggle('hidden',rounds.length>0);$('knockoutRounds').innerHTML=rounds.map(st=>{let matches=data.fixtures.filter(f=>f.stageId===st.id);return `<section class="card knockout-round-card ${st.type==='final'?'final-round':'knockout-round'}"><div class="knockout-round-head"><div><div class="eyebrow">${st.type==='final'?'Championship match':'Knockout round'}</div><h3>${esc(st.name)}</h3><small class="muted">${matches.length} match${matches.length===1?'':'es'}</small></div><div class="row wrap"><button class="btn small" onclick="addKnockoutFixture('${st.id}')">+ Add match</button><button class="btn small danger" onclick="deleteKnockoutStage('${st.id}')">Delete round</button></div></div><div class="knockout-round-matches">${matches.map((f,i)=>`<article class="fixture-card knockout-match-card ${st.type==='final'?'final-match':''}"><div class="fixture-card-head"><div><strong>${esc(f.label||`Match ${i+1}`)}</strong></div><span class="pill ${f.status==='Completed'?'ok':f.status==='Live'?'warn':''}">${esc(f.status||'Scheduled')}</span></div><div class="fixture-scoreboard"><div class="fixture-side"><label>Team A</label><select class="knockout-team-select" aria-label="Team A" onchange="updateKnockoutTeam('${f.id}','teamA',this.value)">${knockoutTeamOptions(f.teamA)}</select><label>Innings 1</label><input type="text" inputmode="text" placeholder="145/6 (20 ov)" value="${esc(f.scoreA)}" onchange="updateFixture('${f.id}','scoreA',this.value)"><div class="innings-extra"><label><input type="checkbox" ${f.allOutA?'checked':''} onchange="updateFixture('${f.id}','allOutA',this.checked)"> All out</label></div></div><div class="fixture-vs">VS</div><div class="fixture-side"><label>Team B</label><select class="knockout-team-select" aria-label="Team B" onchange="updateKnockoutTeam('${f.id}','teamB',this.value)">${knockoutTeamOptions(f.teamB)}</select><label>Innings 1</label><input type="text" inputmode="text" placeholder="142/8 (20 ov)" value="${esc(f.scoreB)}" onchange="updateFixture('${f.id}','scoreB',this.value)"><div class="innings-extra"><label><input type="checkbox" ${f.allOutB?'checked':''} onchange="updateFixture('${f.id}','allOutB',this.checked)"> All out</label></div></div></div><div class="fixture-meta-grid"><label class="overs-limit-field">Overs / innings<input type="number" min="1" step="1" value="${esc(f.oversLimit??data.rules.overs??10)}" onchange="updateFixture('${f.id}','oversLimit',this.value)"></label><label>Date<input type="date" value="${esc(f.date)}" onchange="updateFixture('${f.id}','date',this.value)"></label><label>Time<input type="time" value="${esc(f.time)}" onchange="updateFixture('${f.id}','time',this.value)"></label><label class="venue-field">Venue<input value="${esc(f.venue)}" placeholder="Ground / venue" onchange="updateFixture('${f.id}','venue',this.value)"></label><label>Status<select onchange="setFixtureStatus('${f.id}',this.value)"><option ${f.status==='Scheduled'?'selected':''}>Scheduled</option><option ${f.status==='Live'?'selected':''}>Live</option><option ${f.status==='Completed'?'selected':''}>Completed</option><option ${f.status==='Abandoned'?'selected':''}>Abandoned</option></select></label></div><div class="fixture-card-actions"><button class="btn small danger" onclick="deleteFixture('${f.id}')">Delete match</button></div></article>`).join('')||'<div class="empty">No matches in this round yet. Add a match to set up the pairings.</div>'}</div></section>`}).join('')}
+function updateKnockoutTeam(id,key,value){let f=data.fixtures.find(x=>x.id===id);if(!f)return;f[key]=value;f.winner=null;save();renderKnockoutRounds();renderBracket()}
+function deleteKnockoutStage(id){if(!confirm('Delete this knockout round and all its matches?'))return;data.fixtures=data.fixtures.filter(f=>f.stageId!==id);data.stages=data.stages.filter(s=>s.id!==id);data.stages.forEach(s=>s.connections=(s.connections||[]).filter(x=>x!==id));save();renderKnockoutRounds();renderBracket();renderStats()}
+
+function renderStandings(){let stages=data.stages.filter(s=>s.type==='group'||s.type==='league');$('standingsWrap').innerHTML=stages.map(s=>{let gs=groupQualifiers(s);return `<h3 style="margin:14px 0 8px">${esc(s.name)} · Tables</h3><div class="grid cols${Math.min(2,gs.length)}">${gs.map(g=>`<div style="overflow:auto"><div class="eyebrow" style="margin-bottom:5px">Group ${g.group}</div><table class="schedule-table"><thead><tr><th>Team</th><th>P</th><th>W</th><th>Pts</th><th>NRR</th></tr></thead><tbody>${g.table.map(t=>{let nrr=t.ballsFor&&t.ballsAgainst?((t.runsFor*6/t.ballsFor)-(t.runsAgainst*6/t.ballsAgainst)):0;return `<tr><td>${esc(teamName(t.id))}</td><td>${t.played}</td><td>${t.wins}</td><td><b>${t.points}</b></td><td class="nrr-cell ${nrr>0?'nrr-positive':nrr<0?'nrr-negative':''}">${t.ballsFor&&t.ballsAgainst?(nrr>0?'+':'')+nrr.toFixed(3):'—'}</td></tr>`}).join('')}</tbody></table></div>`).join('')}</div>`}).join('')}
+function updateFixture(id,k,v){let f=data.fixtures.find(x=>x.id===id);if(!f)return;f[k]=v;save();if(['scoreA','scoreB','allOutA','allOutB','oversLimit'].includes(k)){renderStandings();renderStats();return}renderFixtures()}
+function setFixtureStatus(id,status){let f=data.fixtures.find(x=>x.id===id);f.status=status;if(status==='Completed'){let a=scoreRuns(f.scoreA),b=scoreRuns(f.scoreB);if(!f.teamA||!f.teamB||f.teamA===f.teamB||f.scoreA===''||f.scoreB===''||a===b){f.status='Scheduled';toast('Select two different teams, enter both scores; tied matches need a winner recorded by a tie-break.')}else{f.winner=a>b?f.teamA:f.teamB;advanceWinner(f)}}save();renderFixtures();renderKnockoutRounds();renderBracket()}
+function oversToBalls(value){let m=String(value??'').trim().match(/^(\d+)(?:\.(\d))?$/);if(!m)return 0;let balls=Number(m[1])*6+Number(m[2]||0);return Number(m[2]||0)>5?0:balls}
+function inningsData(f,side){let score=String(f['score'+side]??'').trim(),runs=scoreRuns(score),m=score.match(/(?:\(|\b)(\d+)(?:\.(\d))?\s*(?:ov|overs?)\b/i),overs=m?m[1]+(m[2]?'.'+m[2]:''):'';let balls=oversToBalls(overs),quota=oversToBalls(String(f.oversLimit??data.rules.overs??10));if(f['allOut'+side])balls=quota;return {runs,balls,valid:!!score&&balls>0&&quota>0}}
+function groupQualifiers(stage){let fs=data.fixtures.filter(f=>f.stageId===stage.id),groups={};fs.forEach(f=>{let m=(f.label||'').match(/G(\d+)/),g=m?m[1]:'1';groups[g]=groups[g]||{};[f.teamA,f.teamB].forEach(id=>{if(!id)return;groups[g][id]=groups[g][id]||{id,played:0,wins:0,points:0,runsFor:0,runsAgainst:0,ballsFor:0,ballsAgainst:0}});if(f.status==='Completed'){let a=groups[g][f.teamA],b=groups[g][f.teamB];if(!a||!b)return;let ia=inningsData(f,'A'),ib=inningsData(f,'B');a.played++;b.played++;a.runsFor+=ia.runs;a.runsAgainst+=ib.runs;b.runsFor+=ib.runs;b.runsAgainst+=ia.runs;if(ia.valid&&ib.valid){a.ballsFor+=ia.balls;a.ballsAgainst+=ib.balls;b.ballsFor+=ib.balls;b.ballsAgainst+=ia.balls}if(ia.runs>ib.runs){a.wins++;a.points+=data.rules.win;b.points+=data.rules.loss}else{b.wins++;b.points+=data.rules.win;a.points+=data.rules.loss}}});let out=[];Object.keys(groups).sort((a,b)=>+a-+b).forEach(g=>{let arr=Object.values(groups[g]).sort((a,b)=>{let an=a.ballsFor&&a.ballsAgainst?(a.runsFor*6/a.ballsFor-a.runsAgainst*6/a.ballsAgainst):-Infinity,bn=b.ballsFor&&b.ballsAgainst?(b.runsFor*6/b.ballsFor-b.runsAgainst*6/b.ballsAgainst):-Infinity;return b.points-a.points||b.wins-a.wins||bn-an||b.runsFor-a.runsFor});arr.forEach((x,i)=>x.rank=i+1);out.push({group:g,table:arr,qualifiers:arr.slice(0,stage.qualify||0)})});return out}
+function progressStage(source,dest){if(data.fixtures.some(f=>f.stageId===dest.id))return;let entrants=[];if(source.type==='group'||source.type==='league'){groupQualifiers(source).forEach(g=>g.qualifiers.forEach(x=>entrants.push(x.id)))}else{entrants=(source.advancers||[]).map(x=>x.teamId)}if(!entrants.length)return;let needed=(dest.matchCount||Math.ceil(entrants.length/2));let made=[];for(let i=0;i<Math.min(needed,Math.floor(entrants.length/2));i++){made.push({id:uid(),label:dest.name,stageId:dest.id,teamA:entrants[i*2],teamB:entrants[i*2+1],date:'',time:'',venue:data.meta.venue||'',scoreA:'',scoreB:'',allOutA:false,allOutB:false,oversLimit:(+data.rules.overs||10),status:'Scheduled',winner:null})}if(made.length){data.fixtures.push(...made);toast(`${made.length} ${dest.name} fixture(s) created from qualifiers`)}}
+function deleteFixture(id){data.fixtures=data.fixtures.filter(f=>f.id!==id);data.stages.forEach(s=>s.advancers=(s.advancers||[]).filter(x=>x.fromMatch!==id));save();renderFixtures();renderBracket()}
+function parseSource(token){if(!token)return null;let p=token.split('|');return {kind:p[0],stageId:p[1],group:+p[2]||1,rank:+p[3]||0,match:+p[2]||0}}
+function groupPosition(stageId,group,rank){let st=data.stages.find(x=>x.id===stageId);if(!st)return null;let table=groupQualifiers(st).find(x=>+x.group===group)?.table||[];if(table.length)return table.find(x=>x.rank===rank)||null;let n=Math.max(1,+st.teamsPerGroup||data.teams.length),team=data.teams.slice((group-1)*n,group*n)[rank-1];return team?{id:team.id,rank}:null}
+function sourceDisplay(token){let p=parseSource(token);if(!p)return 'Choose participant';let st=data.stages.find(x=>x.id===p.stageId);if(!st)return 'Source unavailable';if(p.kind==='g'){let row=groupPosition(p.stageId,p.group,p.rank),letter=String.fromCharCode(64+p.group),name=row?teamName(row.id):'';return `${letter}${p.rank}${name?' · '+name:''}`}let f=data.fixtures.filter(x=>x.stageId===p.stageId)[p.match],who=p.kind==='w'?'Winner':'Loser';if(f){let teamId=p.kind==='w'?f.winner:(f.winner?(f.winner===f.teamA?f.teamB:f.teamA):null);if(teamId)return `${who} · ${teamName(teamId)}`}return `${who} · ${st.name} M${p.match+1}`}
+function renderBracket(){
+ const host=$('bracketContent');
+ if(!data.stages.length){host.innerHTML='<div class="empty">Add stages in Format Designer to build your tournament bracket.</div>';return;}
+ let html='<div class="bracket-flow" id="bracketFlow">';
+ data.stages.forEach((st,si)=>{
+  const groupStage=st.type==='group'||st.type==='league';
+  const klass=groupStage?'group':st.type==='final'?'final':st.type==='placement'?'placement':'knockout';
+  html+=`<section class="flow-column" data-stage-column="${esc(st.id)}"><div class="flow-column-title">STAGE ${si+1}</div><article class="flow-stage ${klass}" data-stage="${esc(st.id)}"><div class="eyebrow">${esc(typeLabel(st.type))}</div><h3>${esc(st.name)}</h3>`;
+  if(groupStage){
+   const n=Math.max(2,+st.teamsPerGroup||data.teams.length),g=Math.max(1,+st.groupCount||1),teams=data.teams.slice(0,n*g),tables=groupQualifiers(st);
+   html+=`<div class="flow-meta">${g} group${g===1?'':'s'} · ${n} teams each</div>`;
+   for(let gi=0;gi<g;gi++){
+    const groupTeams=teams.slice(gi*n,(gi+1)*n),table=tables.find(x=>+x.group===gi+1),ranked=table?.table?.length?table.table:groupTeams.map(t=>({id:t.id,points:0,rank:0}));
+    html+=`<div class="flow-group"><b>Group ${String.fromCharCode(65+gi)}</b><div class="flow-table-head"><span>Team</span><span>Points</span></div>`;
+    ranked.forEach((row,ri)=>{const rank=row.rank||ri+1,team=data.teams.find(t=>t.id===row.id),qual=rank<=(st.qualify||0);html+=`<div class="flow-team ${qual?'qualifier':'eliminated'}" data-rank-anchor="${esc(st.id)}-${gi+1}-${rank}"><span><i class="flow-rank">${rank}</i>${esc(team?.name||'Team TBD')}${qual?'<small class="flow-path-label">QUALIFIES</small>':''}</span><small>${row.points||0} pts</small></div>`;});
+    html+='</div>';
+   }
+  }else{
+   const count=Math.max(1,+st.matchCount||1);
+   for(let i=0;i<count;i++){
+    const f=data.fixtures.filter(x=>x.stageId===st.id)[i],m=(st.matchDefs||[])[i]||{label:`Match ${i+1}`,a:'',b:''};
+    let a=sourceDisplay(m.a),b=sourceDisplay(m.b);if(f){a=teamName(f.teamA);b=teamName(f.teamB)}
+    html+=`<div class="flow-match" data-match-anchor="${esc(st.id)}-${i}"><div class="flow-match-title">${esc(m.label||`Match ${i+1}`)}${f?.status==='Completed'?' · Completed':''}</div><div class="flow-participant" data-participant-slot="${esc(st.id+'-'+i+'-a')}"><span>${esc(a)}</span><small>${f&&f.scoreA!==''?esc(f.scoreA):'—'}</small></div><div class="flow-participant" data-participant-slot="${esc(st.id+'-'+i+'-b')}"><span>${esc(b)}</span><small>${f&&f.scoreB!==''?esc(f.scoreB):'—'}</small></div><div class="match-output-pair"><div class="match-output" data-match-output="${esc(st.id)}-${i}-w">WINNER</div><div class="match-output" data-match-output="${esc(st.id)}-${i}-l">LOSER</div></div></div>`;
+   }
+  }
+  html+='</article></section>';
+ });
+ html+='</div><p class="bracket-note">Stages are arranged in tournament order. Each stage contains its own group tables or match cards. Connector lines are intentionally omitted.</p>';
+ host.innerHTML=html;
+}
+
+function saveRules(){data.rules={ball:$('ballType').value,overType:$('overType').value,overs:+$('overs').value,players:+$('playersSide').value,powerplay:+$('powerplay').value,bowlerMax:+$('bowlerMax').value,conditions:$('conditions').value,win:+$('winPts').value,tie:+$('tiePts').value,loss:+$('lossPts').value,tiebreakers:$('tiebreakers').value};save();toast('Playing conditions saved')}$('saveRules').onclick=saveRules;$('savePoints').onclick=saveRules;
+function loadRules(){let r=data.rules;$('ballType').value=r.ball;$('overType').value=r.overType;$('overs').value=r.overs;$('playersSide').value=r.players;$('powerplay').value=r.powerplay;$('bowlerMax').value=r.bowlerMax;$('conditions').value=r.conditions;$('winPts').value=r.win;$('tiePts').value=r.tie;$('lossPts').value=r.loss;$('tiebreakers').value=r.tiebreakers}
+function openModal(title,body){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modal').classList.add('show')}function closeModal(){$('modal').classList.remove('show')}
+$('exportBtn').onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(data.meta.name||'tournament').replace(/[^a-z0-9]+/gi,'_')+'.json';a.click();URL.revokeObjectURL(a.href);toast('Tournament exported')};$('importBtn').onclick=()=>$('importFile').click();$('importFile').onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.teams||!x.stages||!x.meta)throw Error();data=x;save();init();toast('Tournament imported')}catch(err){alert('This file is not a valid Tournament Manager export.')}};r.readAsText(f);e.target.value=''};
+function init(){fillDetails();renderStats();renderTeams();renderFormat();renderFixtures();renderBracket();loadRules();positionFixtureStageSlider($('knockoutStageTab')?.classList.contains('active')?'knockout':'group',true);requestAnimationFrame(()=>positionFixtureStageSlider($('knockoutStageTab')?.classList.contains('active')?'knockout':'group',true))}window.addEventListener('resize',()=>{const active=$('knockoutStageTab')?.classList.contains('active')?'knockout':'group';positionFixtureStageSlider(active)});window.addEventListener('load',()=>{const active=$('knockoutStageTab')?.classList.contains('active')?'knockout':'group';positionFixtureStageSlider(active,true)});document.addEventListener('DOMContentLoaded',()=>positionFixtureStageSlider('group',true));init();
+</script>
+<script>
+// Shaktigarh Tournament Manager cloud sync · v1.0.36
+(()=>{
+ const SUPABASE_URL='https://apdnnvgxbmomgekfzpja.supabase.co';
+ const SUPABASE_KEY='sb_publishable_a2SohVdoEPsViTSCFsgqxg_y8FqzCb8';
+ const SLUG='main';
+ const $c=id=>document.getElementById(id);
+ let client=null,session=null,isOwner=false,cloudReady=false,saveTimer=null,loadingCloud=false;
+ const status=(heading,message,kind='')=>{$c('cloudHeading').textContent=heading;$c('cloudMessage').textContent=message;$c('cloudDot').className='cloud-dot'+(kind?' '+kind:'')};
+ const showOwner=owner=>{$c('cloudLoginControls').classList.toggle('hidden',owner);$c('cloudOwnerControls').classList.toggle('hidden',!owner);document.body.classList.toggle('public-view',!owner);};
+ const setSaved=(label)=>{const el=$c('saveState');if(el)el.textContent=label};
+ async function fetchPublished(){
+  const {data:row,error}=await client.from('tournament_published').select('data,version,published_at').eq('slug',SLUG).maybeSingle();
+  if(error)throw error;
+  if(row&&row.data){data=row.data;init();status('Latest published tournament','Public view · Published version '+(row.version??'available'),'online');return true;}
+  data=defaults();init();status('No tournament published yet','The public page is waiting for the owner to publish the first version.','');return false;
+ }
+ async function checkOwner(user){
+  const {data:row,error}=await client.from('tournament_admins').select('user_id').eq('user_id',user.id).maybeSingle();
+  if(error)throw error;
+  return !!row;
+ }
+ async function loadDraftOrSeed(user){
+  const {data:row,error}=await client.from('tournament_drafts').select('data').eq('slug',SLUG).eq('owner_id',user.id).maybeSingle();
+  if(error)throw error;
+  if(row&&row.data){data=row.data;init();status('Owner mode · Draft loaded','Your private draft is saved to Supabase. Publish when you are ready.','online');setSaved('Cloud draft loaded');}
+  else{
+   // First-time cloud migration: seed the new private draft from this browser's existing local tournament.
+   const local=(()=>{try{return JSON.parse(localStorage.getItem('shaktiTournament'))}catch(_){return null}})();
+   if(local&&local.meta&&local.teams&&local.stages)data=local;
+   const {error:upsertError}=await client.from('tournament_drafts').upsert({slug:SLUG,owner_id:user.id,data,updated_at:new Date().toISOString()},{onConflict:'slug,owner_id'});
+   if(upsertError)throw upsertError;
+   init();status('Owner mode · Draft created','Your existing browser tournament has been copied into a private cloud draft. Nothing has been published.','online');setSaved('Cloud draft saved');
+  }
+ }
+ async function syncSession(s){
+  session=s;isOwner=false;cloudReady=false;
+  if(s&&s.user){
+   try{const allowed=await checkOwner(s.user);if(!allowed){showOwner(false);await fetchPublished();status('Signed in, but not an owner','This account is not on the Tournament Manager admin allowlist.','error');return;}
+    isOwner=true;showOwner(true);$c('cloudOwnerLabel').textContent='Owner · '+(s.user.email||'authenticated');await loadDraftOrSeed(s.user);cloudReady=true;
+   }catch(e){showOwner(false);await fetchPublished().catch(()=>{});status('Cloud access error',e.message||'Could not load the owner workspace.','error');}
+  }else{showOwner(false);try{await fetchPublished()}catch(e){status('Cloud connection error',e.message||'Could not load the published tournament.','error');}}
+ }
+ window.tournamentCloudSave=()=>{
+  if(!isOwner||!cloudReady||loadingCloud)return;
+  clearTimeout(saveTimer);setSaved('Saving cloud draft…');
+  saveTimer=setTimeout(async()=>{
+   const snapshot=JSON.parse(JSON.stringify(data));
+   const {error}=await client.from('tournament_drafts').upsert({slug:SLUG,owner_id:session.user.id,data:snapshot,updated_at:new Date().toISOString()},{onConflict:'slug,owner_id'});
+   if(error){status('Draft sync failed',error.message,'error');setSaved('Local copy saved');}
+   else{setSaved('Cloud draft saved');status('Owner mode · Draft synced','Your changes are private in Supabase until you publish.','online');}
+  },650);
+ };
+ async function login(){const email=$c('cloudEmail').value.trim(),password=$c('cloudPassword').value;if(!email||!password){status('Enter owner credentials','Use the email and password for your existing Supabase account.','error');return;}if(!client){status('Cloud login unavailable','The Supabase library has not loaded. Check your internet connection, then reload this page.','error');return;}const button=$c('cloudLogin');button.disabled=true;status('Signing in…','Connecting securely to your existing Supabase account.');try{const {data,error}=await client.auth.signInWithPassword({email,password});if(error)throw error;$c('cloudPassword').value='';await syncSession(data.session);}catch(e){status('Login failed',e.message||'Please check your credentials.','error');}finally{button.disabled=false;}}
+ async function publish(){if(!isOwner||!cloudReady)return;const b=$c('cloudPublish');b.disabled=true;try{
+   // Ensure the latest edits have reached the draft before calling the publish RPC.
+   clearTimeout(saveTimer);const {error:saveError}=await client.from('tournament_drafts').upsert({slug:SLUG,owner_id:session.user.id,data:JSON.parse(JSON.stringify(data)),updated_at:new Date().toISOString()},{onConflict:'slug,owner_id'});if(saveError)throw saveError;
+   const {data:result,error}=await client.rpc('publish_shaktigarh_tournament_v1',{p_slug:SLUG});if(error)throw error;
+   const version=Array.isArray(result)?result[0]?.version:result?.version;
+   status('Tournament published','The public website now shows the latest version'+(version?' · v'+version:'')+'.','online');toast('Latest tournament published');
+  }catch(e){status('Publish failed',e.message||'Could not publish the draft.','error');}finally{b.disabled=false;}}
+ async function logout(){await client.auth.signOut();}
+ async function start(){
+  // Bind controls before any cloud initialisation so a startup/network error can never leave Login inert.
+  $c('cloudLogin').addEventListener('click',login);
+  $c('cloudPublish').addEventListener('click',publish);
+  $c('cloudLogout').addEventListener('click',logout);
+  $c('cloudPassword').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();login();}});
+  document.body.classList.add('public-view');showOwner(false);
+  try{
+   if(!window.supabase||!window.supabase.createClient){status('Cloud library unavailable','The Supabase client did not load. Check your internet connection and reload this page. You can still view the locally stored page.','error');return;}
+   client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+   status('Connecting to tournament cloud…','Checking the published tournament and owner session.');
+   const {data:sessionData,error}=await client.auth.getSession();
+   if(error)throw error;
+   await syncSession(sessionData.session);
+   client.auth.onAuthStateChange((_event,newSession)=>{setTimeout(()=>syncSession(newSession),0)});
+  }catch(e){status('Cloud startup failed',e.message||'Could not initialise cloud access. Reload the page and try again.','error');}
+ }
+ start();
+})();
+</script>
+<script>
+// Desktop Shaktigarh custom-drawn spectrum scrollbar. Mobile keeps native touch scrolling without indicators.
+(()=>{
+  const desktop=window.matchMedia('(min-width:761px) and (hover:hover) and (pointer:fine)');
+  if(!desktop.matches)return;
+  const rail=document.createElement('div');rail.className='spectrum-scrollbar';rail.setAttribute('aria-hidden','true');
+  rail.innerHTML='<div class="spectrum-scrollbar-track"></div><div class="spectrum-scrollbar-thumb"></div>';
+  document.body.appendChild(rail);
+  const thumb=rail.querySelector('.spectrum-scrollbar-thumb');
+  let dragging=false,startY=0,startScroll=0,trackHeight=0,thumbHeight=48,frame=0,maxScrollValue=0,travel=0;
+  const root=()=>document.scrollingElement||document.documentElement;
+  const currentScroll=()=>root().scrollTop||window.scrollY||0;
+  function measure(){
+    const doc=document.documentElement,body=document.body,scroller=root();
+    trackHeight=Math.max(1,rail.clientHeight);
+    const fullHeight=Math.max(scroller.scrollHeight,doc.scrollHeight,body.scrollHeight,doc.offsetHeight,body.offsetHeight);
+    const viewport=Math.max(1,window.innerHeight);
+    maxScrollValue=Math.max(0,fullHeight-viewport);
+    thumbHeight=maxScrollValue<=2?trackHeight:Math.min(trackHeight,Math.max(48,trackHeight*(viewport/fullHeight)));
+    travel=Math.max(0,trackHeight-thumbHeight);
+    thumb.style.height=thumbHeight+'px';
+    rail.style.display=maxScrollValue<=2?'none':'block';
+  }
+  function paint(){frame=0;if(maxScrollValue<=2)return;const y=travel*Math.min(1,Math.max(0,currentScroll()/maxScrollValue));thumb.style.transform='translate3d(0,'+y+'px,0)'}
+  function schedulePaint(){if(!frame)frame=requestAnimationFrame(paint)}
+  function refresh(){measure();schedulePaint()}
+  function scrollInstantly(top){const scroller=root();scroller.scrollTop=top;window.scrollTo(0,top)}
+  function scrollFromPointer(clientY){const rect=rail.getBoundingClientRect(),y=Math.min(travel,Math.max(0,clientY-rect.top-thumbHeight/2));scrollInstantly((y/Math.max(1,travel))*maxScrollValue)}
+  thumb.addEventListener('pointerdown',e=>{measure();dragging=true;startY=e.clientY;startScroll=currentScroll();thumb.setPointerCapture(e.pointerId);e.preventDefault()});
+  thumb.addEventListener('pointermove',e=>{if(!dragging)return;scrollInstantly(startScroll+((e.clientY-startY)/Math.max(1,travel))*maxScrollValue)});
+  const stop=()=>{dragging=false};thumb.addEventListener('pointerup',stop);thumb.addEventListener('pointercancel',stop);thumb.addEventListener('lostpointercapture',stop);
+  rail.addEventListener('pointerdown',e=>{if(e.target!==thumb){measure();scrollFromPointer(e.clientY)}});
+  window.addEventListener('scroll',schedulePaint,{passive:true});window.addEventListener('resize',refresh,{passive:true});
+  if('ResizeObserver'in window){const ro=new ResizeObserver(refresh);ro.observe(document.documentElement);ro.observe(document.body)}
+  if('MutationObserver'in window){const mo=new MutationObserver(refresh);mo.observe(document.body,{childList:true,subtree:true,characterData:true})}
+  window.addEventListener('load',refresh,{once:true});document.fonts?.ready?.then(refresh);refresh();requestAnimationFrame(refresh);
+  desktop.addEventListener?.('change',e=>{if(!e.matches)rail.remove()});
+})();
+</script>
+
+
+<style id="v1-0-35-cloud-pill-nav">
+/* v1.0.36 — keep the cloud panel and desktop dock in normal flow so they never cover controls. */
+.cloud-tabs-row{
+  position:relative!important;top:auto!important;z-index:auto!important;isolation:auto;
+  display:flex;flex-direction:column;align-items:stretch;gap:0;
+  width:100%;min-width:0;margin:0 0 12px;overflow:visible;
+}
+.cloud-tabs-row .cloud-panel{
+  position:relative!important;inset:auto!important;box-sizing:border-box;width:100%;max-width:none;min-width:0;
+  min-height:54px;margin:0 0 8px;padding:10px 13px;display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;overflow:visible;transform:none!important;
+  transition:width .52s cubic-bezier(.22,.8,.22,1),max-width .52s cubic-bezier(.22,.8,.22,1),
+    min-height .42s ease,padding .42s ease,margin .42s ease,border-radius .42s ease,gap .35s ease;
+}
+.cloud-collapse{display:inline-flex;align-items:center;justify-content:center;flex:0 0 30px;width:30px;height:30px;
+  margin-left:8px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--muted);cursor:pointer;
+  transition:transform .42s cubic-bezier(.22,.8,.22,1),background .2s ease,color .2s ease}
+.cloud-collapse:hover{background:color-mix(in srgb,var(--teal) 12%,transparent);color:var(--ink)}
+.cloud-collapse svg{display:block;width:14px;height:14px;transition:transform .48s cubic-bezier(.22,.8,.22,1)}
+.cloud-pill-mode{display:none;font-size:11px;font-weight:750;white-space:nowrap;line-height:1.2}
+.cloud-tabs-row .dock-wrap{
+  position:relative!important;inset:auto!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;
+  transform:none!important;width:100%!important;max-width:none!important;min-width:0!important;
+  margin:0!important;padding:0!important;z-index:auto!important;flex:0 0 auto;overflow:visible!important;
+  transition:flex-basis .52s cubic-bezier(.22,.8,.22,1),width .52s cubic-bezier(.22,.8,.22,1),margin .4s ease;
+}
+.cloud-tabs-row .dock-wrap>.tabs{width:100%!important;max-width:100%!important;margin:0!important}
+.cloud-tabs-row.collapsed{flex-direction:row;align-items:center;gap:10px}
+.cloud-tabs-row.collapsed .cloud-panel{
+  flex:0 0 auto;width:max-content;max-width:min(230px,48vw);min-height:42px;margin:0;padding:6px 10px;
+  border-radius:999px;flex-wrap:nowrap;gap:5px;box-shadow:0 7px 20px rgba(0,0,0,.10);
+}
+.cloud-tabs-row.collapsed .cloud-status{display:flex!important;align-items:center;flex:0 0 auto;min-width:0;width:auto;gap:8px;white-space:nowrap;overflow:visible}
+.cloud-tabs-row.collapsed .cloud-status>span.cloud-dot{display:block!important;visibility:visible!important;opacity:1!important;flex:0 0 9px;width:9px;height:9px}
+.cloud-tabs-row.collapsed .cloud-status>div{display:flex;align-items:center;min-width:0;overflow:visible}
+.cloud-tabs-row.collapsed .cloud-status strong,.cloud-tabs-row.collapsed .cloud-status small,
+.cloud-tabs-row.collapsed .cloud-controls{display:none!important}
+.cloud-tabs-row.collapsed .cloud-pill-mode{display:inline-block;overflow:visible}
+.cloud-tabs-row.collapsed .cloud-collapse{width:25px;height:25px;flex-basis:25px;margin-left:2px}
+.cloud-tabs-row.collapsed .cloud-collapse svg{transform:rotate(180deg)}
+.cloud-tabs-row.collapsed .dock-wrap{flex:1 1 0%;width:auto!important;max-width:none!important;min-width:0!important}
+.cloud-tabs-row.collapsed .dock-wrap>.tabs{width:100%!important;max-width:100%!important;min-width:0!important}
+/* The phone uses its drawer navigation; keep the login status pill compact and fully visible. */
+@media(max-width:760px){
+ .cloud-tabs-row{margin:0 0 10px}
+ .cloud-tabs-row .cloud-panel{gap:8px;padding:9px 10px;min-height:0}
+ .cloud-tabs-row .cloud-status{min-width:100%}
+ .cloud-tabs-row.collapsed{gap:7px}
+ .cloud-tabs-row.collapsed .cloud-panel{max-width:58vw;padding:6px 8px}
+ .cloud-tabs-row.collapsed .cloud-status{min-width:0;width:auto;gap:6px}
+ .cloud-tabs-row.collapsed .cloud-pill-mode{font-size:10px}
+ .cloud-tabs-row.collapsed .cloud-collapse{width:23px;height:23px;flex-basis:23px}
+ .cloud-tabs-row .dock-wrap{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.cloud-tabs-row,.cloud-tabs-row *{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+</style>
+<script>
+// v1.0.36 — safe cloud panel collapse; keep navigation clickable and recalculate the spotlight after layout settles.
+(()=>{
+ const panel=document.getElementById('cloudPanel');
+ const dock=document.querySelector('.dock-wrap');
+ if(!panel||!dock||document.getElementById('cloudTabsRow'))return;
+ const row=document.createElement('div');row.className='cloud-tabs-row';row.id='cloudTabsRow';
+ panel.parentNode.insertBefore(row,panel);row.appendChild(panel);row.appendChild(dock);
+ const toggle=document.createElement('button');toggle.type='button';toggle.className='cloud-collapse';toggle.id='cloudCollapse';
+ toggle.setAttribute('aria-label','Collapse login panel');toggle.setAttribute('aria-expanded','true');
+ toggle.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+ const statusLine=panel.querySelector('.cloud-status>div');
+ const mode=document.createElement('span');mode.className='cloud-pill-mode';mode.textContent='Public view';
+ if(statusLine)statusLine.appendChild(mode);
+ const ownerControls=document.getElementById('cloudOwnerControls');
+ const updateMode=()=>{mode.textContent=ownerControls&&!ownerControls.classList.contains('hidden')?'Owner mode':'Public view'};
+ updateMode();if(ownerControls)new MutationObserver(updateMode).observe(ownerControls,{attributes:true,attributeFilter:['class']});
+ panel.appendChild(toggle);
+ const refreshSpotlight=()=>{const active=document.querySelector('.tab.active');if(active&&typeof moveTabPill==='function')moveTabPill(active.dataset.view)};
+ const settle=()=>requestAnimationFrame(()=>requestAnimationFrame(refreshSpotlight));
+ const setCollapsed=collapsed=>{
+  row.classList.toggle('collapsed',collapsed);
+  toggle.setAttribute('aria-expanded',String(!collapsed));
+  toggle.setAttribute('aria-label',collapsed?'Expand login panel':'Collapse login panel');
+  settle();
+ };
+ toggle.addEventListener('click',()=>setCollapsed(!row.classList.contains('collapsed')));
+ window.addEventListener('load',settle,{once:true});
+ window.addEventListener('resize',settle,{passive:true});
+ if('ResizeObserver'in window){const ro=new ResizeObserver(settle);ro.observe(row);if(dock)ro.observe(dock)}
+ settle();
+})();
+</script>
+
+
+<style id="v1-0-36-layout-recovery">
+/* v1.0.36 — the masthead is fixed, but the cloud panel and tab dock now occupy normal flow.
+   Reserve the masthead height and cancel the old sticky-tab rule inside the shared row. */
+@media (min-width:761px){
+  .app{padding-top:78px!important}
+}
+.cloud-tabs-row .dock-wrap>.tabs{
+  position:relative!important;
+  top:auto!important;
+  z-index:1!important;
+}
+</style>
+
+
+<style id="v1-0-37-clickability-and-spacing">
+/* v1.0.37 — restore click access and establish one consistent vertical spacing rhythm. */
+@media (min-width:761px){
+  .app{padding-top:78px!important;}
+}
+.cloud-tabs-row{
+  gap:12px!important;
+  margin:0 0 12px!important;
+}
+.cloud-tabs-row .cloud-panel{
+  margin:0!important;
+}
+.cloud-tabs-row .dock-wrap{
+  margin:0!important;
+}
+/* Public visitors may navigate and use interface buttons. Cloud writes remain owner-only
+   in tournamentCloudSave(); form fields stay read-only until owner login. */
+body.public-view main button{
+  pointer-events:auto!important;
+  opacity:1!important;
+}
+body.public-view main input,
+body.public-view main select,
+body.public-view main textarea{
+  pointer-events:none!important;
+  opacity:.72!important;
+}
+</style>
+
+
+<style id="v1-0-38-navbar-spacing-and-danger-actions">
+/* v1.0.39 — equalize the navbar's measured top and bottom breathing room. */
+@media (min-width:761px){
+  .cloud-tabs-row:not(.collapsed){
+    display:flex!important;
+    flex-direction:column!important;
+    row-gap:12px!important;
+    margin:0 0 12px!important;
+    padding:0!important;
+  }
+  .cloud-tabs-row:not(.collapsed)>.cloud-panel,
+  .cloud-tabs-row:not(.collapsed)>.dock-wrap{
+    margin:0!important;
+  }
+  .cloud-tabs-row:not(.collapsed)>.dock-wrap>.tabs{
+    margin:0!important;
+  }
+}
+/* Keep destructive fixture actions clearly red in both themes. */
+body.dark .fixture-card-actions .btn.danger{
+  color:#e05a5a!important;
+}
+</style>
+
+
+<style id="v1-0-39-mobile-cloud-transition">
+@media(max-width:760px){
+  /* Keep the mobile login card's dimensions animatable in both directions. */
+  .cloud-tabs-row .cloud-panel{
+    position:relative!important;box-sizing:border-box!important;
+    width:100%!important;max-width:100%!important;min-width:0!important;
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;
+    justify-content:flex-start!important;gap:10px!important;
+    padding:42px 11px 11px!important;margin:0!important;
+    border-radius:14px!important;overflow:hidden!important;
+    transition:width .48s cubic-bezier(.22,.8,.22,1),max-width .48s cubic-bezier(.22,.8,.22,1),
+      padding .42s cubic-bezier(.22,.8,.22,1),border-radius .42s ease,
+      min-height .42s ease,gap .38s ease,opacity .3s ease!important;
+  }
+  .cloud-tabs-row .cloud-collapse{
+    position:absolute!important;top:8px!important;right:8px!important;left:auto!important;
+    z-index:3!important;width:27px!important;height:27px!important;flex:0 0 27px!important;
+    margin:0!important;display:inline-flex!important;
+  }
+  .cloud-tabs-row .cloud-status{
+    width:100%!important;min-width:0!important;flex:0 0 auto!important;
+    opacity:1;transform:translateY(0);transition:opacity .3s ease,transform .42s ease;
+  }
+  .cloud-tabs-row .cloud-controls{
+    display:flex!important;width:100%!important;max-height:240px!important;
+    overflow:hidden!important;opacity:1;transform:translateY(0);
+    transition:max-height .44s cubic-bezier(.22,.8,.22,1),opacity .28s ease,transform .42s ease;
+  }
+  .cloud-tabs-row .cloud-controls input{min-width:0!important;flex:1 1 120px!important}
+  .cloud-tabs-row.collapsed .cloud-panel{
+    width:max-content!important;max-width:min(58vw,250px)!important;min-height:40px!important;
+    padding:6px 43px 6px 9px!important;border-radius:999px!important;
+    flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;
+    gap:6px!important;overflow:visible!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-status{
+    width:auto!important;min-width:0!important;flex:0 0 auto!important;
+    opacity:1!important;transform:none!important;white-space:nowrap!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-status strong,
+  .cloud-tabs-row.collapsed .cloud-status small{display:none!important}
+  .cloud-tabs-row.collapsed .cloud-pill-mode{display:inline-block!important;font-size:10px!important;white-space:nowrap!important}
+  .cloud-tabs-row.collapsed .cloud-controls{
+    display:flex!important;max-height:0!important;opacity:0!important;transform:translateY(-5px)!important;
+    pointer-events:none!important;margin:0!important;padding:0!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-collapse{top:6px!important;right:7px!important;width:25px!important;height:25px!important}
+  .cloud-tabs-row.collapsed .cloud-collapse svg{transform:rotate(180deg)}
+}
+@media(prefers-reduced-motion:reduce){
+ .cloud-tabs-row .cloud-panel,.cloud-tabs-row .cloud-controls,.cloud-tabs-row .cloud-status{transition-duration:.01ms!important}
+}
+</style>
+
+
+<style id="v1-0-40-mobile-login-morph">
+@media(max-width:760px){
+  /* Remove the oversized top reservation; keep the chevron anchored in the corner. */
+  .cloud-tabs-row .cloud-panel{
+    padding:11px 42px 11px 11px!important;
+    border-radius:14px!important;
+    interpolate-size:allow-keywords;
+    transition:width .5s cubic-bezier(.22,.8,.22,1),
+      max-width .5s cubic-bezier(.22,.8,.22,1),
+      padding .5s cubic-bezier(.22,.8,.22,1),
+      border-radius .5s cubic-bezier(.22,.8,.22,1),
+      min-height .5s cubic-bezier(.22,.8,.22,1),
+      gap .5s cubic-bezier(.22,.8,.22,1),
+      opacity .3s ease!important;
+  }
+  /* Animate intrinsic pill width into the full-width panel instead of snapping. */
+  .cloud-tabs-row.collapsed .cloud-panel{
+    width:fit-content!important;
+    max-width:min(58vw,250px)!important;
+    padding:6px 43px 6px 9px!important;
+    border-radius:999px!important;
+  }
+  .cloud-tabs-row .cloud-collapse{top:8px!important;right:8px!important}
+  .cloud-tabs-row.collapsed .cloud-collapse{top:6px!important;right:7px!important}
+}
+</style>
+
+
+<style id="v1-0-41-mobile-login-explicit-morph">
+@media(max-width:760px){
+  /* Use numeric widths at both ends: fit-content/max-content cannot be
+     interpolated consistently, which made the pill appear to morph late. */
+  .cloud-tabs-row .cloud-panel{
+    width:100%!important;
+    max-width:100%!important;
+    box-sizing:border-box!important;
+    border-radius:14px!important;
+    transition:width .52s cubic-bezier(.2,.75,.25,1),
+      max-width .52s cubic-bezier(.2,.75,.25,1),
+      border-radius .52s cubic-bezier(.2,.75,.25,1),
+      padding .52s cubic-bezier(.2,.75,.25,1),
+      min-height .52s cubic-bezier(.2,.75,.25,1),
+      gap .42s cubic-bezier(.2,.75,.25,1)!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-panel{
+    width:180px!important;
+    max-width:58vw!important;
+    border-radius:999px!important;
+    padding:6px 43px 6px 9px!important;
+  }
+}
+</style>
+
+
+<style id="v1-0-42-mobile-login-radius-timing">
+@media(max-width:760px){
+  /* A 999px radius takes almost the entire transition to fall below the
+     pill's 20px half-height. Use the actual capsule radius so rounding
+     starts immediately, in sync with the width and padding morph. */
+  .cloud-tabs-row .cloud-panel{
+    border-radius:14px!important;
+    transition:width .52s cubic-bezier(.2,.75,.25,1),
+      max-width .52s cubic-bezier(.2,.75,.25,1),
+      border-radius .52s cubic-bezier(.2,.75,.25,1),
+      padding .52s cubic-bezier(.2,.75,.25,1),
+      min-height .52s cubic-bezier(.2,.75,.25,1),
+      gap .42s cubic-bezier(.2,.75,.25,1)!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-panel{
+    border-radius:20px!important;
+  }
+}
+</style>
+
+<style id="v1-0-43-mobile-login-controls-layout">
+@media(max-width:760px){
+  /* Use the available card width deliberately instead of stretching every
+     action button to the same size. */
+  .cloud-tabs-row #cloudLoginControls{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto!important;
+    align-items:center!important;
+    gap:7px!important;
+    width:100%!important;
+  }
+  .cloud-tabs-row #cloudLoginControls input{
+    width:100%!important;min-width:0!important;
+    flex:none!important;box-sizing:border-box!important;
+  }
+  .cloud-tabs-row #cloudLogin{
+    flex:none!important;width:auto!important;min-width:0!important;
+    padding:8px 11px!important;font-size:10px!important;
+  }
+  .cloud-tabs-row #cloudOwnerControls{
+    display:grid!important;
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+    align-items:center!important;justify-content:stretch!important;
+    gap:7px!important;width:100%!important;
+  }
+  .cloud-tabs-row #cloudOwnerLabel{
+    min-width:0!important;white-space:nowrap!important;
+    padding:6px 8px!important;font-size:10px!important;
+  }
+  .cloud-tabs-row #cloudPublish{
+    width:100%!important;min-width:0!important;
+    padding:8px 10px!important;font-size:10px!important;
+    white-space:normal!important;line-height:1.2!important;
+  }
+  .cloud-tabs-row #cloudLogout{
+    flex:none!important;width:auto!important;min-width:0!important;
+    padding:8px 9px!important;font-size:10px!important;
+    white-space:nowrap!important;
+  }
+}
+@media(max-width:380px){
+  .cloud-tabs-row #cloudLoginControls{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}
+  .cloud-tabs-row #cloudLogin{grid-column:1/-1;justify-self:end}
+  .cloud-tabs-row #cloudOwnerControls{grid-template-columns:minmax(0,1fr) auto!important}
+  .cloud-tabs-row #cloudOwnerLabel{grid-column:1/-1;justify-self:start}
+  .cloud-tabs-row #cloudPublish{grid-column:1}
+  .cloud-tabs-row #cloudLogout{grid-column:2}
+}
+</style>
+
+<!-- Shaktigarh Tournament Manager v1.0.45 -->
+<style id="v1-0-44-desktop-login-pill-morph">
+/* v1.0.44 — give desktop the same visibly continuous pill-to-panel morph as mobile.
+   Use numeric dimensions at both ends so the browser can interpolate the shape. */
+@media (min-width:761px){
+  .cloud-tabs-row .cloud-panel{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:54px!important;
+    box-sizing:border-box!important;
+    border-radius:14px!important;
+    transition:width .52s cubic-bezier(.22,.8,.22,1),
+      max-width .52s cubic-bezier(.22,.8,.22,1),
+      min-height .52s cubic-bezier(.22,.8,.22,1),
+      padding .52s cubic-bezier(.22,.8,.22,1),
+      border-radius .52s cubic-bezier(.22,.8,.22,1),
+      gap .4s cubic-bezier(.22,.8,.22,1),
+      box-shadow .3s ease!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-panel{
+    width:190px!important;
+    max-width:230px!important;
+    min-height:42px!important;
+    border-radius:21px!important;
+    padding:6px 10px!important;
+    flex:0 0 190px!important;
+  }
+  .cloud-tabs-row .cloud-status,
+  .cloud-tabs-row .cloud-controls{
+    transition:opacity .28s ease,transform .42s cubic-bezier(.22,.8,.22,1),
+      gap .4s ease!important;
+  }
+  .cloud-tabs-row.collapsed .cloud-panel .cloud-status{
+    white-space:nowrap!important;
+  }
+}
+</style>
+
+<!-- Shaktigarh Tournament Manager v1.0.45 -->
+</body>
+</html>
