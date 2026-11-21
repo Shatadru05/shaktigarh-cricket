@@ -5,6 +5,9 @@
 <meta name="theme-color" content="#0b1118"><meta name="description" content="Shaktigarh Cricket Group — a community of friends who love cricket, with player statistics and tournament tools.">
 <title>Shaktigarh Cricket | The home of our game</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
 <style>
 :root{color-scheme:dark;--bg:#0b1118;--bg2:#101a24;--panel:#141f2a;--panel2:#192735;--line:#293a49;--text:#edf4f6;--muted:#9aabb7;--gold:#e8c36a;--teal:#61c4b0;--blue:#829cb4;--shadow:0 18px 50px #0005}
 [data-theme="light"]{color-scheme:light;--bg:#f2f5f4;--bg2:#e9efed;--panel:#fff;--panel2:#f4f7f6;--line:#d8e2de;--text:#17252a;--muted:#65777b;--gold:#9b741d;--teal:#218b7a;--blue:#557b98;--shadow:0 16px 42px #243c3214}
@@ -77,7 +80,14 @@ body{margin:0;background:radial-gradient(ellipse at 78% -10%,#244b4a55,transpare
 @media(max-width:390px){.brand{gap:8px;font-size:11px}.crest{width:34px;height:34px}.brand small{font-size:8px}.navright{gap:7px}.navright .nav-live-auction{padding:0 8px;font-size:8px}.theme{transform:scale(.92);transform-origin:right center}}
 @media(prefers-reduced-motion:reduce){.navright .nav-live-auction,.navright .nav-live-auction::before,.navright .nav-live-auction .nav-live-dot{transition:none}.navright .nav-live-auction.is-live,.navright .nav-live-auction.is-live .nav-live-dot{animation:none}}
 
-</style></head>
+/* Shaktigarh site-wide typography: Geist Mono */
+html,body,body *:not(svg):not(path):not(i):not([class*="icon"]),button,input,select,textarea{font-family:"Geist Mono",monospace!important}
+</style>
+<style id="tournament-viewer-homepage-layout-v1">
+#tournament-managers .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){#tournament-managers .tools{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
 <body><div class="wrap">
 <nav class="nav"><a class="brand" href="#home" data-view-target="home" aria-label="Shaktigarh Cricket home"><span class="crest">SC</span><span>SHAKTIGARH<small>CRICKET · EST. BY THE COMMUNITY</small></span></a><div class="navright"><div class="navlinks"><a href="#statistics" data-view-target="home" data-scroll-target="statistics">Statistics</a><a href="#tournament-managers" data-view-target="home" data-scroll-target="tournament-managers">Tournament managers</a><a href="#about" data-view-target="about" aria-current="false">About</a></div><a class="nav-live-auction" id="liveAuctionFloater" href="live-auction.html" target="_blank" rel="noopener" aria-label="Open the live auction viewer"><span class="nav-live-dot" aria-hidden="true"></span><span>LIVE AUCTION</span></a><button class="theme" id="themeToggle" type="button" role="switch" aria-label="Toggle light and dark mode" aria-checked="false"><span class="theme-icon" aria-hidden="true">☀</span><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-thumb"></span></button></div></nav>
 <main id="homeView" class="view-panel">
@@ -91,6 +101,7 @@ body{margin:0;background:radial-gradient(ellipse at 78% -10%,#244b4a55,transpare
 <a class="tool auction" href="auction-manager.html"><div class="tooltop"><span class="toolicon">🔨</span><span class="version">TOURNAMENT TOOL</span></div><h3>Auction Manager</h3><p>Manage player pools, live bidding, team purses, squads and auction history.</p><div class="launch">OPEN AUCTION MANAGER <span>↗</span></div></a>
 <a class="tool match" href="match-centre.html"><div class="tooltop"><span class="toolicon">🏟️</span><span class="version">MATCH DAY</span></div><h3>Match Centre</h3><p>Create match summaries, save match records and export consistent tournament graphics.</p><div class="launch">OPEN MATCH CENTRE <span>↗</span></div></a>
 <a class="tool tournament" href="tournament-manager.html"><div class="tooltop"><span class="toolicon">🏆</span><span class="version">TOURNAMENT OPERATIONS</span></div><h3>Tournament Manager</h3><p>Build tournament formats, manage teams and fixtures, track standings and publish the latest tournament for everyone.</p><div class="launch">OPEN TOURNAMENT MANAGER <span>↗</span></div></a>
+<a class="tool match" href="tournament-viewer.html"><div class="tooltop"><span class="toolicon">📡</span><span class="version">LIVE BROADCAST</span></div><h3>Tournament Viewer</h3><p>Follow tournament progress, fixtures, match results, group standings and the latest match in real time.</p><div class="launch">OPEN TOURNAMENT VIEWER <span>↗</span></div></a>
 </div></section>
 
 </main><main id="aboutView" class="view-panel" hidden>
